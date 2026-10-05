@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brewkery · Android Developer Take-Home Assessment</title>
+  <title>Brewkery · Interactive Android Prototype & Take-Home Assignment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  
   <style>
+    * {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .font-display { font-family: 'Cabinet Grotesk', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Custom Color Tokens */
     :root {
-      --espresso: #180d08;
-      --roast-dark: #2c1a11;
+      --espresso: #140b07;
+      --roast: #26160e;
       --terracotta: #d9532f;
       --terracotta-hover: #b84121;
       --amber: #f59e0b;
@@ -18,952 +30,990 @@
       --crema-card: #ffffff;
       --caramel-soft: #f7ebe1;
       --border: #ebd8cb;
-      --border-dark: #3a2216;
-      --text-main: #231710;
-      --text-muted: #786457;
-      --mono: 'JetBrains Mono', monospace;
-      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      --font-display: 'Cabinet Grotesk', sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--crema);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      background: #0d0805;
+      color: #f7ebe1;
     }
 
+    /* Ambient Warm Glow */
     .ambient-glow {
       position: fixed;
-      top: -15%;
+      top: -10%;
       right: -10%;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, rgba(217, 83, 47, 0.08) 0%, rgba(251, 247, 244, 0) 70%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(217, 83, 47, 0.12) 0%, rgba(13, 8, 5, 0) 70%);
       z-index: -1;
       pointer-events: none;
     }
 
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 50px 24px 100px;
-    }
-
-    /* Top Badge */
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--caramel-soft);
-      border: 1px solid var(--border);
-      color: var(--espresso);
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .badge-pill .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--terracotta);
-      box-shadow: 0 0 0 3px rgba(217, 83, 47, 0.2);
-    }
-
-    /* Hero */
-    h1 {
-      font-family: var(--font-display), sans-serif;
-      font-size: 3.2rem;
-      font-weight: 900;
-      color: var(--espresso);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-    h1 span {
-      color: var(--terracotta);
-      font-style: italic;
-    }
-    .hero-lead {
-      font-size: 1.18rem;
-      color: var(--text-muted);
-      max-width: 760px;
-      line-height: 1.6;
-      margin-bottom: 36px;
-    }
-
-    /* Metrics Bar */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 14px;
-      margin-bottom: 48px;
-    }
-    .metric-card {
-      background: var(--crema-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 22px;
-      box-shadow: 0 2px 12px rgba(24, 13, 8, 0.03);
+    /* Realistic Android Device Frame */
+    .phone-frame {
+      width: 395px;
+      height: 815px;
+      background: #140b07;
+      border: 8px solid #2d1a12;
+      border-radius: 46px;
       position: relative;
-    }
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--terracotta);
-      border-top-left-radius: 14px;
-      border-bottom-left-radius: 14px;
-    }
-    .metric-val {
-      font-family: var(--font-display), sans-serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--espresso);
-      display: block;
-      margin-bottom: 2px;
-    }
-    .metric-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
+      overflow: hidden;
+      box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(217, 83, 47, 0.18);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Card Blocks */
-    .card-block {
-      background: var(--crema-card);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 36px;
-      margin-bottom: 36px;
-      box-shadow: 0 4px 20px rgba(24, 13, 8, 0.03);
-    }
-    .card-title {
-      font-family: var(--font-display), sans-serif;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--espresso);
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .card-subtitle {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+    .custom-scrollbar::-webkit-scrollbar { display: none; }
+    .custom-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Endpoints Grid */
-    .api-endpoints-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .endpoint-card {
-      background: var(--espresso);
-      border: 1px solid var(--border-dark);
-      border-radius: 14px;
-      padding: 18px 20px;
-      color: #f7ebe1;
-    }
-    .endpoint-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .endpoint-tag {
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: #3e261a;
-      color: #fbd38d;
-    }
-    .endpoint-url-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--roast-dark);
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid #4a2f21;
-      gap: 12px;
-    }
-    .endpoint-url-text {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: #fbd38d;
-      word-break: break-all;
-    }
-    .btn-copy {
-      background: var(--terracotta);
-      color: #fff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-family: var(--font-body);
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-    .btn-copy:hover { background: var(--terracotta-hover); }
-
-    /* =========================================
-       AUTHENTIC ANDROID PHONE HARDWARE SHELL
-       Aspect Ratio: 9:19.5 (Typical Pixel/Galaxy)
-       Max-Width: 260px (Ultra-realistic mobile proportion)
-       ========================================= */
-    .screens-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 22px;
-      margin-top: 24px;
+    .glow-terracotta {
+      box-shadow: 0 0 25px rgba(217, 83, 47, 0.35);
     }
     
-    .phone-column {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .screen-meta-badge {
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--terracotta);
-      margin-bottom: 2px;
-    }
-    .screen-column-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--espresso);
-      margin-bottom: 12px;
-      text-align: center;
+    .gradient-terracotta {
+      background: linear-gradient(135deg, #d9532f 0%, #b84121 50%, #8c2b12 100%);
     }
 
-    .android-device {
-      width: 100%;
-      max-width: 252px;
-      aspect-ratio: 9 / 19.5;
-      background: #090604;
-      border-radius: 38px;
-      padding: 9px;
-      box-shadow: 0 16px 36px -8px rgba(24, 13, 8, 0.35), 0 0 0 2px #26160e;
-      position: relative;
-      display: flex;
-      flex-direction: column;
+    .btn-press {
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+    .btn-press:active {
+      transform: scale(0.96);
+      filter: brightness(0.92);
     }
 
-    /* Screen display inside phone */
-    .android-screen-glass {
-      width: 100%;
-      height: 100%;
-      background: #ffffff;
-      border-radius: 30px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      font-size: 0.72rem;
-      color: var(--espresso);
-    }
-
-    /* Android Status Bar with Camera Hole-Punch */
-    .android-status-bar {
-      height: 24px;
-      padding: 0 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.62rem;
-      font-weight: 700;
-      color: #1a0f0a;
-      background: transparent;
-      z-index: 10;
-      position: relative;
-    }
-    .android-hole-punch {
-      position: absolute;
-      top: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 8px;
-      height: 8px;
-      background: #000000;
+    /* Dynamic Island / Punch Hole */
+    .android-camera-hole {
+      width: 11px;
+      height: 11px;
+      background: #000;
       border-radius: 50%;
-      box-shadow: 0 0 0 1px #1a1a1a;
-    }
-    .status-icons {
-      display: flex;
-      gap: 4px;
-      font-size: 0.58rem;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
     }
 
-    /* Android Bottom System Gesture Pill */
-    .android-gesture-bar {
-      height: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      padding-bottom: 2px;
-    }
-    .gesture-pill {
-      width: 60px;
-      height: 3px;
-      background: #1a0f0a;
-      border-radius: 2px;
-      opacity: 0.3;
-    }
-
-    /* Inner Screen Contents */
+    /* App Light Canvas inside device */
     .app-viewport {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 8px 10px;
-      gap: 8px;
-      background: var(--crema);
-      overflow-y: hidden;
-    }
-
-    /* App Elements inside viewport */
-    .top-app-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 4px;
-    }
-    .app-cart-icon {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-    }
-
-    .cat-chips-scroll {
-      display: flex;
-      gap: 4px;
-      overflow: hidden;
-    }
-    .cat-chip {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.62rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .cat-chip.active {
-      background: var(--espresso);
-      color: #fff;
-      border-color: var(--espresso);
-    }
-
-    .product-row-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 7px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .product-img-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      background-size: cover;
-      background-position: center;
-      flex-shrink: 0;
-    }
-    .mini-badge {
-      font-size: 0.55rem;
-      font-weight: 800;
-      background: #fef3c7;
-      color: #92400e;
-      padding: 1px 4px;
-      border-radius: 3px;
-    }
-
-    /* Screen 2 Elements */
-    .hero-img-box {
-      height: 92px;
-      border-radius: 10px;
-      background-size: cover;
-      background-position: center;
-    }
-    .option-group-title {
-      font-size: 0.62rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-    }
-    .options-row {
-      display: flex;
-      gap: 4px;
-      margin-top: 2px;
-    }
-    .opt-chip {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      padding: 3px 6px;
-      border-radius: 6px;
-      font-size: 0.58rem;
-      font-weight: 600;
-    }
-    .opt-chip.active {
-      border-color: var(--terracotta);
-      background: var(--caramel-soft);
-      color: var(--terracotta);
-      font-weight: 700;
-    }
-
-    /* Screen 3 Elements */
-    .bill-box {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 8px;
-      font-size: 0.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-top: auto;
-    }
-    .bill-row {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* Floating / Sticky Action Button */
-    .app-action-btn {
-      background: var(--espresso);
-      color: #ffffff;
-      border-radius: 8px;
-      padding: 8px 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-      font-size: 0.65rem;
-      margin-top: auto;
-    }
-
-    /* AI Guidance Card */
-    .ai-guidance-card {
-      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-      border: 2px dashed #f97316;
-      border-radius: 20px;
-      padding: 32px;
-      margin: 36px 0;
-    }
-    .ai-guidance-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.45rem;
-      font-weight: 800;
-      color: #9a3412;
-      margin-bottom: 8px;
-    }
-
-    /* Checklist */
-    .steps-checklist {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .steps-checklist li {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      font-size: 0.95rem;
-    }
-    .step-badge-num {
-      width: 26px;
-      height: 26px;
-      background: var(--terracotta);
-      color: #ffffff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.78rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    /* Submission Banner */
-    .submission-banner {
-      background: var(--espresso);
-      border-radius: 24px;
-      padding: 44px 30px;
-      color: #ffffff;
-      text-align: center;
-      border: 1px solid #3d2216;
-    }
-    .submission-banner h2 {
-      font-family: var(--font-display);
-      font-size: 2.1rem;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-    .submission-banner p {
-      color: #b7a091;
-      max-width: 540px;
-      margin: 0 auto 26px;
-    }
-    .action-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--terracotta);
-      color: #ffffff;
-      padding: 14px 32px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 1rem;
-      text-decoration: none;
-      box-shadow: 0 8px 18px rgba(217, 83, 47, 0.35);
-      transition: all 0.2s;
-    }
-    .action-cta-btn:hover {
-      background: var(--terracotta-hover);
-      transform: translateY(-2px);
-    }
-
-    @media (max-width: 640px) {
-      h1 { font-size: 2.3rem; }
-      .card-block { padding: 20px; }
-      .container { padding: 30px 16px 60px; }
+      background: #fbf7f4;
+      color: #231710;
     }
   </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col items-center justify-center p-3 sm:p-6">
 
   <div class="ambient-glow"></div>
 
-  <div class="container">
-    <!-- Header Badge -->
-    <header>
-      <div class="badge-pill">
-        <span class="dot"></span> Android Developer Take-Home · Brewkery
+  <!-- TOP PROTOTYPE CONTROL BAR -->
+  <header class="w-full max-w-4xl mb-4 text-center select-none">
+    <div class="flex flex-wrap items-center justify-between gap-3 bg-[#1c100a]/90 border border-[#3e2417] px-4 py-2.5 rounded-2xl mb-3 shadow-xl backdrop-blur-md">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-[#d9532f] animate-ping"></span>
+        <span class="text-xs font-black tracking-wider uppercase text-white">Brewkery Client v1.0</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#d9532f]/20 text-[#f59e0b] font-bold border border-[#d9532f]/30">Target SDK 36</span>
       </div>
-      <h1>Build the <span>Brewkery</span> Mobile Experience.</h1>
-      <p class="hero-lead">
-        A 4-screen native Android ordering app for an artisanal coffeehouse & bakery. Powered by flexible REST endpoints with dynamic subtotal recalculation and customizable menu options.
-      </p>
-
-      <!-- Assignment Highlights -->
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <span class="metric-val">~3–4 Hours</span>
-          <span class="metric-label">Recommended Time</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-val">Kotlin & Compose</span>
-          <span class="metric-label">Architecture Stack</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-val">4 Core Screens</span>
-          <span class="metric-label">Exact Matching</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-val">Single & All API</span>
-          <span class="metric-label">REST Endpoints</span>
-        </div>
+      
+      <div class="flex items-center gap-2">
+        <a href="#assignment-spec" class="px-3 py-1.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-xs font-bold text-amber-300 flex items-center gap-1.5 transition btn-press">
+          <i class="fa-solid fa-code text-amber-400"></i> Candidate API Spec
+        </a>
+        <button onclick="resetCartState()" class="px-3 py-1.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-xs font-bold text-emerald-300 flex items-center gap-1.5 transition btn-press">
+          <i class="fa-solid fa-rotate-left text-emerald-400"></i> Reset Prototype
+        </button>
       </div>
-    </header>
+    </div>
 
-    <!-- Overview Block -->
-    <section class="card-block">
-      <h2 class="card-title">What You Are Building</h2>
-      <p class="card-subtitle">
-        <strong>Brewkery</strong> is a consumer mobile experience where customers browse artisanal roasts and pastries, customize cup sizes and organic milk choices with instant price calculation, manage their cart, and review checkout details.
-      </p>
-      <p style="color: var(--text-muted); font-size: 0.94rem;">
-        🎨 <strong>Visual Theme:</strong> Warm artisanal coffeehouse palette (Deep Espresso <code>#180d08</code>, Terracotta <code>#d9532f</code>, Amber accents, and Soft Crema <code>#fbf7f4</code>). Clean cards and rounded buttons.
-      </p>
-    </section>
+    <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center justify-center gap-2 font-display">
+      <span>Brewkery</span>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d9532f] to-[#f59e0b]">Android Live Prototype</span>
+    </h1>
+    <p class="text-xs text-[#a89486] mt-1">Tap through the full 4-screen flow: Menu & Catalog &rarr; Customization &rarr; Cart & Checkout &rarr; Order Status</p>
 
-    <!-- API Endpoints Section (Both Full Menu & Single Item) -->
-    <section class="card-block">
-      <h2 class="card-title">The REST API Endpoints</h2>
-      <p class="card-subtitle">
-        You can fetch the full menu at once OR fetch individual item details dynamically by ID when navigating:
-      </p>
+    <!-- Screen Switcher Buttons -->
+    <div class="flex flex-wrap justify-center gap-2 mt-3.5">
+      <button onclick="setScreen('menu')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#d9532f] text-white shadow glow-terracotta transition btn-press" id="btn-menu">
+        1. Menu & Catalog
+      </button>
+      <button onclick="openCustomization('item_caramel_macchiato')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-custom">
+        2. Customization
+      </button>
+      <button onclick="setScreen('cart')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-cart">
+        3. Cart & Checkout (<span id="top-cart-count">2</span>)
+      </button>
+      <button onclick="setScreen('order')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-order">
+        4. Order Status
+      </button>
+    </div>
+  </header>
 
-      <div class="api-endpoints-grid">
-        <!-- Endpoint 1: Full Menu -->
-        <div class="endpoint-card">
-          <div class="endpoint-header">
-            <span class="endpoint-tag">Endpoint 1 · Full Menu & Store Metadata</span>
-            <span style="font-size:0.75rem; color:#a89486;">GET</span>
-          </div>
-          <div class="endpoint-url-bar">
-            <span class="endpoint-url-text" id="fullMenuUrl">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json</span>
-            <button class="btn-copy" onclick="copyUrl('fullMenuUrl', this)">Copy URL</button>
-          </div>
-          <div style="font-size:0.78rem; color:#b7a091; margin-top:6px;">
-            Returns shop configuration, categories list, and all 6 featured items.
-          </div>
-        </div>
+  <!-- Interactive Mobile Phone Frame -->
+  <div class="phone-frame flex flex-col justify-between shadow-2xl relative">
 
-        <!-- Endpoint 2: Single Item by ID -->
-        <div class="endpoint-card">
-          <div class="endpoint-header">
-            <span class="endpoint-tag">Endpoint 2 · Single Item Detail by ID</span>
-            <span style="font-size:0.75rem; color:#a89486;">GET</span>
-          </div>
-          <div class="endpoint-url-bar">
-            <span class="endpoint-url-text" id="singleItemPattern">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{item_id}.json</span>
-            <button class="btn-copy" onclick="copyUrl('singleItemPattern', this)">Copy URL</button>
-          </div>
-          <div style="font-size:0.78rem; color:#b7a091; margin-top:8px;">
-            💡 <em>Direct Example (Caramel Macchiato):</em><br>
-            <code style="color:#fbd38d; font-family:var(--mono); font-size:0.75rem;">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/item_caramel_macchiato.json</code>
-          </div>
-        </div>
+    <!-- Top Status Bar with Android Camera Hole-Punch -->
+    <div class="w-full pt-3 px-6 pb-2 flex justify-between items-center text-xs font-semibold z-40 select-none bg-[#fbf7f4] text-[#140b07] border-b border-[#ebd8cb]/60">
+      <span class="text-[13px] font-bold">9:41</span>
+      
+      <!-- Camera Punch Hole -->
+      <div class="android-camera-hole"></div>
+
+      <div class="flex items-center gap-1.5 text-opacity-80">
+        <i class="fa-solid fa-signal text-[11px]"></i>
+        <i class="fa-solid fa-wifi text-[11px]"></i>
+        <i class="fa-solid fa-battery-full text-xs text-emerald-600"></i>
       </div>
-    </section>
+    </div>
 
-    <!-- Screen Mockups in Authentic Android Frames -->
-    <section class="card-block">
-      <h2 class="card-title">The 4 Android Screens — Recreate As Shown</h2>
-      <p class="card-subtitle">
-        Proportioned to modern Android form factor (20:9 ratio with hole-punch camera and gesture navigation).
-      </p>
+    <!-- MAIN SCROLLABLE APP VIEWPORT -->
+    <div id="screen-viewport" class="flex-1 overflow-y-auto custom-scrollbar relative px-4 pb-20 pt-2 space-y-4 app-viewport">
 
-      <div class="screens-container">
+      <!-- ========================================================= -->
+      <!-- 1. MENU & CATALOG SCREEN                                  -->
+      <!-- ========================================================= -->
+      <div id="view-menu" class="screen-view space-y-3.5">
         
-        <!-- Screen 1: Catalog -->
-        <div class="phone-column">
-          <span class="screen-meta-badge">Screen 1</span>
-          <h3 class="screen-column-title">Menu & Catalog</h3>
-
-          <div class="android-device">
-            <div class="android-screen-glass">
-              <!-- Android Status Bar -->
-              <div class="android-status-bar">
-                <span>9:41</span>
-                <div class="android-hole-punch"></div>
-                <div class="status-icons"><span>5G</span><span>100%</span></div>
-              </div>
-
-              <!-- Viewport -->
-              <div class="app-viewport">
-                <div class="top-app-bar">
-                  <div>
-                    <strong style="font-size:0.75rem; display:block;">Brewkery</strong>
-                    <span style="font-size:0.58rem; color:var(--text-muted);">⏱ 20-30 mins</span>
-                  </div>
-                  <div class="app-cart-icon">🛍</div>
-                </div>
-
-                <div class="cat-chips-scroll">
-                  <span class="cat-chip active">☕ Hot Coffee</span>
-                  <span class="cat-chip">🧊 Cold Brews</span>
-                  <span class="cat-chip">🥐 Bakery</span>
-                </div>
-
-                <div class="product-row-card">
-                  <div class="product-img-box" style="background-image:url('https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&auto=format&fit=crop&q=80');"></div>
-                  <div style="flex:1;">
-                    <span class="mini-badge">BESTSELLER</span>
-                    <strong style="display:block; font-size:0.68rem;">Caramel Macchiato</strong>
-                    <span style="color:var(--text-muted); font-size:0.58rem;">⭐ 4.9 (312)</span>
-                    <div style="display:flex; justify-content:space-between; margin-top:2px;">
-                      <strong style="color:var(--terracotta); font-size:0.68rem;">$4.85</strong>
-                      <span style="background:var(--terracotta); color:#fff; border-radius:4px; padding:1px 5px; font-size:0.55rem; font-weight:700;">+ Add</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-row-card">
-                  <div class="product-img-box" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&auto=format&fit=crop&q=80');"></div>
-                  <div style="flex:1;">
-                    <span class="mini-badge">FRESH</span>
-                    <strong style="display:block; font-size:0.68rem;">Normandy Croissant</strong>
-                    <span style="color:var(--text-muted); font-size:0.58rem;">⭐ 4.95 (420)</span>
-                    <div style="display:flex; justify-content:space-between; margin-top:2px;">
-                      <strong style="color:var(--terracotta); font-size:0.68rem;">$3.90</strong>
-                      <span style="background:var(--terracotta); color:#fff; border-radius:4px; padding:1px 5px; font-size:0.55rem; font-weight:700;">+ Add</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="app-action-btn">
-                  <span>2 Items Selected</span>
-                  <span>View Cart ($9.40) →</span>
-                </div>
-              </div>
-
-              <!-- Gesture Bar -->
-              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
+        <!-- App Bar -->
+        <div class="flex items-center justify-between pt-1">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-[#140b07] flex items-center justify-center text-white text-xs font-display font-black">
+              BK
+            </div>
+            <div>
+              <span class="text-[10px] text-[#786457] font-semibold block leading-tight">Artisanal Coffee & Bakes</span>
+              <h2 class="text-xs font-extrabold text-[#140b07]">Brewkery Flagship</h2>
             </div>
           </div>
+
+          <button onclick="setScreen('cart')" class="relative flex items-center justify-center w-8 h-8 rounded-full bg-white border border-[#ebd8cb] shadow-sm btn-press">
+            <i class="fa-solid fa-bag-shopping text-xs text-[#140b07]"></i>
+            <span id="badge-cart-counter" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#d9532f] text-white text-[9px] font-bold flex items-center justify-center">2</span>
+          </button>
         </div>
 
-        <!-- Screen 2: Customization Detail -->
-        <div class="phone-column">
-          <span class="screen-meta-badge">Screen 2</span>
-          <h3 class="screen-column-title">Customization</h3>
-
-          <div class="android-device">
-            <div class="android-screen-glass">
-              <div class="android-status-bar">
-                <span>9:41</span>
-                <div class="android-hole-punch"></div>
-                <div class="status-icons"><span>5G</span><span>100%</span></div>
-              </div>
-
-              <div class="app-viewport">
-                <div class="hero-img-box" style="background-image:url('https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&auto=format&fit=crop&q=80');"></div>
-                
-                <div>
-                  <strong style="font-size:0.75rem; display:block;">Caramel Macchiato</strong>
-                  <span style="font-size:0.58rem; color:var(--text-muted);">Espresso, steamed oat milk & salted caramel.</span>
-                </div>
-
-                <div>
-                  <div class="option-group-title">Size</div>
-                  <div class="options-row">
-                    <span class="opt-chip">Tall (+$0)</span>
-                    <span class="opt-chip active">Grande (+$0.65)</span>
-                    <span class="opt-chip">Venti (+$1.25)</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="option-group-title">Milk Choice</div>
-                  <div class="options-row">
-                    <span class="opt-chip active">Oat Milk</span>
-                    <span class="opt-chip">Almond (+$0.50)</span>
-                  </div>
-                </div>
-
-                <div style="margin-top:auto; display:flex; gap:6px;">
-                  <div style="background:#fff; border:1px solid var(--border); border-radius:6px; padding:4px 8px; font-weight:700; font-size:0.65rem;">
-                    - 1 +
-                  </div>
-                  <div class="app-action-btn" style="flex:1; margin-top:0; justify-content:center;">
-                    Add • $5.50
-                  </div>
-                </div>
-              </div>
-
-              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
-            </div>
+        <!-- Delivery Banner Pill -->
+        <div class="flex items-center justify-between p-2 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-[11px] font-semibold text-[#140b07]">Estimated Delivery: <b>20 - 30 mins</b></span>
           </div>
+          <span class="text-[10px] font-bold text-[#d9532f]">$2.50 Flat</span>
         </div>
 
-        <!-- Screen 3: Cart & Checkout -->
-        <div class="phone-column">
-          <span class="screen-meta-badge">Screen 3</span>
-          <h3 class="screen-column-title">Cart & Checkout</h3>
-
-          <div class="android-device">
-            <div class="android-screen-glass">
-              <div class="android-status-bar">
-                <span>9:41</span>
-                <div class="android-hole-punch"></div>
-                <div class="status-icons"><span>5G</span><span>100%</span></div>
-              </div>
-
-              <div class="app-viewport">
-                <strong style="font-size:0.75rem;">Your Cart (2 items)</strong>
-
-                <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:6px;">
-                  <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.65rem;">
-                    <span>1x Caramel Macchiato</span>
-                    <span>$5.50</span>
-                  </div>
-                  <span style="font-size:0.55rem; color:var(--text-muted);">Grande · Oat Milk</span>
-                </div>
-
-                <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:6px;">
-                  <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.65rem;">
-                    <span>1x Croissant</span>
-                    <span>$3.90</span>
-                  </div>
-                  <span style="font-size:0.55rem; color:var(--text-muted);">Freshly Warmed</span>
-                </div>
-
-                <div class="bill-box">
-                  <div class="bill-row"><span style="color:var(--text-muted);">Subtotal</span><span>$9.40</span></div>
-                  <div class="bill-row"><span style="color:var(--text-muted);">Delivery</span><span>$2.50</span></div>
-                  <div class="bill-row"><span style="color:var(--text-muted);">Tax (8%)</span><span>$0.75</span></div>
-                  <div class="bill-row" style="border-top:1px dashed var(--border); padding-top:2px; font-weight:800; font-size:0.7rem;">
-                    <span>Total</span><span style="color:var(--terracotta);">$12.65</span>
-                  </div>
-                </div>
-
-                <div class="app-action-btn" style="justify-content:center;">
-                  Place Order ($12.65) →
-                </div>
-              </div>
-
-              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
-            </div>
-          </div>
+        <!-- Search Bar -->
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-[#786457]"></i>
+          <input type="text" id="menu-search-input" onkeyup="filterMenuSearch()" placeholder="Search roast, cold brew, pastry..." class="w-full bg-white border border-[#ebd8cb] rounded-xl pl-8 pr-3 py-2 text-xs text-[#140b07] placeholder-[#786457] outline-none">
         </div>
 
-        <!-- Screen 4: Order Status -->
-        <div class="phone-column">
-          <span class="screen-meta-badge">Screen 4</span>
-          <h3 class="screen-column-title">Order Status</h3>
+        <!-- Category Horizontal Chips -->
+        <div class="flex gap-1.5 overflow-x-auto custom-scrollbar pb-1 text-xs">
+          <button onclick="filterCategory('ALL')" id="cat-ALL" class="cat-filter-btn px-3 py-1.5 rounded-full bg-[#140b07] text-white font-bold whitespace-nowrap btn-press">
+            All Items
+          </button>
+          <button onclick="filterCategory('cat_hot_coffee')" id="cat-cat_hot_coffee" class="cat-filter-btn px-3 py-1.5 rounded-full bg-white border border-[#ebd8cb] text-[#786457] font-semibold whitespace-nowrap btn-press">
+            ☕ Hot Coffee
+          </button>
+          <button onclick="filterCategory('cat_cold_brews')" id="cat-cat_cold_brews" class="cat-filter-btn px-3 py-1.5 rounded-full bg-white border border-[#ebd8cb] text-[#786457] font-semibold whitespace-nowrap btn-press">
+            🧊 Cold Brews
+          </button>
+          <button onclick="filterCategory('cat_bakery')" id="cat-cat_bakery" class="cat-filter-btn px-3 py-1.5 rounded-full bg-white border border-[#ebd8cb] text-[#786457] font-semibold whitespace-nowrap btn-press">
+            🥐 Artisan Bakery
+          </button>
+        </div>
 
-          <div class="android-device">
-            <div class="android-screen-glass">
-              <div class="android-status-bar">
-                <span>9:41</span>
-                <div class="android-hole-punch"></div>
-                <div class="status-icons"><span>5G</span><span>100%</span></div>
-              </div>
+        <!-- Menu Product List -->
+        <div id="catalog-items-container" class="space-y-2.5">
+          <!-- Dynamically populated from JS items -->
+        </div>
 
-              <div class="app-viewport" style="text-align:center;">
-                <div style="width:40px; height:40px; background:#fef2f2; border:1px solid #fecaca; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:8px auto 2px; font-size:1.1rem;">
-                  ☕
-                </div>
-                <strong style="font-size:0.78rem; display:block;">Order Confirmed!</strong>
-                <span style="font-size:0.58rem; color:var(--text-muted);">Barista has begun brewing.</span>
-
-                <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px; text-align:left; margin-top:8px; font-size:0.6rem; display:flex; flex-direction:column; gap:4px;">
-                  <div>
-                    <span style="color:var(--text-muted); display:block;">Order ID</span>
-                    <strong style="font-family:var(--mono);">#BK-74921</strong>
-                  </div>
-                  <div>
-                    <span style="color:var(--text-muted); display:block;">Estimated Arrival</span>
-                    <strong style="color:var(--terracotta);">20 - 30 mins</strong>
-                  </div>
-                  <div>
-                    <span style="color:var(--text-muted); display:block;">Delivery Address</span>
-                    <strong>45 Market St, Apt 3B</strong>
-                  </div>
-                </div>
-
-                <div class="app-action-btn" style="justify-content:center; margin-top:auto; background:var(--caramel-soft); color:var(--espresso); border:1px solid var(--border);">
-                  Back to Menu
-                </div>
-              </div>
-
-              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
+        <!-- Floating Cart Bar (Sticky at bottom of screen 1) -->
+        <div id="sticky-cart-bar" class="p-3 rounded-2xl bg-[#140b07] text-white flex items-center justify-between shadow-xl cursor-pointer btn-press" onclick="setScreen('cart')">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-[#d9532f] flex items-center justify-center text-xs font-bold" id="floating-bar-qty">2</span>
+            <div>
+              <span class="text-[10px] text-[#ebd8cb] block leading-tight">Selected items</span>
+              <span class="text-xs font-extrabold text-white" id="floating-bar-subtotal">$9.40</span>
             </div>
           </div>
+          <span class="text-xs font-extrabold text-[#f59e0b] flex items-center gap-1">
+            View Cart <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
         </div>
 
       </div>
-    </section>
 
-    <!-- AI Evaluation Requirement -->
-    <div class="ai-guidance-card">
-      <h3>🤖 How We Evaluate Your AI Engineering Skills</h3>
-      <p style="color: #7c2d12; font-size: 0.95rem;">
-        Using AI tools (Cursor, Claude, Copilot, ChatGPT, Gemini) is expected. But blind copy-pasting is an anti-signal. We check:
-      </p>
-      <ul style="margin: 10px 0 0 20px; color: #7c2d12; font-size: 0.9rem; line-height: 1.7;">
-        <li><strong>Prompt Precision:</strong> Providing concise schemas instead of burning context tokens on giant file dumps.</li>
-        <li><strong>Clean Architecture:</strong> Enforcing <strong>MVVM</strong> (StateFlow, ViewModels, Repository pattern).</li>
-        <li><strong>Critical Bug Detection:</strong> Catching floating-point tax rounding errors or Compose recomposition cycles.</li>
-      </ul>
+      <!-- ========================================================= -->
+      <!-- 2. ITEM CUSTOMIZATION SCREEN                              -->
+      <!-- ========================================================= -->
+      <div id="view-custom" class="screen-view hidden space-y-3.5">
+        
+        <!-- Header Nav -->
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="setScreen('menu')" class="w-7 h-7 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Item Customizer</span>
+          <button onclick="toggleFavorite()" class="w-7 h-7 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-rose-500 shadow-sm btn-press">
+            <i class="fa-solid fa-heart" id="fav-icon"></i>
+          </button>
+        </div>
 
-      <div style="background:#ffffff; border:1px solid #fdba74; border-radius:10px; padding:14px 18px; font-family:var(--mono); font-size:0.8rem; color:#7c2d12; margin-top:14px;">
-        <strong>Mandatory Deliverable: <code>AI_WORKFLOW.md</code></strong><br>
-        1. List the AI tools used.<br>
-        2. Share 2–3 of your best prompts.<br>
-        3. Explain 1 instance where AI output broke or gave buggy code, and how you diagnosed and fixed it.
+        <!-- Hero Image -->
+        <div class="relative h-44 rounded-2xl overflow-hidden shadow-md">
+          <img id="custom-hero-img" src="" alt="Item" class="w-full h-full object-cover">
+          <span id="custom-hero-badge" class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#140b07]/80 text-[#f59e0b] backdrop-blur-sm">
+            BESTSELLER
+          </span>
+        </div>
+
+        <!-- Title & Base Info -->
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 id="custom-item-name" class="text-base font-black text-[#140b07] font-display">Toasted Caramel Macchiato</h2>
+            <span id="custom-base-price" class="text-base font-extrabold text-[#d9532f] font-mono">$4.85</span>
+          </div>
+          <p id="custom-item-desc" class="text-[11px] text-[#786457] mt-1 leading-relaxed">
+            Rich espresso roast layered with velvety steamed milk, infused with house-made vanilla bean syrup and toasted caramel drizzle.
+          </p>
+        </div>
+
+        <!-- Ingredients Wrap -->
+        <div>
+          <span class="text-[10px] font-black uppercase text-[#786457] tracking-wider block mb-1">Key Ingredients</span>
+          <div id="custom-ingredients-row" class="flex flex-wrap gap-1">
+            <!-- Chips -->
+          </div>
+        </div>
+
+        <!-- Size Selection -->
+        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#140b07]">Cup Size</span>
+            <span class="text-[10px] text-[#786457]">Select 1</span>
+          </div>
+          <div id="custom-sizes-row" class="grid grid-cols-3 gap-1.5">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Milk Choice -->
+        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#140b07]">Milk / Spread Choice</span>
+            <span class="text-[10px] text-[#786457]">Custom blend</span>
+          </div>
+          <div id="custom-milk-row" class="space-y-1.5">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Sugar Level Selection -->
+        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#140b07]">Sweetness Level</span>
+            <span class="text-[10px] text-[#786457]">Taste profile</span>
+          </div>
+          <div id="custom-sugar-row" class="flex gap-1.5">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Sticky Bottom Bar inside screen 2 -->
+        <div class="pt-2 flex items-center gap-2">
+          <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white border border-[#ebd8cb]">
+            <button onclick="adjustCustomQty(-1)" class="text-xs font-black text-[#140b07] btn-press">-</button>
+            <span id="custom-qty-display" class="text-xs font-bold text-[#140b07] font-mono">1</span>
+            <button onclick="adjustCustomQty(1)" class="text-xs font-black text-[#140b07] btn-press">+</button>
+          </div>
+          
+          <button onclick="addToCartCurrentCustom()" class="flex-1 py-3 rounded-xl gradient-terracotta text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-lg btn-press">
+            <span>Add to Cart</span>
+            <span>•</span>
+            <span id="custom-calc-total-btn">$5.50</span>
+          </button>
+        </div>
+
       </div>
+
+      <!-- ========================================================= -->
+      <!-- 3. CART & CHECKOUT SCREEN                                 -->
+      <!-- ========================================================= -->
+      <div id="view-cart" class="screen-view hidden space-y-3.5">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="setScreen('menu')" class="w-7 h-7 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Your Order Cart</span>
+          <button onclick="clearCart()" class="text-[10px] font-bold text-rose-600 hover:underline btn-press">
+            Clear
+          </button>
+        </div>
+
+        <!-- Items Container -->
+        <div id="cart-items-list" class="space-y-2">
+          <!-- Populated from cart state -->
+        </div>
+
+        <!-- Promo Code Input -->
+        <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2 flex-1">
+            <i class="fa-solid fa-tag text-[#d9532f] text-xs"></i>
+            <input type="text" id="promo-input" placeholder="Promo code (use ROAST10)" class="text-xs text-[#140b07] placeholder-[#786457] outline-none w-full uppercase font-mono">
+          </div>
+          <button onclick="applyPromoCode()" class="px-2.5 py-1 rounded-lg bg-[#140b07] text-white text-[10px] font-bold btn-press">
+            Apply
+          </button>
+        </div>
+
+        <!-- Bill Breakdown Card -->
+        <div class="p-3.5 rounded-2xl bg-white border border-[#ebd8cb] space-y-2 text-xs">
+          <div class="flex justify-between text-[#786457]">
+            <span>Subtotal</span>
+            <span id="bill-subtotal" class="font-mono text-[#140b07] font-semibold">$9.40</span>
+          </div>
+          <div class="flex justify-between text-[#786457]">
+            <span>Delivery Fee</span>
+            <span class="font-mono text-[#140b07] font-semibold">$2.50</span>
+          </div>
+          <div class="flex justify-between text-[#786457]">
+            <span>Est. Tax (8.0%)</span>
+            <span id="bill-tax" class="font-mono text-[#140b07] font-semibold">$0.75</span>
+          </div>
+          <div id="bill-discount-row" class="hidden flex justify-between text-emerald-600 font-bold">
+            <span>Promo Discount (10%)</span>
+            <span id="bill-discount" class="font-mono">-$0.94</span>
+          </div>
+          
+          <div class="pt-2 border-t border-dashed border-[#ebd8cb] flex justify-between items-center text-sm font-black text-[#140b07]">
+            <span>Total Payable</span>
+            <span id="bill-total" class="text-base text-[#d9532f] font-mono">$12.65</span>
+          </div>
+        </div>
+
+        <!-- Delivery Address Mock -->
+        <div class="p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] flex items-center gap-2 text-xs">
+          <i class="fa-solid fa-location-dot text-[#d9532f]"></i>
+          <div class="flex-1">
+            <span class="text-[10px] text-[#786457] block leading-tight">Deliver to</span>
+            <strong class="text-[11px] text-[#140b07]">45 Market Street, Apt 3B</strong>
+          </div>
+          <span class="text-[10px] font-bold text-[#d9532f]">Change</span>
+        </div>
+
+        <!-- Place Order Button -->
+        <button onclick="placeOrderFinal()" class="w-full py-3.5 rounded-xl gradient-terracotta text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-xl glow-terracotta btn-press">
+          <i class="fa-solid fa-lock text-[10px]"></i>
+          <span>Place Order Now</span>
+          <span>•</span>
+          <span id="btn-place-order-total">$12.65</span>
+        </button>
+
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- 4. ORDER STATUS CONFIRMATION SCREEN                       -->
+      <!-- ========================================================= -->
+      <div id="view-order" class="screen-view hidden space-y-4 text-center py-2">
+        
+        <!-- Animated Coffee Mug Icon -->
+        <div class="w-20 h-20 mx-auto rounded-full bg-[#f7ebe1] border-2 border-[#d9532f] flex items-center justify-center text-3xl text-[#d9532f] shadow-lg">
+          ☕
+        </div>
+
+        <div>
+          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Order Settled Successfully</span>
+          <h2 class="text-lg font-black text-[#140b07] font-display">Brewing in Progress!</h2>
+          <p class="text-xs text-[#786457] max-w-[240px] mx-auto mt-1 leading-relaxed">
+            Our artisan barista has received your ticket and is hand-crafting your items.
+          </p>
+        </div>
+
+        <!-- Ticket Card -->
+        <div class="p-4 rounded-2xl bg-white border border-[#ebd8cb] text-left space-y-2.5 text-xs">
+          <div class="flex justify-between items-center pb-2 border-b border-[#ebd8cb]/60">
+            <div>
+              <span class="text-[9px] text-[#786457] uppercase font-bold block">Order Ticket</span>
+              <strong class="font-mono text-sm text-[#140b07]" id="order-ref-code">#BK-74921</strong>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold">PREPARING</span>
+          </div>
+
+          <div class="flex justify-between text-[#786457]">
+            <span>Estimated Arrival:</span>
+            <strong class="text-[#d9532f]">20 - 30 minutes</strong>
+          </div>
+          
+          <div class="flex justify-between text-[#786457]">
+            <span>Payment Mode:</span>
+            <span class="font-semibold text-[#140b07]">Credit Card (••8421)</span>
+          </div>
+
+          <div class="pt-2 border-t border-[#ebd8cb]/60 text-[#786457]">
+            <span class="text-[10px] block mb-1">Delivering to:</span>
+            <strong class="text-[#140b07] block">45 Market Street, Apt 3B (Doorstep drop)</strong>
+          </div>
+        </div>
+
+        <!-- Action Back to Store -->
+        <button onclick="setScreen('menu')" class="w-full py-3 rounded-xl bg-[#140b07] text-white font-extrabold text-xs btn-press">
+          Back to Storefront
+        </button>
+
+      </div>
+
     </div>
 
-    <!-- Step by Step -->
-    <section class="card-block">
-      <h2 class="card-title">Checklist & Implementation Steps</h2>
-      <ul class="steps-checklist">
-        <li>
-          <span class="step-badge-num">1</span>
-          <div><strong>New Project:</strong> Initialize in Android Studio with Kotlin (Jetpack Compose strongly preferred).</div>
-        </li>
-        <li>
-          <span class="step-badge-num">2</span>
-          <div><strong>Networking:</strong> Retrofit2 or Ktor parsing either the complete menu or single-item endpoints.</div>
-        </li>
-        <li>
-          <span class="step-badge-num">3</span>
-          <div><strong>Dynamic Pricing:</strong> Subtotal updates in ViewModel as sizes or milk choices change.</div>
-        </li>
-        <li>
-          <span class="step-badge-num">4</span>
-          <div><strong>Image Loading:</strong> Seamless remote image rendering with Coil or Glide.</div>
-        </li>
-        <li>
-          <span class="step-badge-num">5</span>
-          <div><strong>Robustness:</strong> Proper loading spinner and error handling state.</div>
-        </li>
-        <li>
-          <span class="step-badge-num">6</span>
-          <div><strong>Unit Test:</strong> At least 1 unit test covering cart price calculation.</div>
-        </li>
-      </ul>
-    </section>
+    <!-- Android Bottom Navigation Bar (4 Connected Tabs) -->
+    <nav id="app-bottom-nav" class="bg-white/95 backdrop-blur-md border-t border-[#ebd8cb] px-4 py-2 flex justify-around items-center z-40 select-none">
+      
+      <button onclick="setScreen('menu')" id="nav-menu" class="flex flex-col items-center gap-0.5 btn-press">
+        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#d9532f] bg-[#d9532f]/15">
+          <i class="fa-solid fa-mug-saucer text-xs"></i>
+        </div>
+        <span class="text-[9px] font-bold text-[#d9532f]">Menu</span>
+      </button>
 
-    <!-- Submission Section -->
-    <div class="submission-banner">
-      <h2>Ready to Submit?</h2>
-      <p>
-        Push your code to a public GitHub repository, build an installable debug APK, and submit your assignment.
-      </p>
-      <a href="mailto:hr@clickretina.com?subject=Brewkery%20Android%20Take-Home%20Submission" class="action-cta-btn">
-        ✉ Submit Application to hr@clickretina.com
-      </a>
-      <div style="margin-top: 18px; font-size: 0.82rem; color: #a89486;">
-        Questions or need an extension? Email <strong>hr@clickretina.com</strong> or call <strong>9889856987</strong>
-      </div>
-    </div>
+      <button onclick="openCustomization('item_caramel_macchiato')" id="nav-custom" class="flex flex-col items-center gap-0.5 btn-press">
+        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]">
+          <i class="fa-solid fa-sliders text-xs"></i>
+        </div>
+        <span class="text-[9px] font-semibold text-[#786457]">Customize</span>
+      </button>
+
+      <button onclick="setScreen('cart')" id="nav-cart" class="relative flex flex-col items-center gap-0.5 btn-press">
+        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]">
+          <i class="fa-solid fa-bag-shopping text-xs"></i>
+        </div>
+        <span class="text-[9px] font-semibold text-[#786457]">Cart</span>
+        <span id="nav-cart-dot" class="absolute top-0 right-1 w-2 h-2 rounded-full bg-[#d9532f]"></span>
+      </button>
+
+      <button onclick="setScreen('order')" id="nav-order" class="flex flex-col items-center gap-0.5 btn-press">
+        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]">
+          <i class="fa-solid fa-receipt text-xs"></i>
+        </div>
+        <span class="text-[9px] font-semibold text-[#786457]">Status</span>
+      </button>
+
+    </nav>
 
   </div>
 
+  <!-- CANDIDATE SPEC & API SECTION -->
+  <section id="assignment-spec" class="w-full max-w-4xl mt-12 bg-[#140b07] border border-[#3e2417] rounded-3xl p-6 sm:p-10 text-white shadow-2xl">
+    <div class="inline-flex items-center gap-2 bg-[#2d1a12] px-3 py-1 rounded-full text-xs font-bold text-[#f59e0b] mb-4">
+      <i class="fa-solid fa-code"></i> Developer Take-Home Brief
+    </div>
+    
+    <h2 class="text-2xl sm:text-3xl font-black font-display mb-3">
+      API Endpoints & Architecture Specification
+    </h2>
+    <p class="text-xs sm:text-sm text-[#ebd8cb]/80 mb-6 leading-relaxed">
+      Recreate the exact 4 screens seen above in Kotlin (Jetpack Compose strongly preferred). Candidates can query either the complete menu or single items dynamically by ID.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono mb-8">
+      <!-- Full Menu -->
+      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
+        <span class="text-[#f59e0b] font-bold block mb-1">1. Full Menu & Store Config</span>
+        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
+          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
+        </div>
+        <button onclick="copyToClipboard('endpoint-menu')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
+          Copy URL
+        </button>
+      </div>
+
+      <!-- Single Item Pattern -->
+      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
+        <span class="text-[#f59e0b] font-bold block mb-1">2. Single Item Detail by ID</span>
+        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-single">
+          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{item_id}.json
+        </div>
+        <button onclick="copyToClipboard('endpoint-single')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
+          Copy Pattern
+        </button>
+      </div>
+    </div>
+
+    <!-- Key Candidate Requirements -->
+    <div class="bg-[#26160e] border border-[#3e2417] rounded-2xl p-6 space-y-3 text-xs text-[#ebd8cb]">
+      <h3 class="font-bold text-sm text-white font-display">Required Deliverables</h3>
+      <ul class="list-disc list-inside space-y-1.5 text-[#ebd8cb]/80">
+        <li><strong>Architecture:</strong> MVVM pattern with ViewModel, Repository, and StateFlow.</li>
+        <li><strong>Subtotal Math:</strong> Dynamic price updates as user toggles sizes (+extra_price) and milk choices.</li>
+        <li><strong>AI Workflow (Mandatory):</strong> Include <code>AI_WORKFLOW.md</code> detailing prompts used and 1 AI hallucination/bug caught and resolved.</li>
+        <li><strong>Submission:</strong> Email GitHub repo + compiled debug APK to <a href="mailto:hr@clickretina.com" class="text-[#f59e0b] underline">hr@clickretina.com</a>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Global Toast -->
+  <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transform -translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-[#140b07] border border-[#ebd8cb] text-white px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-bold">
+      <i class="fa-solid fa-circle-check text-emerald-400"></i>
+      <span id="toast-text">Notification</span>
+    </div>
+  </div>
+
+  <!-- CLIENT PROTOTYPE LOGIC -->
   <script>
-    function copyUrl(elementId, btn) {
-      const url = document.getElementById(elementId).innerText.trim();
-      navigator.clipboard.writeText(url).then(() => {
-        const originalText = btn.innerText;
-        btn.innerText = 'Copied!';
-        btn.style.background = '#2c1a11';
-        setTimeout(() => {
-          btn.innerText = originalText;
-          btn.style.background = 'var(--terracotta)';
-        }, 2000);
+    // In-memory data store replicating data.json
+    const storeData = {
+      meta: {
+        delivery_fee: 2.50,
+        tax_rate_percent: 8.0,
+        currency_symbol: "$"
+      },
+      items: [
+        {
+          id: "item_caramel_macchiato",
+          category_id: "cat_hot_coffee",
+          name: "Toasted Caramel Macchiato",
+          base_price: 4.85,
+          rating: 4.9,
+          reviews: 312,
+          badge: "BESTSELLER",
+          image_url: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
+          desc: "Rich espresso roast layered with velvety steamed milk, vanilla syrup and salted toasted caramel.",
+          ingredients: ["Signature Espresso", "Steamed Oat Milk", "Salted Caramel", "Bourbon Vanilla"],
+          sizes: [
+            { id: "sz_small", label: "Tall (8 oz)", extra: 0.00 },
+            { id: "sz_medium", label: "Grande (12 oz)", extra: 0.65 },
+            { id: "sz_large", label: "Venti (16 oz)", extra: 1.25 }
+          ],
+          milks: [
+            { id: "m_oat", label: "Oat Milk (Barista Blend)", extra: 0.00 },
+            { id: "m_almond", label: "Roasted Almond Milk", extra: 0.50 },
+            { id: "m_whole", label: "Organic Whole Milk", extra: 0.00 }
+          ],
+          sugars: ["0% Unsweetened", "50% Mild", "100% Sweet"]
+        },
+        {
+          id: "item_vanilla_cold_brew",
+          category_id: "cat_cold_brews",
+          name: "Velvet Vanilla Cold Foam",
+          base_price: 5.40,
+          rating: 4.8,
+          reviews: 248,
+          badge: "STAFF PICK",
+          image_url: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&auto=format&fit=crop&q=80",
+          desc: "18-hour cold steeped Colombian beans topped with Madagascar vanilla sweet cream foam.",
+          ingredients: ["18hr Steeped Coffee", "Vanilla Sweet Cream", "Ice", "Raw Cane Sugar"],
+          sizes: [
+            { id: "sz_medium", label: "Regular (16 oz)", extra: 0.00 },
+            { id: "sz_large", label: "Large (24 oz)", extra: 0.95 }
+          ],
+          milks: [
+            { id: "m_sweet_foam", label: "Signature Sweet Cream", extra: 0.00 },
+            { id: "m_coconut_foam", label: "Toasted Coconut Foam", extra: 0.60 }
+          ],
+          sugars: ["Light Sweet", "Regular Sweet", "Extra Sweet"]
+        },
+        {
+          id: "item_butter_croissant",
+          category_id: "cat_bakery",
+          name: "Golden Normandy Croissant",
+          base_price: 3.90,
+          rating: 4.95,
+          reviews: 420,
+          badge: "FRESHLY BAKED",
+          image_url: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80",
+          desc: "36-layer flakey European butter pastry baked fresh at sunrise with crisp amber crust.",
+          ingredients: ["Normandy Butter (84%)", "Organic Flour", "Natural Yeast", "Sea Salt"],
+          sizes: [
+            { id: "sz_single", label: "Single Piece", extra: 0.00 },
+            { id: "sz_pair", label: "Pair Box (2 Pcs)", extra: 3.20 }
+          ],
+          milks: [
+            { id: "top_butter", label: "Whipped Honey Butter", extra: 0.50 },
+            { id: "top_plain", label: "Classic (No Spread)", extra: 0.00 }
+          ],
+          sugars: ["Warm & Crisp", "Room Temperature"]
+        },
+        {
+          id: "item_pistachio_danish",
+          category_id: "cat_bakery",
+          name: "Crushed Pistachio Danish",
+          base_price: 4.60,
+          rating: 4.75,
+          reviews: 184,
+          badge: "SEASONAL",
+          image_url: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600&auto=format&fit=crop&q=80",
+          desc: "Laminated puff pastry filled with rich Sicilian pistachio custard and roasted emerald nuts.",
+          ingredients: ["Bronte Pistachio", "Vanilla Custard", "Puff Pastry"],
+          sizes: [
+            { id: "sz_single", label: "Single Danish", extra: 0.00 }
+          ],
+          milks: [
+            { id: "top_none", label: "Standard Glaze", extra: 0.00 },
+            { id: "top_nuts", label: "Extra Pistachios", extra: 0.75 }
+          ],
+          sugars: ["Freshly Warmed", "Room Temperature"]
+        }
+      ]
+    };
+
+    // User Cart State
+    let cart = [
+      {
+        id: "item_caramel_macchiato",
+        name: "Caramel Macchiato",
+        size: "Grande (12 oz)",
+        milk: "Oat Milk (Barista Blend)",
+        unitPrice: 5.50,
+        qty: 1
+      },
+      {
+        id: "item_butter_croissant",
+        name: "Normandy Croissant",
+        size: "Single Piece",
+        milk: "Classic (No Spread)",
+        unitPrice: 3.90,
+        qty: 1
+      }
+    ];
+
+    let currentCustomItem = storeData.items[0];
+    let selectedSizeIndex = 1;
+    let selectedMilkIndex = 0;
+    let selectedSugarIndex = 1;
+    let customQty = 1;
+    let discountPercent = 0.0;
+
+    // Navigation Engine
+    function setScreen(screenName) {
+      document.querySelectorAll('.screen-view').forEach(v => v.classList.add('hidden'));
+      const target = document.getElementById(`view-${screenName}`);
+      if (target) target.classList.remove('hidden');
+
+      // Top control bar button sync
+      document.querySelectorAll('.screen-btn').forEach(btn => {
+        btn.classList.remove('bg-[#d9532f]', 'text-white', 'glow-terracotta');
+        btn.classList.add('bg-[#26160e]', 'text-[#ebd8cb]');
+      });
+      const activeTopBtn = document.getElementById(`btn-${screenName}`);
+      if (activeTopBtn) {
+        activeTopBtn.classList.remove('bg-[#26160e]', 'text-[#ebd8cb]');
+        activeTopBtn.classList.add('bg-[#d9532f]', 'text-white', 'glow-terracotta');
+      }
+
+      // Bottom bar icon sync
+      ['menu', 'custom', 'cart', 'order'].forEach(n => {
+        const navBtn = document.getElementById(`nav-${n}`);
+        if (!navBtn) return;
+        const iconContainer = navBtn.querySelector('div');
+        const label = navBtn.querySelector('span');
+
+        if (n === screenName) {
+          iconContainer.className = 'w-7 h-7 rounded-xl flex items-center justify-center text-[#d9532f] bg-[#d9532f]/15';
+          label.className = 'text-[9px] font-bold text-[#d9532f]';
+        } else {
+          iconContainer.className = 'w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]';
+          label.className = 'text-[9px] font-semibold text-[#786457]';
+        }
+      });
+
+      renderCart();
+    }
+
+    // Render Menu Catalog
+    function renderCatalog(filteredItems = storeData.items) {
+      const container = document.getElementById('catalog-items-container');
+      container.innerHTML = '';
+
+      filteredItems.forEach(it => {
+        const card = document.createElement('div');
+        card.className = "p-2.5 rounded-xl bg-white border border-[#ebd8cb] flex gap-2.5 items-center shadow-sm hover:border-[#d9532f] transition cursor-pointer btn-press";
+        card.onclick = () => openCustomization(it.id);
+
+        card.innerHTML = `
+          <div class="w-14 h-14 rounded-lg bg-cover bg-center flex-shrink-0" style="background-image: url('${it.image_url}');"></div>
+          <div class="flex-1 min-w-0">
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-900">${it.badge}</span>
+            <strong class="text-xs text-[#140b07] block truncate">${it.name}</strong>
+            <span class="text-[10px] text-[#786457]">⭐ ${it.rating} (${it.reviews})</span>
+            <div class="flex items-center justify-between mt-1">
+              <strong class="text-xs text-[#d9532f] font-mono">$${it.base_price.toFixed(2)}</strong>
+              <button class="px-2 py-0.5 rounded-md bg-[#d9532f] text-white text-[10px] font-bold">+ Customize</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
       });
     }
+
+    function filterCategory(catId) {
+      document.querySelectorAll('.cat-filter-btn').forEach(b => {
+        b.className = 'cat-filter-btn px-3 py-1.5 rounded-full bg-white border border-[#ebd8cb] text-[#786457] font-semibold whitespace-nowrap btn-press';
+      });
+      const activeBtn = document.getElementById(`cat-${catId}`);
+      if (activeBtn) {
+        activeBtn.className = 'cat-filter-btn px-3 py-1.5 rounded-full bg-[#140b07] text-white font-bold whitespace-nowrap btn-press';
+      }
+
+      if (catId === 'ALL') {
+        renderCatalog(storeData.items);
+      } else {
+        const filtered = storeData.items.filter(it => it.category_id === catId);
+        renderCatalog(filtered);
+      }
+    }
+
+    function filterMenuSearch() {
+      const q = document.getElementById('menu-search-input').value.toLowerCase();
+      const filtered = storeData.items.filter(it => it.name.toLowerCase().includes(q) || it.desc.toLowerCase().includes(q));
+      renderCatalog(filtered);
+    }
+
+    // Open Customization Detail
+    function openCustomization(itemId) {
+      const item = storeData.items.find(x => x.id === itemId) || storeData.items[0];
+      currentCustomItem = item;
+      selectedSizeIndex = 0;
+      selectedMilkIndex = 0;
+      selectedSugarIndex = 0;
+      customQty = 1;
+
+      document.getElementById('custom-hero-img').src = item.image_url;
+      document.getElementById('custom-hero-badge').innerText = item.badge;
+      document.getElementById('custom-item-name').innerText = item.name;
+      document.getElementById('custom-base-price').innerText = `$${item.base_price.toFixed(2)}`;
+      document.getElementById('custom-item-desc').innerText = item.desc;
+      document.getElementById('custom-qty-display').innerText = customQty;
+
+      // Ingredients
+      const ingRow = document.getElementById('custom-ingredients-row');
+      ingRow.innerHTML = '';
+      item.ingredients.forEach(ing => {
+        const chip = document.createElement('span');
+        chip.className = 'text-[9px] px-2 py-0.5 rounded-md bg-white border border-[#ebd8cb] text-[#786457]';
+        chip.innerText = ing;
+        ingRow.appendChild(chip);
+      });
+
+      // Sizes
+      const sizesRow = document.getElementById('custom-sizes-row');
+      sizesRow.innerHTML = '';
+      item.sizes.forEach((sz, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `p-2 rounded-lg text-[10px] font-bold border transition ${idx === selectedSizeIndex ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f]' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
+        btn.innerHTML = `${sz.label}<br><span class="text-[9px] text-opacity-80">+${sz.extra > 0 ? '$' + sz.extra.toFixed(2) : '$0'}</span>`;
+        btn.onclick = () => {
+          selectedSizeIndex = idx;
+          openCustomization(item.id);
+        };
+        sizesRow.appendChild(btn);
+      });
+
+      // Milks
+      const milkRow = document.getElementById('custom-milk-row');
+      milkRow.innerHTML = '';
+      item.milks.forEach((m, idx) => {
+        const row = document.createElement('div');
+        row.className = `flex justify-between items-center p-2 rounded-lg border text-xs cursor-pointer ${idx === selectedMilkIndex ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f] font-bold' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
+        row.innerHTML = `<span>${m.label}</span><span class="font-mono text-[10px]">+${m.extra > 0 ? '$' + m.extra.toFixed(2) : '$0'}</span>`;
+        row.onclick = () => {
+          selectedMilkIndex = idx;
+          openCustomization(item.id);
+        };
+        milkRow.appendChild(row);
+      });
+
+      // Sugars
+      const sugarRow = document.getElementById('custom-sugar-row');
+      sugarRow.innerHTML = '';
+      item.sugars.forEach((s, idx) => {
+        const chip = document.createElement('button');
+        chip.className = `flex-1 py-1.5 rounded-lg text-[10px] font-bold border ${idx === selectedSugarIndex ? 'bg-[#140b07] text-white border-[#140b07]' : 'bg-white text-[#786457] border-[#ebd8cb]'}`;
+        chip.innerText = s;
+        chip.onclick = () => {
+          selectedSugarIndex = idx;
+          openCustomization(item.id);
+        };
+        sugarRow.appendChild(chip);
+      });
+
+      updateCustomSubtotal();
+      setScreen('custom');
+    }
+
+    function updateCustomSubtotal() {
+      const base = currentCustomItem.base_price;
+      const sizeExtra = currentCustomItem.sizes[selectedSizeIndex]?.extra || 0;
+      const milkExtra = currentCustomItem.milks[selectedMilkIndex]?.extra || 0;
+      const total = (base + sizeExtra + milkExtra) * customQty;
+      document.getElementById('custom-calc-total-btn').innerText = `$${total.toFixed(2)}`;
+    }
+
+    function adjustCustomQty(delta) {
+      customQty = Math.max(1, customQty + delta);
+      document.getElementById('custom-qty-display').innerText = customQty;
+      updateCustomSubtotal();
+    }
+
+    function addToCartCurrentCustom() {
+      const base = currentCustomItem.base_price;
+      const sizeObj = currentCustomItem.sizes[selectedSizeIndex] || currentCustomItem.sizes[0];
+      const milkObj = currentCustomItem.milks[selectedMilkIndex] || currentCustomItem.milks[0];
+      const unit = base + (sizeObj.extra || 0) + (milkObj.extra || 0);
+
+      cart.push({
+        id: currentCustomItem.id,
+        name: currentCustomItem.name,
+        size: sizeObj.label,
+        milk: milkObj.label,
+        unitPrice: unit,
+        qty: customQty
+      });
+
+      showToast(`Added ${customQty}x ${currentCustomItem.name} to Cart`);
+      setScreen('cart');
+    }
+
+    // Cart Management
+    function renderCart() {
+      const container = document.getElementById('cart-items-list');
+      container.innerHTML = '';
+
+      let subtotal = 0;
+      let totalQty = 0;
+
+      cart.forEach((it, index) => {
+        const itemTotal = it.unitPrice * it.qty;
+        subtotal += itemTotal;
+        totalQty += it.qty;
+
+        const row = document.createElement('div');
+        row.className = "p-2.5 rounded-xl bg-white border border-[#ebd8cb] flex items-center justify-between text-xs";
+        row.innerHTML = `
+          <div>
+            <strong class="text-xs text-[#140b07] block">${it.name}</strong>
+            <span class="text-[10px] text-[#786457]">${it.size} • ${it.milk}</span>
+            <div class="text-[11px] font-bold text-[#d9532f] font-mono mt-0.5">$${itemTotal.toFixed(2)}</div>
+          </div>
+          <div class="flex items-center gap-2 bg-[#f7ebe1] px-2 py-1 rounded-lg border border-[#ebd8cb]">
+            <button onclick="changeCartQty(${index}, -1)" class="text-xs font-bold text-[#140b07]">-</button>
+            <span class="text-xs font-bold text-[#140b07] font-mono">${it.qty}</span>
+            <button onclick="changeCartQty(${index}, 1)" class="text-xs font-bold text-[#140b07]">+</button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      // Update counters
+      document.getElementById('badge-cart-counter').innerText = totalQty;
+      document.getElementById('top-cart-count').innerText = totalQty;
+      document.getElementById('floating-bar-qty').innerText = totalQty;
+
+      // Update calculations
+      const delivery = subtotal > 0 ? storeData.meta.delivery_fee : 0;
+      const tax = subtotal * (storeData.meta.tax_rate_percent / 100);
+      const discount = subtotal * discountPercent;
+      const total = Math.max(0, subtotal + delivery + tax - discount);
+
+      document.getElementById('bill-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById('bill-tax').innerText = `$${tax.toFixed(2)}`;
+      document.getElementById('bill-total').innerText = `$${total.toFixed(2)}`;
+      document.getElementById('floating-bar-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById('btn-place-order-total').innerText = `$${total.toFixed(2)}`;
+
+      if (discount > 0) {
+        document.getElementById('bill-discount-row').classList.remove('hidden');
+        document.getElementById('bill-discount').innerText = `-$${discount.toFixed(2)}`;
+      } else {
+        document.getElementById('bill-discount-row').classList.add('hidden');
+      }
+    }
+
+    function changeCartQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      renderCart();
+      showToast('Cart cleared');
+    }
+
+    function applyPromoCode() {
+      const code = document.getElementById('promo-input').value.trim().toUpperCase();
+      if (code === 'ROAST10') {
+        discountPercent = 0.10;
+        renderCart();
+        showToast('🎉 10% Discount Applied!');
+      } else {
+        showToast('Invalid coupon code');
+      }
+    }
+
+    function placeOrderFinal() {
+      if (cart.length === 0) {
+        showToast('Your cart is empty! Add an item first.');
+        return;
+      }
+      document.getElementById('order-ref-code').innerText = `#BK-${Math.floor(10000 + Math.random() * 90000)}`;
+      showToast('🎉 Order placed successfully!');
+      cart = [];
+      discountPercent = 0;
+      setScreen('order');
+    }
+
+    function resetCartState() {
+      cart = [
+        {
+          id: "item_caramel_macchiato",
+          name: "Caramel Macchiato",
+          size: "Grande (12 oz)",
+          milk: "Oat Milk (Barista Blend)",
+          unitPrice: 5.50,
+          qty: 1
+        },
+        {
+          id: "item_butter_croissant",
+          name: "Normandy Croissant",
+          size: "Single Piece",
+          milk: "Classic (No Spread)",
+          unitPrice: 3.90,
+          qty: 1
+        }
+      ];
+      discountPercent = 0;
+      setScreen('menu');
+      showToast('🔄 Reset to default prototype state');
+    }
+
+    function toggleFavorite() {
+      const icon = document.getElementById('fav-icon');
+      icon.classList.toggle('text-rose-500');
+      icon.classList.toggle('text-[#786457]');
+      showToast('Item saved to favorites');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.remove('-translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('-translate-y-24', 'opacity-0');
+      }, 2400);
+    }
+
+    function copyToClipboard(id) {
+      const text = document.getElementById(id).innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied URL to clipboard!');
+      });
+    }
+
+    // Initialize View
+    renderCatalog();
+    renderCart();
+    setScreen('menu');
   </script>
 </body>
 </html>
