@@ -42,7 +42,7 @@
       pointer-events: none;
     }
 
-    /* Authentic Android Smartphone Frame (No bottom navigation bar) */
+    /* Authentic Android Smartphone Frame */
     .phone-frame {
       width: 395px;
       height: 800px;
@@ -105,13 +105,13 @@
     <div class="flex flex-wrap items-center justify-between gap-3 bg-[#1c100a]/90 border border-[#3e2417] px-4 py-2.5 rounded-2xl mb-3 shadow-xl backdrop-blur-md">
       <div class="flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-[#d9532f] animate-ping"></span>
-        <span class="text-xs font-black tracking-wider uppercase text-white">Android Developer Take-Home</span>
-        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">1-Day / Fresher Friendly</span>
+        <span class="text-xs font-black tracking-wider uppercase text-white">Clickretina · Android Developer Take-Home</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">~3-4 hrs · Time-Boxed</span>
       </div>
       
       <div class="flex items-center gap-2">
-        <a href="#fresher-structure" class="px-3 py-1.5 rounded-full bg-[#d9532f]/20 hover:bg-[#d9532f]/30 border border-[#d9532f]/40 text-xs font-bold text-[#f59e0b] flex items-center gap-1.5 transition btn-press">
-          <i class="fa-solid fa-list-check text-[#f59e0b]"></i> Assignment Requirements
+        <a href="#assignment-guide" class="px-3 py-1.5 rounded-full bg-[#d9532f]/20 hover:bg-[#d9532f]/30 border border-[#d9532f]/40 text-xs font-bold text-[#f59e0b] flex items-center gap-1.5 transition btn-press">
+          <i class="fa-solid fa-list-check text-[#f59e0b]"></i> Assignment Instructions
         </a>
         <button onclick="resetPrototype()" class="px-3 py-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-xs font-bold text-white flex items-center gap-1.5 transition btn-press">
           <i class="fa-solid fa-rotate-left"></i> Reset
@@ -120,10 +120,10 @@
     </div>
 
     <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center justify-center gap-2 font-display">
-      <span>Brewkery</span>
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d9532f] to-[#f59e0b]">App Flow Prototype</span>
+      <span>Build the</span>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d9532f] to-[#f59e0b]">Brewkery App</span>
     </h1>
-    <p class="text-xs text-[#a89486] mt-1">Flow: <b>Menu</b> &rarr; <i>(Tap item)</i> &rarr; <b>Detail (Full Customizations)</b> &rarr; <i>(Add to Cart)</i> &rarr; <b>Cart</b> &rarr; <i>(Place Order)</i> &rarr; <b>Order Status</b></p>
+    <p class="text-xs text-[#a89486] mt-1">A native Android coffee & bakery app powered by a single API. Flow: <b>Menu</b> &rarr; <i>(Tap item)</i> &rarr; <b>Item Detail</b> &rarr; <i>(Add to Cart)</i> &rarr; <b>Cart</b> &rarr; <i>(Place Order)</i> &rarr; <b>Order Status</b></p>
 
     <!-- Top Flow Step Switcher -->
     <div class="flex flex-wrap justify-center gap-2 mt-3.5">
@@ -159,7 +159,7 @@
       </div>
     </div>
 
-    <!-- MAIN SCROLLABLE SCREEN VIEWPORT (Full height without bottom nav) -->
+    <!-- MAIN SCROLLABLE SCREEN VIEWPORT -->
     <div id="screen-viewport" class="flex-1 overflow-y-auto custom-scrollbar relative px-4 pb-4 pt-2 space-y-4 app-viewport flex flex-col">
 
       <!-- ========================================================= -->
@@ -186,15 +186,24 @@
           </button>
         </div>
 
-        <!-- DYNAMIC STORE / ACTIVE ORDER BANNER -->
-        <!-- Default State (Before ordering): 🛵 Delivery in 20 - 30 mins • $2.50 fee -->
-        <!-- Active Order State (After ordering): 🟢 Active Order #BK-XXXXX: Preparing (Arriving in 25 mins) -->
-        <div id="home-status-banner" class="flex items-center justify-between p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs transition-all">
-          <div class="flex items-center gap-2">
-            <span class="text-sm" id="home-banner-icon">🛵</span>
-            <span class="text-[11px] font-semibold text-[#140b07]" id="home-banner-text">Delivery in 20 - 30 mins • $2.50 fee</span>
+        <!-- HIGH-POLISH DYNAMIC STORE / ACTIVE ORDER CARD -->
+        <div id="home-status-banner" class="p-3 rounded-2xl bg-gradient-to-r from-[#faeee5] to-[#f7ebe1] border border-[#ebd8cb] text-xs shadow-sm transition-all flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-white border border-[#ebd8cb] flex items-center justify-center text-sm shadow-sm" id="home-banner-icon-box">
+              🛵
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[9px] font-black uppercase tracking-wider text-[#d9532f]" id="home-banner-tag">STORE INFO</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-[#d9532f]"></span>
+              </div>
+              <strong class="text-xs text-[#140b07] block" id="home-banner-main">Delivery in 20 - 30 mins</strong>
+              <span class="text-[10px] text-[#786457]" id="home-banner-sub">$2.50 flat fee</span>
+            </div>
           </div>
-          <span class="text-[10px] font-bold text-[#d9532f]" id="home-banner-sub">Standard</span>
+          <span class="px-2.5 py-1 rounded-lg bg-white border border-[#ebd8cb] text-[10px] font-bold text-[#140b07]" id="home-banner-action">
+            Open
+          </span>
         </div>
 
         <!-- Search Bar -->
@@ -241,7 +250,7 @@
       </div>
 
       <!-- ========================================================= -->
-      <!-- SCREEN 2: ITEM DETAIL SCREEN (WITH ALL API CUSTOMIZATIONS) -->
+      <!-- SCREEN 2: ITEM DETAIL SCREEN                              -->
       <!-- ========================================================= -->
       <div id="view-detail" class="screen-view hidden space-y-3 flex-1 flex flex-col">
         
@@ -281,29 +290,26 @@
           <div id="detail-ingredients-row" class="flex flex-wrap gap-1"></div>
         </div>
 
-        <!-- 1. API Customization: SIZES -->
+        <!-- 1. Size Selection -->
         <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
           <div class="flex items-center justify-between">
             <span class="text-[11px] font-bold text-[#140b07]">Size Selection</span>
-            <span class="text-[9px] text-[#786457] font-mono">from customizations.sizes</span>
           </div>
           <div id="detail-sizes-row" class="grid grid-cols-3 gap-1.5"></div>
         </div>
 
-        <!-- 2. API Customization: MILK OPTIONS / SPREADS -->
+        <!-- 2. Milk Options / Spreads -->
         <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
           <div class="flex items-center justify-between">
             <span class="text-[11px] font-bold text-[#140b07]">Milk Options / Spreads</span>
-            <span class="text-[9px] text-[#786457] font-mono">from customizations.milk_options</span>
           </div>
           <div id="detail-milk-row" class="space-y-1"></div>
         </div>
 
-        <!-- 3. API Customization: SUGAR LEVELS / PREPARATION -->
+        <!-- 3. Sugar Levels / Serving -->
         <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
           <div class="flex items-center justify-between">
             <span class="text-[11px] font-bold text-[#140b07]">Sugar Levels / Serving</span>
-            <span class="text-[9px] text-[#786457] font-mono">from customizations.sugar_levels</span>
           </div>
           <div id="detail-sugar-row" class="flex gap-1.5 flex-wrap"></div>
         </div>
@@ -378,7 +384,7 @@
       </div>
 
       <!-- ========================================================= -->
-      <!-- SCREEN 4: ORDER PLACED (CLEARS CART AUTOMATICALLY)        -->
+      <!-- SCREEN 4: ORDER PLACED SCREEN                             -->
       <!-- ========================================================= -->
       <div id="view-order" class="screen-view hidden space-y-4 text-center py-4 flex-1 flex flex-col justify-between">
         
@@ -388,10 +394,10 @@
             ☕
           </div>
 
-          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Cart Cleared & Dispatched</span>
+          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Order Dispatched</span>
           <h2 class="text-xl font-black text-[#140b07] font-display">Brewing in Progress!</h2>
           <p class="text-xs text-[#786457] max-w-[240px] mx-auto mt-1 leading-relaxed">
-            Your ticket was dispatched to our barista. Your in-memory cart has been reset.
+            Your ticket was dispatched to our barista.
           </p>
         </div>
 
@@ -440,50 +446,69 @@
   </div>
 
   <!-- ========================================================= -->
-  <!-- FRESHER ASSESSMENT BRIEF & ARCHITECTURE SPECIFICATION     -->
+  <!-- STEP-BY-STEP INSTRUCTIONS & HOW TO SUBMIT                 -->
   <!-- ========================================================= -->
-  <section id="fresher-structure" class="w-full max-w-4xl mt-12 bg-[#140b07] border border-[#3e2417] rounded-3xl p-6 sm:p-10 text-white shadow-2xl">
+  <section id="assignment-guide" class="w-full max-w-4xl mt-12 bg-[#140b07] border border-[#3e2417] rounded-3xl p-6 sm:p-10 text-white shadow-2xl space-y-8">
     
-    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-      <div class="inline-flex items-center gap-2 bg-[#2d1a12] px-3.5 py-1.5 rounded-full text-xs font-bold text-[#f59e0b]">
-        <i class="fa-solid fa-graduation-cap"></i> Fresher-Friendly Android Assessment
+    <div>
+      <div class="inline-flex items-center gap-2 bg-[#2d1a12] px-3.5 py-1.5 rounded-full text-xs font-bold text-[#f59e0b] mb-3">
+        <i class="fa-solid fa-code"></i> Clickretina · Android Developer Take-Home
       </div>
-      <span class="text-xs text-[#a89486] font-mono">Suggested Time: ~3 to 4 Hours</span>
+      <h2 class="text-2xl sm:text-3xl font-black font-display text-white">
+        Build it — step by step
+      </h2>
+      <p class="text-xs sm:text-sm text-[#ebd8cb]/80 mt-1">Just follow these simple instructions:</p>
     </div>
-    
-    <h2 class="text-2xl sm:text-3xl font-black font-display mb-3">
-      Architecture & Candidate Evaluation
-    </h2>
-    
-    <!-- ⚠️ Critical Architecture Note Callout -->
-    <div class="bg-[#24130b] border-2 border-[#d9532f] rounded-2xl p-4 sm:p-5 my-5 text-xs text-[#ebd8cb] space-y-2">
+
+    <!-- Step Checklist -->
+    <div class="bg-[#1c100a] border border-[#3e2417] rounded-2xl p-5 space-y-3 text-xs text-[#cbd5e1]">
+      <ul class="space-y-2.5 list-disc list-inside">
+        <li>Create a new Android project in Kotlin (Android Studio).</li>
+        <li>Add Retrofit + coroutines and fetch the JSON from the API URL below.</li>
+        <li><strong>Screen 1 — Home / Menu:</strong> show the categories row and the items list (thumbnail, badge, title, rating, base price). Includes the store announcement banner (and active order tracking once placed).</li>
+        <li><strong>Screen 2 — Item Detail:</strong> tap an item &rarr; hero image, info, ingredients, and dynamic customizations (<code>sizes</code>, <code>milk_options</code>, <code>sugar_levels</code>) with price recalculation.</li>
+        <li><strong>Screen 3 — Cart:</strong> tap cart &rarr; items list with quantities, subtotal + $2.50 delivery + 8% tax calculation.</li>
+        <li><strong>Screen 4 — Order Status:</strong> place order &rarr; clear cart, generate ticket ID, and show <code>PREPARING</code> status.</li>
+        <li>Load all images from their URLs with Coil or Glide.</li>
+        <li>Show a loading state and an error message for the network call.</li>
+        <li>Write at least one unit test.</li>
+        <li>Use AI tools (Claude, Cursor, Copilot, Gemini) throughout — that's expected here.</li>
+        <li>Add a README (below) and push everything to a public GitHub repo.</li>
+      </ul>
+    </div>
+
+    <!-- Architecture Note on Database -->
+    <div class="bg-[#24130b] border-2 border-[#d9532f] rounded-2xl p-4 sm:p-5 text-xs text-[#ebd8cb] space-y-2">
       <div class="flex items-center gap-2 text-[#f59e0b] font-bold text-sm">
         <i class="fa-solid fa-database"></i>
         <span>Important Architecture Note: Database Usage</span>
       </div>
       <p class="leading-relaxed">
-        <strong>No SQLite or Room database is required.</strong> When the app closes, it is completely fine if the cart resets. You and your AI workflow are free to decide how state is maintained (e.g., in memory or however you choose). If you do choose to integrate local persistence like Room/SQLite, that is a pure bonus.
+        <strong>No SQLite or Room database is required.</strong> When the app closes, it is completely fine if the cart resets. If you choose to integrate local persistence like Room/SQLite, that will be considered a bonus.
       </p>
     </div>
 
-    <!-- Core Requirements (Must-Have) -->
-    <div class="bg-[#1e1008] border border-[#4a2b1c] rounded-2xl p-5 space-y-3 text-xs my-6">
-      <div class="flex items-center justify-between">
-        <h3 class="font-bold text-sm text-white font-display">Core Requirements (Must-Have)</h3>
-        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-[#f59e0b] font-bold text-[10px]">ALL CORE REQUIREMENTS</span>
+    <!-- The One Extra Thing: AI Workflow -->
+    <div class="bg-gradient-to-r from-[#26140b] to-[#1c100a] border border-[#d9532f]/60 rounded-2xl p-6 space-y-3 text-xs text-[#ebd8cb]">
+      <div class="flex items-center gap-2 text-white font-bold text-sm font-display">
+        <span class="text-lg">🤖</span>
+        <span>The one extra thing: README · how you used AI</span>
       </div>
-      <ul class="space-y-2.5 text-[#cbd5e1] list-disc list-inside">
-        <li><strong>API Fetch:</strong> Fetch data from GitHub raw endpoint using Retrofit or Ktor with Coroutines.</li>
-        <li><strong>Screen 1 (Menu):</strong> Render category row and item cards (remote image via Coil/Glide, title, price, rating). Includes store announcement banner (e.g., <em>Delivery in 20 - 30 mins • $2.50 fee</em>) and dynamic active order tracking when an order is placed.</li>
-        <li><strong>Screen 2 (Item Detail & Customizations):</strong> Match exact API schema: render <code>sizes</code>, <code>sugar_levels</code>, and <code>milk_options</code> dynamically with price recalculation and "Add to Cart".</li>
-        <li><strong>Screen 3 (Cart & Checkout):</strong> View added items, calculate subtotal + flat delivery + tax.</li>
-        <li><strong>Screen 4 (Order Placed):</strong> Clear the cart automatically, display randomized ticket ID (e.g. <code>#BK-83921</code>), and <code>PREPARING</code> status.</li>
-        <li><strong>AI Workflow (Mandatory):</strong> Submit <code>AI_WORKFLOW.md</code> showing 2–3 prompts used and 1 AI bug or hallucination you caught and resolved.</li>
+      <p class="text-[#cbd5e1] leading-relaxed">
+        Add a short README to your repo that shows how you worked with AI:
+      </p>
+      <ul class="list-disc list-inside space-y-1.5 text-[#cbd5e1]">
+        <li>Which AI tools you used.</li>
+        <li>2–3 of the actual prompts you sent.</li>
+        <li>One thing AI got right, and one thing it got wrong — and how you fixed it.</li>
       </ul>
+      <p class="text-[11px] text-[#f59e0b] italic font-semibold">
+        This is an AI-first team — we want to see how you actually work with these tools.
+      </p>
     </div>
 
     <!-- API Endpoints -->
-    <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 text-xs font-mono mb-6">
+    <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 text-xs font-mono">
       <span class="text-[#f59e0b] font-bold block mb-1">Public Raw API Endpoint:</span>
       <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
         https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
@@ -493,15 +518,35 @@
       </button>
     </div>
 
-    <!-- Submission Guidelines -->
-    <div class="border-t border-[#3e2417] pt-5 flex items-center justify-between flex-wrap gap-3 text-xs">
-      <div>
-        <span class="text-[#a89486] block">Questions or Need Help?</span>
-        <strong class="text-white">hr@clickretina.com</strong>
+    <!-- How to submit -->
+    <div class="bg-[#1c100a] border border-[#3e2417] rounded-2xl p-6 space-y-3 text-xs text-[#cbd5e1]">
+      <h3 class="text-sm font-bold text-white font-display">How to submit — share your app with us</h3>
+      <ol class="list-decimal list-inside space-y-2">
+        <li>Push your code to a public GitHub repository and copy the repo link.</li>
+        <li>Build a debug APK so we can install and try it. In Android Studio: <code>Build &rarr; Build Bundle(s) / APK(s) &rarr; Build APK(s)</code>. Or run <code>./gradlew assembleDebug</code> — find it in <code>app/build/outputs/apk/debug/</code>.</li>
+        <li>Make sure the README (with the AI section) is in the repo.</li>
+        <li>Optional but appreciated: a 1–2 minute screen recording of the app running.</li>
+        <li>Email all of it — GitHub link + the APK (attach it, or a Google Drive link) + recording — to <a href="mailto:hr@clickretina.com?subject=Brewkery%20Android%20Assignment%20Submission" class="text-[#f59e0b] font-bold underline">hr@clickretina.com</a>.</li>
+      </ol>
+      <div class="pt-3 border-t border-[#3e2417] flex items-center justify-between flex-wrap gap-2 text-[11px]">
+        <span class="text-[#f59e0b] font-bold">⏳ Deadline: within 4 days of receiving this assignment. Need more time? Just ask.</span>
+        <a href="mailto:hr@clickretina.com?subject=Brewkery%20Android%20Assignment%20Submission" class="px-3.5 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
+          ✉ Submit to hr@clickretina.com
+        </a>
       </div>
-      <a href="mailto:hr@clickretina.com?subject=Brewkery%20Take-Home%20Submission" class="px-5 py-2.5 rounded-xl bg-[#d9532f] text-white font-extrabold hover:bg-[#b84121] transition">
-        ✉ Submit GitHub Repo & APK
-      </a>
+    </div>
+
+    <!-- Ground Rules -->
+    <div class="bg-[#140b07] border border-[#3e2417] rounded-2xl p-5 space-y-2 text-xs text-[#a89486]">
+      <h4 class="font-bold text-white text-xs uppercase tracking-wider">Ground rules — A few honest notes</h4>
+      <ul class="list-disc list-inside space-y-1.5">
+        <li>Keep it to roughly 3–4 hours. Don't over-engineer.</li>
+        <li>Match the screens shown above — same app for everyone.</li>
+        <li>Use AI as much as you like, but understand your code; we'll go through it in the interview.</li>
+        <li>Stuck on something? Email us — how you ask is part of the signal.</li>
+        <li>Questions? <a href="mailto:hr@clickretina.com" class="text-[#ebd8cb] underline">hr@clickretina.com</a> · 9889856987</li>
+      </ul>
+      <p class="pt-2 text-white font-semibold">We read every submission — looking forward to seeing what you build.</p>
     </div>
 
   </section>
@@ -609,7 +654,7 @@
             sugar_levels: ["Freshly Warmed", "Room Temperature"],
             milk_options: [
               { id: "top_none", name: "Standard Glaze", extra_price: 0.00 },
-              { id: "top_nuts", name: "Extra Toasted Pistachios", extra_price: 0.75 }
+              { id: "top_extra_nuts", name: "Extra Toasted Pistachios", extra_price: 0.75 }
             ]
           }
         }
@@ -667,23 +712,28 @@
     }
 
     function updateHomeBanner() {
-      const banner = document.getElementById('home-status-banner');
-      const icon = document.getElementById('home-banner-icon');
-      const text = document.getElementById('home-banner-text');
+      const iconBox = document.getElementById('home-banner-icon-box');
+      const tag = document.getElementById('home-banner-tag');
+      const main = document.getElementById('home-banner-main');
       const sub = document.getElementById('home-banner-sub');
+      const action = document.getElementById('home-banner-action');
 
       if (activeOrder) {
-        banner.className = "flex items-center justify-between p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-xs transition-all";
-        icon.innerText = "🟢";
-        text.innerHTML = `Active Order <b>${activeOrder.orderId}</b>: Preparing (Arriving in ${activeOrder.wait})`;
-        sub.innerText = "Tracking";
-        sub.className = "text-[10px] font-bold text-emerald-700";
+        iconBox.innerHTML = "🟢";
+        tag.innerText = "ACTIVE ORDER";
+        tag.className = "text-[9px] font-black uppercase tracking-wider text-emerald-600";
+        main.innerText = `Active Order ${activeOrder.orderId}`;
+        sub.innerText = `Preparing (Arriving in ${activeOrder.wait})`;
+        action.innerText = "Track";
+        action.className = "px-2.5 py-1 rounded-lg bg-emerald-600 text-white text-[10px] font-bold";
       } else {
-        banner.className = "flex items-center justify-between p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs transition-all";
-        icon.innerText = "🛵";
-        text.innerText = "Delivery in 20 - 30 mins • $2.50 fee";
-        sub.innerText = "Standard";
-        sub.className = "text-[10px] font-bold text-[#d9532f]";
+        iconBox.innerHTML = "🛵";
+        tag.innerText = "STORE INFO";
+        tag.className = "text-[9px] font-black uppercase tracking-wider text-[#d9532f]";
+        main.innerText = "Delivery in 20 - 30 mins";
+        sub.innerText = "$2.50 flat fee";
+        action.innerText = "Open";
+        action.className = "px-2.5 py-1 rounded-lg bg-white border border-[#ebd8cb] text-[10px] font-bold text-[#140b07]";
       }
     }
 
@@ -761,7 +811,7 @@
         ingRow.appendChild(chip);
       });
 
-      // 1. Sizes from customizations.sizes
+      // 1. Sizes
       const sizesRow = document.getElementById('detail-sizes-row');
       sizesRow.innerHTML = '';
       item.customizations.sizes.forEach((sz, idx) => {
@@ -776,7 +826,7 @@
         sizesRow.appendChild(btn);
       });
 
-      // 2. Milk Options from customizations.milk_options
+      // 2. Milk Options
       const milkRow = document.getElementById('detail-milk-row');
       milkRow.innerHTML = '';
       item.customizations.milk_options.forEach((m, idx) => {
@@ -791,7 +841,7 @@
         milkRow.appendChild(row);
       });
 
-      // 3. Sugar Levels from customizations.sugar_levels
+      // 3. Sugar Levels
       const sugarRow = document.getElementById('detail-sugar-row');
       sugarRow.innerHTML = '';
       item.customizations.sugar_levels.forEach((s, idx) => {
