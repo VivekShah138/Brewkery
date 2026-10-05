@@ -1,0 +1,73 @@
+﻿{
+    "meta":  {
+                 "app":  "Brewkery",
+                 "version":  "1.0.0",
+                 "tagline":  "Artisanal Coffee \u0026 Fresh Oven Bakes",
+                 "currency":  "USD",
+                 "currency_symbol":  "$",
+                 "delivery_fee":  2.50,
+                 "tax_rate_percent":  8.0,
+                 "estimated_delivery_time":  "20 - 30 mins"
+             },
+    "item":  {
+                 "id":  "item_caramel_macchiato",
+                 "category_id":  "cat_hot_coffee",
+                 "name":  "Toasted Caramel Macchiato",
+                 "tagline":  "Double shot espresso with velvety oat milk \u0026 salted caramel",
+                 "description":  "Rich espresso roast layered with velvety steamed milk, infused with house-made vanilla bean syrup and marked with a buttery toasted caramel drizzle.",
+                 "base_price":  4.85,
+                 "rating":  4.9,
+                 "review_count":  312,
+                 "prep_time":  "5-7 mins",
+                 "calories":  240,
+                 "image_url":  "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800\u0026auto=format\u0026fit=crop\u0026q=80",
+                 "badge":  "BESTSELLER",
+                 "ingredients":  [
+                                     "Signature Espresso",
+                                     "Steamed Oat Milk",
+                                     "Salted Caramel",
+                                     "Bourbon Vanilla"
+                                 ],
+                 "customizations":  {
+                                        "sizes":  [
+                                                      {
+                                                          "id":  "sz_small",
+                                                          "label":  "Tall (8 oz)",
+                                                          "extra_price":  0.00
+                                                      },
+                                                      {
+                                                          "id":  "sz_medium",
+                                                          "label":  "Grande (12 oz)",
+                                                          "extra_price":  0.65
+                                                      },
+                                                      {
+                                                          "id":  "sz_large",
+                                                          "label":  "Venti (16 oz)",
+                                                          "extra_price":  1.25
+                                                      }
+                                                  ],
+                                        "sugar_levels":  [
+                                                             "0% Unsweetened",
+                                                             "50% Mild",
+                                                             "100% Standard Sweet"
+                                                         ],
+                                        "milk_options":  [
+                                                             {
+                                                                 "id":  "m_oat",
+                                                                 "name":  "Oat Milk (Barista Blend)",
+                                                                 "extra_price":  0.00
+                                                             },
+                                                             {
+                                                                 "id":  "m_almond",
+                                                                 "name":  "Roasted Almond Milk",
+                                                                 "extra_price":  0.50
+                                                             },
+                                                             {
+                                                                 "id":  "m_whole",
+                                                                 "name":  "Organic Whole Milk",
+                                                                 "extra_price":  0.00
+                                                             }
+                                                         ]
+                                    }
+             }
+}

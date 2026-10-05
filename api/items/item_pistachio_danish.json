@@ -1,0 +1,57 @@
+﻿{
+    "meta":  {
+                 "app":  "Brewkery",
+                 "version":  "1.0.0",
+                 "tagline":  "Artisanal Coffee \u0026 Fresh Oven Bakes",
+                 "currency":  "USD",
+                 "currency_symbol":  "$",
+                 "delivery_fee":  2.50,
+                 "tax_rate_percent":  8.0,
+                 "estimated_delivery_time":  "20 - 30 mins"
+             },
+    "item":  {
+                 "id":  "item_pistachio_danish",
+                 "category_id":  "cat_bakery",
+                 "name":  "Crushed Pistachio Danish",
+                 "tagline":  "Flaky puff pastry with rich Sicilian pistachio custard",
+                 "description":  "Laminated pastry parcel filled with velvety pistachio paste, baked until caramelized and topped with roasted emerald pistachios and fine powdered sugar.",
+                 "base_price":  4.60,
+                 "rating":  4.75,
+                 "review_count":  184,
+                 "prep_time":  "Ready to serve",
+                 "calories":  330,
+                 "image_url":  "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800\u0026auto=format\u0026fit=crop\u0026q=80",
+                 "badge":  "SEASONAL",
+                 "ingredients":  [
+                                     "Bronte Pistachio Paste",
+                                     "Vanilla Custard",
+                                     "Puff Pastry",
+                                     "Icing Sugar"
+                                 ],
+                 "customizations":  {
+                                        "sizes":  [
+                                                      {
+                                                          "id":  "sz_single",
+                                                          "label":  "Single Danish",
+                                                          "extra_price":  0.00
+                                                      }
+                                                  ],
+                                        "sugar_levels":  [
+                                                             "Freshly Warmed",
+                                                             "Room Temperature"
+                                                         ],
+                                        "milk_options":  [
+                                                             {
+                                                                 "id":  "top_none",
+                                                                 "name":  "Standard Glaze",
+                                                                 "extra_price":  0.00
+                                                             },
+                                                             {
+                                                                 "id":  "top_extra_nuts",
+                                                                 "name":  "Extra Toasted Pistachios",
+                                                                 "extra_price":  0.75
+                                                             }
+                                                         ]
+                                    }
+             }
+}

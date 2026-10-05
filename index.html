@@ -6,23 +6,23 @@
   <title>Brewkery · Android Developer Take-Home Assessment</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --espresso: #1a0f0a;
+      --espresso: #180d08;
       --roast-dark: #2c1a11;
       --terracotta: #d9532f;
-      --terracotta-hover: #bf3f1d;
+      --terracotta-hover: #b84121;
       --amber: #f59e0b;
-      --crema: #fdf8f4;
+      --crema: #fbf7f4;
       --crema-card: #ffffff;
-      --caramel-soft: #faeee5;
-      --border: #ebd9cb;
-      --border-dark: #3e261a;
+      --caramel-soft: #f7ebe1;
+      --border: #ebd8cb;
+      --border-dark: #3a2216;
       --text-main: #231710;
-      --text-muted: #796558;
+      --text-muted: #786457;
       --mono: 'JetBrains Mono', monospace;
-      --font-body: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
       --font-display: 'Cabinet Grotesk', sans-serif;
     }
 
@@ -33,38 +33,26 @@
       font-family: var(--font-body);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
 
-    /* Ambient Warm Glow */
     .ambient-glow {
       position: fixed;
-      top: -20%;
+      top: -15%;
       right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(217, 83, 47, 0.08) 0%, rgba(253, 248, 244, 0) 70%);
-      z-index: -1;
-      pointer-events: none;
-    }
-    .ambient-glow-left {
-      position: fixed;
-      bottom: -10%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, rgba(253, 248, 244, 0) 70%);
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(217, 83, 47, 0.08) 0%, rgba(251, 247, 244, 0) 70%);
       z-index: -1;
       pointer-events: none;
     }
 
     .container {
-      max-width: 1040px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 56px 24px 100px;
+      padding: 50px 24px 100px;
     }
 
-    /* Top Banner / Badge */
+    /* Top Badge */
     .badge-pill {
       display: inline-flex;
       align-items: center;
@@ -72,13 +60,13 @@
       background: var(--caramel-soft);
       border: 1px solid var(--border);
       color: var(--espresso);
-      padding: 7px 16px;
+      padding: 6px 16px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .badge-pill .dot {
       width: 8px;
@@ -88,43 +76,42 @@
       box-shadow: 0 0 0 3px rgba(217, 83, 47, 0.2);
     }
 
-    /* Hero Typography */
+    /* Hero */
     h1 {
       font-family: var(--font-display), sans-serif;
-      font-size: 3.4rem;
+      font-size: 3.2rem;
       font-weight: 900;
       color: var(--espresso);
       letter-spacing: -0.03em;
-      line-height: 1.08;
-      margin-bottom: 18px;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
     h1 span {
       color: var(--terracotta);
       font-style: italic;
     }
     .hero-lead {
-      font-size: 1.22rem;
+      font-size: 1.18rem;
       color: var(--text-muted);
-      max-width: 740px;
+      max-width: 760px;
       line-height: 1.6;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
 
     /* Metrics Bar */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 56px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 48px;
     }
     .metric-card {
       background: var(--crema-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px 24px;
-      box-shadow: 0 4px 16px rgba(26, 15, 10, 0.03);
+      border-radius: 14px;
+      padding: 18px 22px;
+      box-shadow: 0 2px 12px rgba(24, 13, 8, 0.03);
       position: relative;
-      overflow: hidden;
     }
     .metric-card::before {
       content: '';
@@ -134,303 +121,394 @@
       width: 4px;
       height: 100%;
       background: var(--terracotta);
-      opacity: 0.6;
+      border-top-left-radius: 14px;
+      border-bottom-left-radius: 14px;
     }
     .metric-val {
       font-family: var(--font-display), sans-serif;
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 800;
       color: var(--espresso);
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .metric-label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
     }
 
-    /* Common Card Styles */
+    /* Card Blocks */
     .card-block {
       background: var(--crema-card);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 4px 24px rgba(26, 15, 10, 0.04);
+      border-radius: 22px;
+      padding: 36px;
+      margin-bottom: 36px;
+      box-shadow: 0 4px 20px rgba(24, 13, 8, 0.03);
     }
     .card-title {
       font-family: var(--font-display), sans-serif;
-      font-size: 1.85rem;
+      font-size: 1.8rem;
       font-weight: 800;
       color: var(--espresso);
       letter-spacing: -0.02em;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .card-subtitle {
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
-    /* API Endpoint Showcase */
-    .api-terminal {
-      background: var(--espresso);
-      border-radius: 18px;
-      padding: 24px;
-      color: #f7ebe1;
-      font-family: var(--mono);
-      font-size: 0.9rem;
-      border: 1px solid var(--border-dark);
+    /* Endpoints Grid */
+    .api-endpoints-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
       margin-top: 16px;
     }
-    .api-url-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      background: var(--roast-dark);
-      padding: 12px 18px;
-      border-radius: 10px;
-      margin-bottom: 18px;
-      border: 1px solid #4a2f21;
+    .endpoint-card {
+      background: var(--espresso);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px;
+      padding: 18px 20px;
+      color: #f7ebe1;
     }
-    .api-url-text {
+    .endpoint-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .endpoint-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #3e261a;
       color: #fbd38d;
-      font-weight: 500;
+    }
+    .endpoint-url-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--roast-dark);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #4a2f21;
+      gap: 12px;
+    }
+    .endpoint-url-text {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: #fbd38d;
       word-break: break-all;
     }
     .btn-copy {
       background: var(--terracotta);
-      color: #ffffff;
+      color: #fff;
       border: none;
-      padding: 8px 18px;
-      border-radius: 8px;
+      padding: 6px 14px;
+      border-radius: 6px;
       font-family: var(--font-body);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
       white-space: nowrap;
+      transition: background 0.2s;
     }
-    .btn-copy:hover {
-      background: var(--terracotta-hover);
-      transform: translateY(-1px);
-    }
+    .btn-copy:hover { background: var(--terracotta-hover); }
 
-    /* Screen Previews / Mockups (Artisanal Coffee Theme) */
+    /* =========================================
+       AUTHENTIC ANDROID PHONE HARDWARE SHELL
+       Aspect Ratio: 9:19.5 (Typical Pixel/Galaxy)
+       Max-Width: 260px (Ultra-realistic mobile proportion)
+       ========================================= */
     .screens-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
       margin-top: 24px;
     }
-    .phone-frame {
-      background: #120905;
-      border-radius: 36px;
-      padding: 14px;
-      border: 4px solid #331d14;
-      box-shadow: 0 16px 36px -10px rgba(26, 15, 10, 0.25);
+    
+    .phone-column {
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
-    .screen-header-meta {
-      padding: 6px 12px 14px;
-    }
-    .screen-step-tag {
-      font-size: 0.72rem;
+    .screen-meta-badge {
+      font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--amber);
-      display: block;
+      letter-spacing: 0.06em;
+      color: var(--terracotta);
       margin-bottom: 2px;
     }
-    .screen-title {
+    .screen-column-title {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 800;
-      color: #ffffff;
-    }
-    .device-screen {
-      background: var(--crema);
-      border-radius: 24px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex-grow: 1;
-      font-size: 0.8rem;
       color: var(--espresso);
-      min-height: 530px;
+      margin-bottom: 12px;
+      text-align: center;
     }
 
-    /* Micro-UI Elements */
-    .top-bar-mock {
+    .android-device {
+      width: 100%;
+      max-width: 252px;
+      aspect-ratio: 9 / 19.5;
+      background: #090604;
+      border-radius: 38px;
+      padding: 9px;
+      box-shadow: 0 16px 36px -8px rgba(24, 13, 8, 0.35), 0 0 0 2px #26160e;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Screen display inside phone */
+    .android-screen-glass {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      font-size: 0.72rem;
+      color: var(--espresso);
+    }
+
+    /* Android Status Bar with Camera Hole-Punch */
+    .android-status-bar {
+      height: 24px;
+      padding: 0 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 8px;
-      border-bottom: 1px dashed var(--border);
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #1a0f0a;
+      background: transparent;
+      z-index: 10;
+      position: relative;
     }
-    .category-pills-row {
+    .android-hole-punch {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: #000000;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px #1a1a1a;
+    }
+    .status-icons {
       display: flex;
-      gap: 6px;
-      overflow-x: auto;
+      gap: 4px;
+      font-size: 0.58rem;
+    }
+
+    /* Android Bottom System Gesture Pill */
+    .android-gesture-bar {
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
       padding-bottom: 2px;
     }
-    .c-pill {
+    .gesture-pill {
+      width: 60px;
+      height: 3px;
+      background: #1a0f0a;
+      border-radius: 2px;
+      opacity: 0.3;
+    }
+
+    /* Inner Screen Contents */
+    .app-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 10px;
+      gap: 8px;
+      background: var(--crema);
+      overflow-y: hidden;
+    }
+
+    /* App Elements inside viewport */
+    .top-app-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 4px;
+    }
+    .app-cart-icon {
       background: #ffffff;
       border: 1px solid var(--border);
-      padding: 5px 12px;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+
+    .cat-chips-scroll {
+      display: flex;
+      gap: 4px;
+      overflow: hidden;
+    }
+    .cat-chip {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
       border-radius: 999px;
+      font-size: 0.62rem;
       font-weight: 700;
-      font-size: 0.72rem;
       white-space: nowrap;
     }
-    .c-pill.active {
+    .cat-chip.active {
       background: var(--espresso);
-      color: #ffffff;
+      color: #fff;
       border-color: var(--espresso);
     }
-    .item-card-mock {
+
+    .product-row-card {
       background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px;
+      border-radius: 10px;
+      padding: 7px;
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
     }
-    .item-thumb-mock {
-      width: 65px;
-      height: 65px;
-      border-radius: 10px;
+    .product-img-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
       background-size: cover;
       background-position: center;
       flex-shrink: 0;
     }
-    .item-badge-pill {
-      font-size: 0.62rem;
+    .mini-badge {
+      font-size: 0.55rem;
       font-weight: 800;
       background: #fef3c7;
       color: #92400e;
-      padding: 2px 6px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 2px;
+      padding: 1px 4px;
+      border-radius: 3px;
     }
-    .custom-section-title {
-      font-size: 0.74rem;
+
+    /* Screen 2 Elements */
+    .hero-img-box {
+      height: 92px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+    }
+    .option-group-title {
+      font-size: 0.62rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--text-muted);
-      margin-top: 4px;
+      letter-spacing: 0.04em;
     }
-    .selection-chips-row {
+    .options-row {
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
     }
-    .chip-option {
+    .opt-chip {
       background: #ffffff;
       border: 1px solid var(--border);
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-size: 0.72rem;
+      padding: 3px 6px;
+      border-radius: 6px;
+      font-size: 0.58rem;
       font-weight: 600;
     }
-    .chip-option.selected {
-      background: var(--caramel-soft);
+    .opt-chip.active {
       border-color: var(--terracotta);
+      background: var(--caramel-soft);
       color: var(--terracotta);
       font-weight: 700;
     }
-    .sticky-bottom-action {
+
+    /* Screen 3 Elements */
+    .bill-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font-size: 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: auto;
+    }
+    .bill-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Floating / Sticky Action Button */
+    .app-action-btn {
       background: var(--espresso);
       color: #ffffff;
-      border-radius: 12px;
-      padding: 12px 14px;
+      border-radius: 8px;
+      padding: 8px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-weight: 700;
+      font-size: 0.65rem;
       margin-top: auto;
     }
-    .stepper-mock {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-weight: 700;
-    }
-    .order-success-icon {
-      width: 60px;
-      height: 60px;
-      background: #fef2f2;
-      border: 2px solid #fecaca;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      margin: 12px auto 6px;
-    }
 
-    /* AI Box Special */
+    /* AI Guidance Card */
     .ai-guidance-card {
       background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
       border: 2px dashed #f97316;
-      border-radius: 24px;
-      padding: 36px;
-      margin: 40px 0;
+      border-radius: 20px;
+      padding: 32px;
+      margin: 36px 0;
     }
     .ai-guidance-card h3 {
       font-family: var(--font-display);
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       font-weight: 800;
       color: #9a3412;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .prompt-snippet-box {
-      background: #ffffff;
-      border: 1px solid #fdba74;
-      border-radius: 12px;
-      padding: 16px 20px;
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      color: #7c2d12;
-      margin-top: 14px;
+      margin-bottom: 8px;
     }
 
-    /* Step Checklist */
+    /* Checklist */
     .steps-checklist {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
     .steps-checklist li {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       align-items: flex-start;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
     }
     .step-badge-num {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       background: var(--terracotta);
       color: #ffffff;
       border-radius: 50%;
@@ -438,66 +516,60 @@
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       flex-shrink: 0;
       margin-top: 2px;
     }
 
-    /* Submission Dark Section */
+    /* Submission Banner */
     .submission-banner {
       background: var(--espresso);
-      border-radius: 28px;
-      padding: 50px 36px;
+      border-radius: 24px;
+      padding: 44px 30px;
       color: #ffffff;
       text-align: center;
-      position: relative;
-      overflow: hidden;
       border: 1px solid #3d2216;
     }
     .submission-banner h2 {
       font-family: var(--font-display);
-      font-size: 2.3rem;
+      font-size: 2.1rem;
       font-weight: 900;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
+      margin-bottom: 10px;
     }
     .submission-banner p {
       color: #b7a091;
-      max-width: 580px;
-      margin: 0 auto 30px;
-      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 26px;
     }
     .action-cta-btn {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: var(--terracotta);
       color: #ffffff;
-      padding: 16px 36px;
-      border-radius: 12px;
+      padding: 14px 32px;
+      border-radius: 10px;
       font-weight: 800;
-      font-size: 1.05rem;
+      font-size: 1rem;
       text-decoration: none;
-      box-shadow: 0 10px 20px rgba(217, 83, 47, 0.35);
+      box-shadow: 0 8px 18px rgba(217, 83, 47, 0.35);
       transition: all 0.2s;
     }
     .action-cta-btn:hover {
       background: var(--terracotta-hover);
       transform: translateY(-2px);
-      box-shadow: 0 14px 26px rgba(217, 83, 47, 0.45);
     }
 
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem; }
-      .card-block { padding: 24px; }
-      .container { padding: 32px 16px 64px; }
+    @media (max-width: 640px) {
+      h1 { font-size: 2.3rem; }
+      .card-block { padding: 20px; }
+      .container { padding: 30px 16px 60px; }
     }
   </style>
 </head>
 <body>
 
   <div class="ambient-glow"></div>
-  <div class="ambient-glow-left"></div>
 
   <div class="container">
     <!-- Header Badge -->
@@ -507,10 +579,10 @@
       </div>
       <h1>Build the <span>Brewkery</span> Mobile Experience.</h1>
       <p class="hero-lead">
-        A curated 4-screen native Android ordering app for an artisanal coffeehouse & bakery. Powered entirely by a single endpoint with dynamic recalculation and customizable menu items.
+        A 4-screen native Android ordering app for an artisanal coffeehouse & bakery. Powered by flexible REST endpoints with dynamic subtotal recalculation and customizable menu options.
       </p>
 
-      <!-- Key Assignment Metrics -->
+      <!-- Assignment Highlights -->
       <div class="metrics-grid">
         <div class="metric-card">
           <span class="metric-val">~3–4 Hours</span>
@@ -518,15 +590,15 @@
         </div>
         <div class="metric-card">
           <span class="metric-val">Kotlin & Compose</span>
-          <span class="metric-label">Target Architecture</span>
+          <span class="metric-label">Architecture Stack</span>
         </div>
         <div class="metric-card">
           <span class="metric-val">4 Core Screens</span>
-          <span class="metric-label">Menu → Custom → Cart → Done</span>
+          <span class="metric-label">Exact Matching</span>
         </div>
         <div class="metric-card">
-          <span class="metric-val">AI-First</span>
-          <span class="metric-label">Efficiency Evaluated</span>
+          <span class="metric-val">Single & All API</span>
+          <span class="metric-label">REST Endpoints</span>
         </div>
       </div>
     </header>
@@ -535,235 +607,276 @@
     <section class="card-block">
       <h2 class="card-title">What You Are Building</h2>
       <p class="card-subtitle">
-        <strong>Brewkery</strong> is a delightful consumer mobile app where guests browse specialty brews, customize sizes and organic milk choices with real-time price updates, manage their cart, and review checkout details.
+        <strong>Brewkery</strong> is a consumer mobile experience where customers browse artisanal roasts and pastries, customize cup sizes and organic milk choices with instant price calculation, manage their cart, and review checkout details.
       </p>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">
-        🎨 <strong>Visual Tone:</strong> Warm artisanal aesthetic (Deep Espresso <code>#1a0f0a</code>, Terracotta <code>#d9532f</code>, Amber accents, and Soft Crema <code>#fdf8f4</code>). Clean cards, rounded corners, and crisp product typography.
+      <p style="color: var(--text-muted); font-size: 0.94rem;">
+        🎨 <strong>Visual Theme:</strong> Warm artisanal coffeehouse palette (Deep Espresso <code>#180d08</code>, Terracotta <code>#d9532f</code>, Amber accents, and Soft Crema <code>#fbf7f4</code>). Clean cards and rounded buttons.
       </p>
     </section>
 
-    <!-- The API Section -->
+    <!-- API Endpoints Section (Both Full Menu & Single Item) -->
     <section class="card-block">
-      <h2 class="card-title">The Single Data API Endpoint</h2>
+      <h2 class="card-title">The REST API Endpoints</h2>
       <p class="card-subtitle">
-        Everything needed to populate the store metadata, categories, menu items, prices, and options is returned by one public endpoint:
+        You can fetch the full menu at once OR fetch individual item details dynamically by ID when navigating:
       </p>
 
-      <div class="api-terminal">
-        <div class="api-url-row">
-          <span class="api-url-text" id="apiEndpointUrl">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json</span>
-          <button class="btn-copy" onclick="copyApiUrl()">Copy Raw URL</button>
+      <div class="api-endpoints-grid">
+        <!-- Endpoint 1: Full Menu -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="endpoint-tag">Endpoint 1 · Full Menu & Store Metadata</span>
+            <span style="font-size:0.75rem; color:#a89486;">GET</span>
+          </div>
+          <div class="endpoint-url-bar">
+            <span class="endpoint-url-text" id="fullMenuUrl">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json</span>
+            <button class="btn-copy" onclick="copyUrl('fullMenuUrl', this)">Copy URL</button>
+          </div>
+          <div style="font-size:0.78rem; color:#b7a091; margin-top:6px;">
+            Returns shop configuration, categories list, and all 6 featured items.
+          </div>
         </div>
-        <pre><code style="color: #cbd5e1;">// Structure Overview:
-{
-  "meta": { "app": "Brewkery", "currency_symbol": "$", "delivery_fee": 2.50, "tax_rate_percent": 8.0 },
-  "categories": [ { "id": "cat_hot_coffee", "name": "Hot Coffee", "icon": "☕" }, ... ],
-  "featured_items": [
-    {
-      "id": "item_caramel_macchiato",
-      "name": "Toasted Caramel Macchiato",
-      "base_price": 4.85,
-      "image_url": "https://images.unsplash.com/...",
-      "customizations": {
-        "sizes": [ { "label": "Tall (8 oz)", "extra_price": 0.00 }, { "label": "Venti (16 oz)", "extra_price": 1.25 } ],
-        "sugar_levels": [ "0%", "50%", "100%" ],
-        "milk_options": [ { "name": "Oat Milk", "extra_price": 0.00 }, { "name": "Roasted Almond", "extra_price": 0.50 } ]
-      }
-    }
-  ]
-}</code></pre>
+
+        <!-- Endpoint 2: Single Item by ID -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="endpoint-tag">Endpoint 2 · Single Item Detail by ID</span>
+            <span style="font-size:0.75rem; color:#a89486;">GET</span>
+          </div>
+          <div class="endpoint-url-bar">
+            <span class="endpoint-url-text" id="singleItemPattern">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{item_id}.json</span>
+            <button class="btn-copy" onclick="copyUrl('singleItemPattern', this)">Copy URL</button>
+          </div>
+          <div style="font-size:0.78rem; color:#b7a091; margin-top:8px;">
+            💡 <em>Direct Example (Caramel Macchiato):</em><br>
+            <code style="color:#fbd38d; font-family:var(--mono); font-size:0.75rem;">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/item_caramel_macchiato.json</code>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Screens Specification Grid -->
+    <!-- Screen Mockups in Authentic Android Frames -->
     <section class="card-block">
-      <h2 class="card-title">The 4 Screens — Recreate As Shown</h2>
-      <p class="card-subtitle">Map the API responses directly to these screens. Replicate the layout hierarchy and user interactions.</p>
+      <h2 class="card-title">The 4 Android Screens — Recreate As Shown</h2>
+      <p class="card-subtitle">
+        Proportioned to modern Android form factor (20:9 ratio with hole-punch camera and gesture navigation).
+      </p>
 
       <div class="screens-container">
         
-        <!-- Screen 1: Catalog / Menu -->
-        <div class="phone-frame">
-          <div class="screen-header-meta">
-            <span class="screen-step-tag">Screen 1</span>
-            <h3 class="screen-title">Menu & Catalog</h3>
-          </div>
-          <div class="device-screen">
-            <div class="top-bar-mock">
-              <div>
-                <strong style="font-size:0.85rem; display:block;">Brewkery Artisans</strong>
-                <span style="font-size:0.68rem; color:var(--text-muted);">⏱ 20 - 30 mins delivery</span>
+        <!-- Screen 1: Catalog -->
+        <div class="phone-column">
+          <span class="screen-meta-badge">Screen 1</span>
+          <h3 class="screen-column-title">Menu & Catalog</h3>
+
+          <div class="android-device">
+            <div class="android-screen-glass">
+              <!-- Android Status Bar -->
+              <div class="android-status-bar">
+                <span>9:41</span>
+                <div class="android-hole-punch"></div>
+                <div class="status-icons"><span>5G</span><span>100%</span></div>
               </div>
-              <div style="background:#ffffff; border:1px solid var(--border); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.75rem;">🛍</div>
-            </div>
 
-            <div class="category-pills-row">
-              <span class="c-pill active">☕ Hot Coffee</span>
-              <span class="c-pill">🧊 Cold Brews</span>
-              <span class="c-pill">🥐 Bakery</span>
-            </div>
+              <!-- Viewport -->
+              <div class="app-viewport">
+                <div class="top-app-bar">
+                  <div>
+                    <strong style="font-size:0.75rem; display:block;">Brewkery</strong>
+                    <span style="font-size:0.58rem; color:var(--text-muted);">⏱ 20-30 mins</span>
+                  </div>
+                  <div class="app-cart-icon">🛍</div>
+                </div>
 
-            <!-- Item 1 Mock -->
-            <div class="item-card-mock">
-              <div class="item-thumb-mock" style="background-image:url('https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=300&auto=format&fit=crop&q=80');"></div>
-              <div style="flex-grow:1;">
-                <span class="item-badge-pill">BESTSELLER</span>
-                <strong style="font-size:0.78rem; display:block;">Caramel Macchiato</strong>
-                <span style="font-size:0.68rem; color:var(--text-muted); display:block;">⭐ 4.9 (312)</span>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                  <strong style="color:var(--terracotta); font-size:0.82rem;">$4.85</strong>
-                  <span style="background:var(--terracotta); color:#fff; border-radius:6px; padding:2px 8px; font-weight:700; font-size:0.7rem;">+ Customize</span>
+                <div class="cat-chips-scroll">
+                  <span class="cat-chip active">☕ Hot Coffee</span>
+                  <span class="cat-chip">🧊 Cold Brews</span>
+                  <span class="cat-chip">🥐 Bakery</span>
+                </div>
+
+                <div class="product-row-card">
+                  <div class="product-img-box" style="background-image:url('https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&auto=format&fit=crop&q=80');"></div>
+                  <div style="flex:1;">
+                    <span class="mini-badge">BESTSELLER</span>
+                    <strong style="display:block; font-size:0.68rem;">Caramel Macchiato</strong>
+                    <span style="color:var(--text-muted); font-size:0.58rem;">⭐ 4.9 (312)</span>
+                    <div style="display:flex; justify-content:space-between; margin-top:2px;">
+                      <strong style="color:var(--terracotta); font-size:0.68rem;">$4.85</strong>
+                      <span style="background:var(--terracotta); color:#fff; border-radius:4px; padding:1px 5px; font-size:0.55rem; font-weight:700;">+ Add</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="product-row-card">
+                  <div class="product-img-box" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&auto=format&fit=crop&q=80');"></div>
+                  <div style="flex:1;">
+                    <span class="mini-badge">FRESH</span>
+                    <strong style="display:block; font-size:0.68rem;">Normandy Croissant</strong>
+                    <span style="color:var(--text-muted); font-size:0.58rem;">⭐ 4.95 (420)</span>
+                    <div style="display:flex; justify-content:space-between; margin-top:2px;">
+                      <strong style="color:var(--terracotta); font-size:0.68rem;">$3.90</strong>
+                      <span style="background:var(--terracotta); color:#fff; border-radius:4px; padding:1px 5px; font-size:0.55rem; font-weight:700;">+ Add</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="app-action-btn">
+                  <span>2 Items Selected</span>
+                  <span>View Cart ($9.40) →</span>
                 </div>
               </div>
-            </div>
 
-            <!-- Item 2 Mock -->
-            <div class="item-card-mock">
-              <div class="item-thumb-mock" style="background-image:url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=300&auto=format&fit=crop&q=80');"></div>
-              <div style="flex-grow:1;">
-                <span class="item-badge-pill">FRESHLY BAKED</span>
-                <strong style="font-size:0.78rem; display:block;">Normandy Croissant</strong>
-                <span style="font-size:0.68rem; color:var(--text-muted); display:block;">⭐ 4.95 (420)</span>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                  <strong style="color:var(--terracotta); font-size:0.82rem;">$3.90</strong>
-                  <span style="background:var(--terracotta); color:#fff; border-radius:6px; padding:2px 8px; font-weight:700; font-size:0.7rem;">+ Customize</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Floating Cart Bar -->
-            <div class="sticky-bottom-action">
-              <span>2 Items in Cart</span>
-              <span>View Cart ($10.45) →</span>
+              <!-- Gesture Bar -->
+              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
             </div>
           </div>
         </div>
 
         <!-- Screen 2: Customization Detail -->
-        <div class="phone-frame">
-          <div class="screen-header-meta">
-            <span class="screen-step-tag">Screen 2</span>
-            <h3 class="screen-title">Customization</h3>
-          </div>
-          <div class="device-screen">
-            <div style="height:110px; border-radius:12px; background-image:url('https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80'); background-size:cover; background-position:center;"></div>
-            
-            <div>
-              <strong style="font-size:0.9rem;">Toasted Caramel Macchiato</strong>
-              <p style="font-size:0.68rem; color:var(--text-muted); margin-top:2px;">Rich espresso layered with steamed oat milk & salted caramel.</p>
-            </div>
+        <div class="phone-column">
+          <span class="screen-meta-badge">Screen 2</span>
+          <h3 class="screen-column-title">Customization</h3>
 
-            <div>
-              <div class="custom-section-title">Select Size</div>
-              <div class="selection-chips-row" style="margin-top:4px;">
-                <span class="chip-option">Tall (+$0.00)</span>
-                <span class="chip-option selected">Grande (+$0.65)</span>
-                <span class="chip-option">Venti (+$1.25)</span>
+          <div class="android-device">
+            <div class="android-screen-glass">
+              <div class="android-status-bar">
+                <span>9:41</span>
+                <div class="android-hole-punch"></div>
+                <div class="status-icons"><span>5G</span><span>100%</span></div>
               </div>
-            </div>
 
-            <div>
-              <div class="custom-section-title">Milk Choice</div>
-              <div class="selection-chips-row" style="margin-top:4px;">
-                <span class="chip-option selected">Oat Milk (Barista)</span>
-                <span class="chip-option">Roasted Almond (+$0.50)</span>
-              </div>
-            </div>
+              <div class="app-viewport">
+                <div class="hero-img-box" style="background-image:url('https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&auto=format&fit=crop&q=80');"></div>
+                
+                <div>
+                  <strong style="font-size:0.75rem; display:block;">Caramel Macchiato</strong>
+                  <span style="font-size:0.58rem; color:var(--text-muted);">Espresso, steamed oat milk & salted caramel.</span>
+                </div>
 
-            <!-- Sticky Add to Cart with Stepper -->
-            <div style="margin-top:auto; display:flex; gap:8px; align-items:center;">
-              <div class="stepper-mock">
-                <span>-</span>
-                <span>1</span>
-                <span>+</span>
+                <div>
+                  <div class="option-group-title">Size</div>
+                  <div class="options-row">
+                    <span class="opt-chip">Tall (+$0)</span>
+                    <span class="opt-chip active">Grande (+$0.65)</span>
+                    <span class="opt-chip">Venti (+$1.25)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="option-group-title">Milk Choice</div>
+                  <div class="options-row">
+                    <span class="opt-chip active">Oat Milk</span>
+                    <span class="opt-chip">Almond (+$0.50)</span>
+                  </div>
+                </div>
+
+                <div style="margin-top:auto; display:flex; gap:6px;">
+                  <div style="background:#fff; border:1px solid var(--border); border-radius:6px; padding:4px 8px; font-weight:700; font-size:0.65rem;">
+                    - 1 +
+                  </div>
+                  <div class="app-action-btn" style="flex:1; margin-top:0; justify-content:center;">
+                    Add • $5.50
+                  </div>
+                </div>
               </div>
-              <div class="sticky-bottom-action" style="flex-grow:1; margin-top:0; justify-content:center; gap:8px;">
-                <span>Add to Order</span>
-                <span>• $5.50</span>
-              </div>
+
+              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
             </div>
           </div>
         </div>
 
         <!-- Screen 3: Cart & Checkout -->
-        <div class="phone-frame">
-          <div class="screen-header-meta">
-            <span class="screen-step-tag">Screen 3</span>
-            <h3 class="screen-title">Cart & Checkout</h3>
-          </div>
-          <div class="device-screen">
-            <strong style="font-size:0.85rem;">Order Summary</strong>
-            
-            <div style="background:#ffffff; border:1px solid var(--border); border-radius:10px; padding:8px;">
-              <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.75rem;">
-                <span>1x Caramel Macchiato</span>
-                <span>$5.50</span>
-              </div>
-              <span style="font-size:0.65rem; color:var(--text-muted); display:block;">Grande · Oat Milk</span>
-            </div>
+        <div class="phone-column">
+          <span class="screen-meta-badge">Screen 3</span>
+          <h3 class="screen-column-title">Cart & Checkout</h3>
 
-            <div style="background:#ffffff; border:1px solid var(--border); border-radius:10px; padding:8px;">
-              <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.75rem;">
-                <span>1x Normandy Croissant</span>
-                <span>$3.90</span>
+          <div class="android-device">
+            <div class="android-screen-glass">
+              <div class="android-status-bar">
+                <span>9:41</span>
+                <div class="android-hole-punch"></div>
+                <div class="status-icons"><span>5G</span><span>100%</span></div>
               </div>
-              <span style="font-size:0.65rem; color:var(--text-muted); display:block;">Freshly Warmed</span>
-            </div>
 
-            <!-- Bill Breakdown -->
-            <div style="margin-top:auto; background:#ffffff; border:1px solid var(--border); border-radius:12px; padding:10px; font-size:0.72rem;">
-              <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                <span style="color:var(--text-muted);">Subtotal</span>
-                <span>$9.40</span>
-              </div>
-              <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                <span style="color:var(--text-muted);">Delivery Fee</span>
-                <span>$2.50</span>
-              </div>
-              <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
-                <span style="color:var(--text-muted);">Est. Tax (8%)</span>
-                <span>$0.75</span>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-weight:800; font-size:0.85rem; border-top:1px dashed var(--border); padding-top:4px; margin-top:4px;">
-                <span>Total Amount</span>
-                <span style="color:var(--terracotta);">$12.65</span>
-              </div>
-            </div>
+              <div class="app-viewport">
+                <strong style="font-size:0.75rem;">Your Cart (2 items)</strong>
 
-            <div class="sticky-bottom-action" style="justify-content:center; margin-top:0;">
-              <span>Place Order ($12.65) →</span>
+                <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:6px;">
+                  <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.65rem;">
+                    <span>1x Caramel Macchiato</span>
+                    <span>$5.50</span>
+                  </div>
+                  <span style="font-size:0.55rem; color:var(--text-muted);">Grande · Oat Milk</span>
+                </div>
+
+                <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:6px;">
+                  <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.65rem;">
+                    <span>1x Croissant</span>
+                    <span>$3.90</span>
+                  </div>
+                  <span style="font-size:0.55rem; color:var(--text-muted);">Freshly Warmed</span>
+                </div>
+
+                <div class="bill-box">
+                  <div class="bill-row"><span style="color:var(--text-muted);">Subtotal</span><span>$9.40</span></div>
+                  <div class="bill-row"><span style="color:var(--text-muted);">Delivery</span><span>$2.50</span></div>
+                  <div class="bill-row"><span style="color:var(--text-muted);">Tax (8%)</span><span>$0.75</span></div>
+                  <div class="bill-row" style="border-top:1px dashed var(--border); padding-top:2px; font-weight:800; font-size:0.7rem;">
+                    <span>Total</span><span style="color:var(--terracotta);">$12.65</span>
+                  </div>
+                </div>
+
+                <div class="app-action-btn" style="justify-content:center;">
+                  Place Order ($12.65) →
+                </div>
+              </div>
+
+              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
             </div>
           </div>
         </div>
 
-        <!-- Screen 4: Order Confirmation -->
-        <div class="phone-frame">
-          <div class="screen-header-meta">
-            <span class="screen-step-tag">Screen 4</span>
-            <h3 class="screen-title">Order Status</h3>
-          </div>
-          <div class="device-screen" style="text-align:center;">
-            <div class="order-success-icon">☕</div>
-            <strong style="font-size:1rem; display:block; margin-top:6px;">Brewing in Progress!</strong>
-            <p style="font-size:0.7rem; color:var(--text-muted); margin-top:2px;">Our barista has started prepping your order.</p>
+        <!-- Screen 4: Order Status -->
+        <div class="phone-column">
+          <span class="screen-meta-badge">Screen 4</span>
+          <h3 class="screen-column-title">Order Status</h3>
 
-            <div style="background:#ffffff; border:1px solid var(--border); border-radius:14px; padding:14px; text-align:left; margin-top:12px; font-size:0.72rem;">
-              <div style="margin-bottom:6px;">
-                <span style="color:var(--text-muted); display:block;">Order Reference</span>
-                <strong style="font-family:var(--mono);">#BK-74921</strong>
+          <div class="android-device">
+            <div class="android-screen-glass">
+              <div class="android-status-bar">
+                <span>9:41</span>
+                <div class="android-hole-punch"></div>
+                <div class="status-icons"><span>5G</span><span>100%</span></div>
               </div>
-              <div style="margin-bottom:6px;">
-                <span style="color:var(--text-muted); display:block;">Estimated Arrival</span>
-                <strong style="color:var(--terracotta);">20 - 30 minutes</strong>
-              </div>
-              <div>
-                <span style="color:var(--text-muted); display:block;">Deliver To</span>
-                <strong>45 Market Street, Apt 3B</strong>
-              </div>
-            </div>
 
-            <div style="margin-top:auto; background:var(--caramel-soft); border:1px solid var(--border); color:var(--espresso); border-radius:10px; padding:10px; font-weight:700; font-size:0.75rem;">
-              Back to Storefront
+              <div class="app-viewport" style="text-align:center;">
+                <div style="width:40px; height:40px; background:#fef2f2; border:1px solid #fecaca; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:8px auto 2px; font-size:1.1rem;">
+                  ☕
+                </div>
+                <strong style="font-size:0.78rem; display:block;">Order Confirmed!</strong>
+                <span style="font-size:0.58rem; color:var(--text-muted);">Barista has begun brewing.</span>
+
+                <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px; text-align:left; margin-top:8px; font-size:0.6rem; display:flex; flex-direction:column; gap:4px;">
+                  <div>
+                    <span style="color:var(--text-muted); display:block;">Order ID</span>
+                    <strong style="font-family:var(--mono);">#BK-74921</strong>
+                  </div>
+                  <div>
+                    <span style="color:var(--text-muted); display:block;">Estimated Arrival</span>
+                    <strong style="color:var(--terracotta);">20 - 30 mins</strong>
+                  </div>
+                  <div>
+                    <span style="color:var(--text-muted); display:block;">Delivery Address</span>
+                    <strong>45 Market St, Apt 3B</strong>
+                  </div>
+                </div>
+
+                <div class="app-action-btn" style="justify-content:center; margin-top:auto; background:var(--caramel-soft); color:var(--espresso); border:1px solid var(--border);">
+                  Back to Menu
+                </div>
+              </div>
+
+              <div class="android-gesture-bar"><div class="gesture-pill"></div></div>
             </div>
           </div>
         </div>
@@ -771,82 +884,82 @@
       </div>
     </section>
 
-    <!-- AI Prompting & Architecture Expectations -->
+    <!-- AI Evaluation Requirement -->
     <div class="ai-guidance-card">
-      <h3>⚡ How We Evaluate Your AI Engineering Skills</h3>
-      <p style="color: #7c2d12; font-size: 0.98rem;">
-        You are expected to use AI coding tools (Claude, Cursor, Copilot, ChatGPT, Gemini). However, copying and pasting unexamined code is an immediate anti-signal. We check:
+      <h3>🤖 How We Evaluate Your AI Engineering Skills</h3>
+      <p style="color: #7c2d12; font-size: 0.95rem;">
+        Using AI tools (Cursor, Claude, Copilot, ChatGPT, Gemini) is expected. But blind copy-pasting is an anti-signal. We check:
       </p>
-      <ul style="margin: 12px 0 0 20px; color: #7c2d12; font-size: 0.92rem; line-height: 1.7;">
-        <li><strong>Prompt Efficiency:</strong> Providing clean JSON models to the AI without burning context tokens on massive dumps.</li>
-        <li><strong>Architecture Guidance:</strong> Directing the AI to maintain strict <strong>MVVM</strong> (StateFlow, ViewModels, Repository pattern).</li>
-        <li><strong>Critical Bug Detection:</strong> Catching floating-point rounding bugs in tax/subtotals or Compose recomposition cycles.</li>
+      <ul style="margin: 10px 0 0 20px; color: #7c2d12; font-size: 0.9rem; line-height: 1.7;">
+        <li><strong>Prompt Precision:</strong> Providing concise schemas instead of burning context tokens on giant file dumps.</li>
+        <li><strong>Clean Architecture:</strong> Enforcing <strong>MVVM</strong> (StateFlow, ViewModels, Repository pattern).</li>
+        <li><strong>Critical Bug Detection:</strong> Catching floating-point tax rounding errors or Compose recomposition cycles.</li>
       </ul>
 
-      <div class="prompt-snippet-box">
-        <strong>Mandatory Deliverable in Repository: <code>AI_WORKFLOW.md</code></strong><br>
-        1. List the AI tools used during the session.<br>
-        2. Share 2–3 of your highest-leverage prompts.<br>
-        3. Explain 1 instance where AI output broke or gave suboptimal code, and how you caught and fixed it.
+      <div style="background:#ffffff; border:1px solid #fdba74; border-radius:10px; padding:14px 18px; font-family:var(--mono); font-size:0.8rem; color:#7c2d12; margin-top:14px;">
+        <strong>Mandatory Deliverable: <code>AI_WORKFLOW.md</code></strong><br>
+        1. List the AI tools used.<br>
+        2. Share 2–3 of your best prompts.<br>
+        3. Explain 1 instance where AI output broke or gave buggy code, and how you diagnosed and fixed it.
       </div>
     </div>
 
-    <!-- Step by Step Requirements -->
+    <!-- Step by Step -->
     <section class="card-block">
       <h2 class="card-title">Checklist & Implementation Steps</h2>
       <ul class="steps-checklist">
         <li>
           <span class="step-badge-num">1</span>
-          <div><strong>Project Setup:</strong> Native Android project in Kotlin (Android Studio). Compose strongly preferred.</div>
+          <div><strong>New Project:</strong> Initialize in Android Studio with Kotlin (Jetpack Compose strongly preferred).</div>
         </li>
         <li>
           <span class="step-badge-num">2</span>
-          <div><strong>Networking:</strong> Retrofit2 or Ktor parsing the provided GitHub <code>data.json</code> endpoint.</div>
+          <div><strong>Networking:</strong> Retrofit2 or Ktor parsing either the complete menu or single-item endpoints.</div>
         </li>
         <li>
           <span class="step-badge-num">3</span>
-          <div><strong>State & Price Logic:</strong> Dynamic subtotal calculation in ViewModel when item sizes or add-ons change.</div>
+          <div><strong>Dynamic Pricing:</strong> Subtotal updates in ViewModel as sizes or milk choices change.</div>
         </li>
         <li>
           <span class="step-badge-num">4</span>
-          <div><strong>Media:</strong> Seamless remote image loading with Coil or Glide.</div>
+          <div><strong>Image Loading:</strong> Seamless remote image rendering with Coil or Glide.</div>
         </li>
         <li>
           <span class="step-badge-num">5</span>
-          <div><strong>Edge Handling:</strong> Proper loading spinner/shimmer and network retry states.</div>
+          <div><strong>Robustness:</strong> Proper loading spinner and error handling state.</div>
         </li>
         <li>
           <span class="step-badge-num">6</span>
-          <div><strong>Verification:</strong> At least 1 unit test covering cart price calculation or tax math.</div>
+          <div><strong>Unit Test:</strong> At least 1 unit test covering cart price calculation.</div>
         </li>
       </ul>
     </section>
 
     <!-- Submission Section -->
     <div class="submission-banner">
-      <h2>Ready to Ship Your App?</h2>
+      <h2>Ready to Submit?</h2>
       <p>
         Push your code to a public GitHub repository, build an installable debug APK, and submit your assignment.
       </p>
       <a href="mailto:hr@clickretina.com?subject=Brewkery%20Android%20Take-Home%20Submission" class="action-cta-btn">
         ✉ Submit Application to hr@clickretina.com
       </a>
-      <div style="margin-top: 22px; font-size: 0.84rem; color: #a89486;">
-        Questions or need an extension? Reach out to <strong>hr@clickretina.com</strong> or call <strong>9889856987</strong>
+      <div style="margin-top: 18px; font-size: 0.82rem; color: #a89486;">
+        Questions or need an extension? Email <strong>hr@clickretina.com</strong> or call <strong>9889856987</strong>
       </div>
     </div>
 
   </div>
 
   <script>
-    function copyApiUrl() {
-      const url = document.getElementById('apiEndpointUrl').innerText.trim();
+    function copyUrl(elementId, btn) {
+      const url = document.getElementById(elementId).innerText.trim();
       navigator.clipboard.writeText(url).then(() => {
-        const btn = document.querySelector('.btn-copy');
+        const originalText = btn.innerText;
         btn.innerText = 'Copied!';
         btn.style.background = '#2c1a11';
         setTimeout(() => {
-          btn.innerText = 'Copy Raw URL';
+          btn.innerText = originalText;
           btn.style.background = 'var(--terracotta)';
         }, 2000);
       });
