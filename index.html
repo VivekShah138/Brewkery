@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brewkery · Interactive Android Prototype & Take-Home Assignment</title>
+  <title>Brewkery · Android Developer Take-Home Assessment</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,16 +19,10 @@
     .font-display { font-family: 'Cabinet Grotesk', sans-serif; }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Custom Color Tokens */
     :root {
       --espresso: #140b07;
-      --roast: #26160e;
       --terracotta: #d9532f;
-      --terracotta-hover: #b84121;
-      --amber: #f59e0b;
-      --crema: #fbf7f4;
-      --crema-card: #ffffff;
-      --caramel-soft: #f7ebe1;
+      --crema: #fdfaf7;
       --border: #ebd8cb;
     }
 
@@ -37,7 +31,6 @@
       color: #f7ebe1;
     }
 
-    /* Ambient Warm Glow */
     .ambient-glow {
       position: fixed;
       top: -10%;
@@ -49,10 +42,10 @@
       pointer-events: none;
     }
 
-    /* Realistic Android Device Frame */
+    /* Authentic Android Smartphone Frame (No bottom navigation bar) */
     .phone-frame {
       width: 395px;
-      height: 815px;
+      height: 800px;
       background: #140b07;
       border: 8px solid #2d1a12;
       border-radius: 46px;
@@ -81,18 +74,24 @@
       filter: brightness(0.92);
     }
 
-    /* Dynamic Island / Punch Hole */
     .android-camera-hole {
-      width: 11px;
-      height: 11px;
+      width: 10px;
+      height: 10px;
       background: #000;
       border-radius: 50%;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
     }
 
-    /* App Light Canvas inside device */
+    .android-gesture-pill {
+      width: 68px;
+      height: 4px;
+      background: #140b07;
+      opacity: 0.35;
+      border-radius: 999px;
+    }
+
     .app-viewport {
-      background: #fbf7f4;
+      background: #fdfaf7;
       color: #231710;
     }
   </style>
@@ -106,48 +105,48 @@
     <div class="flex flex-wrap items-center justify-between gap-3 bg-[#1c100a]/90 border border-[#3e2417] px-4 py-2.5 rounded-2xl mb-3 shadow-xl backdrop-blur-md">
       <div class="flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-[#d9532f] animate-ping"></span>
-        <span class="text-xs font-black tracking-wider uppercase text-white">Brewkery Client v1.0</span>
-        <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#d9532f]/20 text-[#f59e0b] font-bold border border-[#d9532f]/30">Target SDK 36</span>
+        <span class="text-xs font-black tracking-wider uppercase text-white">Fresher Take-Home Assessment</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">1-Day / ~3-4 Hrs</span>
       </div>
       
       <div class="flex items-center gap-2">
-        <a href="#assignment-spec" class="px-3 py-1.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-xs font-bold text-amber-300 flex items-center gap-1.5 transition btn-press">
-          <i class="fa-solid fa-code text-amber-400"></i> Candidate API Spec
+        <a href="#fresher-structure" class="px-3 py-1.5 rounded-full bg-[#d9532f]/20 hover:bg-[#d9532f]/30 border border-[#d9532f]/40 text-xs font-bold text-[#f59e0b] flex items-center gap-1.5 transition btn-press">
+          <i class="fa-solid fa-list-check text-[#f59e0b]"></i> Core vs Bonus Breakdown
         </a>
-        <button onclick="resetCartState()" class="px-3 py-1.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-xs font-bold text-emerald-300 flex items-center gap-1.5 transition btn-press">
-          <i class="fa-solid fa-rotate-left text-emerald-400"></i> Reset Prototype
+        <button onclick="resetPrototype()" class="px-3 py-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-xs font-bold text-white flex items-center gap-1.5 transition btn-press">
+          <i class="fa-solid fa-rotate-left"></i> Reset
         </button>
       </div>
     </div>
 
     <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center justify-center gap-2 font-display">
       <span>Brewkery</span>
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d9532f] to-[#f59e0b]">Android Live Prototype</span>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d9532f] to-[#f59e0b]">App Flow Prototype</span>
     </h1>
-    <p class="text-xs text-[#a89486] mt-1">Tap through the full 4-screen flow: Menu & Catalog &rarr; Customization &rarr; Cart & Checkout &rarr; Order Status</p>
+    <p class="text-xs text-[#a89486] mt-1">Natural flow: <b>Menu</b> &rarr; <i>(Tap item)</i> &rarr; <b>Detail</b> &rarr; <i>(Add to Cart)</i> &rarr; <b>Cart</b> &rarr; <i>(Place Order)</i> &rarr; <b>Order Status</b></p>
 
-    <!-- Screen Switcher Buttons -->
+    <!-- Top Flow Step Switcher -->
     <div class="flex flex-wrap justify-center gap-2 mt-3.5">
       <button onclick="setScreen('menu')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#d9532f] text-white shadow glow-terracotta transition btn-press" id="btn-menu">
-        1. Menu & Catalog
+        1. Menu Catalog
       </button>
-      <button onclick="openCustomization('item_caramel_macchiato')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-custom">
-        2. Customization
+      <button onclick="openDetail('item_caramel_macchiato')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-detail">
+        2. Item Detail
       </button>
       <button onclick="setScreen('cart')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-cart">
         3. Cart & Checkout (<span id="top-cart-count">2</span>)
       </button>
       <button onclick="setScreen('order')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-order">
-        4. Order Status
+        4. Order Placed
       </button>
     </div>
   </header>
 
-  <!-- Interactive Mobile Phone Frame -->
+  <!-- Real Android Smartphone Frame -->
   <div class="phone-frame flex flex-col justify-between shadow-2xl relative">
 
-    <!-- Top Status Bar with Android Camera Hole-Punch -->
-    <div class="w-full pt-3 px-6 pb-2 flex justify-between items-center text-xs font-semibold z-40 select-none bg-[#fbf7f4] text-[#140b07] border-b border-[#ebd8cb]/60">
+    <!-- Top Android Status Bar -->
+    <div class="w-full pt-3 px-6 pb-2 flex justify-between items-center text-xs font-semibold z-40 select-none bg-[#fdfaf7] text-[#140b07] border-b border-[#ebd8cb]/60">
       <span class="text-[13px] font-bold">9:41</span>
       
       <!-- Camera Punch Hole -->
@@ -160,37 +159,38 @@
       </div>
     </div>
 
-    <!-- MAIN SCROLLABLE APP VIEWPORT -->
-    <div id="screen-viewport" class="flex-1 overflow-y-auto custom-scrollbar relative px-4 pb-20 pt-2 space-y-4 app-viewport">
+    <!-- MAIN SCROLLABLE SCREEN VIEWPORT (Fills full height without bottom nav) -->
+    <div id="screen-viewport" class="flex-1 overflow-y-auto custom-scrollbar relative px-4 pb-4 pt-2 space-y-4 app-viewport flex flex-col">
 
       <!-- ========================================================= -->
-      <!-- 1. MENU & CATALOG SCREEN                                  -->
+      <!-- SCREEN 1: MENU & CATALOG                                  -->
       <!-- ========================================================= -->
-      <div id="view-menu" class="screen-view space-y-3.5">
+      <div id="view-menu" class="screen-view space-y-3.5 flex-1 flex flex-col">
         
-        <!-- App Bar -->
+        <!-- App Bar with Shop Branding & Live Cart Button -->
         <div class="flex items-center justify-between pt-1">
           <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-full bg-[#140b07] flex items-center justify-center text-white text-xs font-display font-black">
               BK
             </div>
             <div>
-              <span class="text-[10px] text-[#786457] font-semibold block leading-tight">Artisanal Coffee & Bakes</span>
-              <h2 class="text-xs font-extrabold text-[#140b07]">Brewkery Flagship</h2>
+              <span class="text-[10px] text-[#786457] font-semibold block leading-tight">Fresh Roast & Bakes</span>
+              <h2 class="text-xs font-extrabold text-[#140b07]">Brewkery Artisans</h2>
             </div>
           </div>
 
+          <!-- Cart Icon Header Button -->
           <button onclick="setScreen('cart')" class="relative flex items-center justify-center w-8 h-8 rounded-full bg-white border border-[#ebd8cb] shadow-sm btn-press">
             <i class="fa-solid fa-bag-shopping text-xs text-[#140b07]"></i>
             <span id="badge-cart-counter" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#d9532f] text-white text-[9px] font-bold flex items-center justify-center">2</span>
           </button>
         </div>
 
-        <!-- Delivery Banner Pill -->
-        <div class="flex items-center justify-between p-2 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs">
+        <!-- Delivery Banner -->
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-[11px] font-semibold text-[#140b07]">Estimated Delivery: <b>20 - 30 mins</b></span>
+            <span class="text-[11px] font-semibold text-[#140b07]">Delivery ETA: <b>20 - 30 mins</b></span>
           </div>
           <span class="text-[10px] font-bold text-[#d9532f]">$2.50 Flat</span>
         </div>
@@ -201,7 +201,7 @@
           <input type="text" id="menu-search-input" onkeyup="filterMenuSearch()" placeholder="Search roast, cold brew, pastry..." class="w-full bg-white border border-[#ebd8cb] rounded-xl pl-8 pr-3 py-2 text-xs text-[#140b07] placeholder-[#786457] outline-none">
         </div>
 
-        <!-- Category Horizontal Chips -->
+        <!-- Categories Row -->
         <div class="flex gap-1.5 overflow-x-auto custom-scrollbar pb-1 text-xs">
           <button onclick="filterCategory('ALL')" id="cat-ALL" class="cat-filter-btn px-3 py-1.5 rounded-full bg-[#140b07] text-white font-bold whitespace-nowrap btn-press">
             All Items
@@ -218,149 +218,112 @@
         </div>
 
         <!-- Menu Product List -->
-        <div id="catalog-items-container" class="space-y-2.5">
-          <!-- Dynamically populated from JS items -->
+        <div id="catalog-items-container" class="space-y-2.5 flex-1">
+          <!-- Populated from storeData -->
         </div>
 
-        <!-- Floating Cart Bar (Sticky at bottom of screen 1) -->
-        <div id="sticky-cart-bar" class="p-3 rounded-2xl bg-[#140b07] text-white flex items-center justify-between shadow-xl cursor-pointer btn-press" onclick="setScreen('cart')">
+        <!-- Floating Cart Bar (Appears when items are in cart) -->
+        <div id="sticky-cart-bar" class="p-3 rounded-2xl bg-[#140b07] text-white flex items-center justify-between shadow-xl cursor-pointer btn-press mt-auto" onclick="setScreen('cart')">
           <div class="flex items-center gap-2">
             <span class="w-6 h-6 rounded-full bg-[#d9532f] flex items-center justify-center text-xs font-bold" id="floating-bar-qty">2</span>
             <div>
-              <span class="text-[10px] text-[#ebd8cb] block leading-tight">Selected items</span>
+              <span class="text-[10px] text-[#ebd8cb] block leading-tight">View Your Cart</span>
               <span class="text-xs font-extrabold text-white" id="floating-bar-subtotal">$9.40</span>
             </div>
           </div>
           <span class="text-xs font-extrabold text-[#f59e0b] flex items-center gap-1">
-            View Cart <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            Proceed to Checkout <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </span>
         </div>
 
       </div>
 
       <!-- ========================================================= -->
-      <!-- 2. ITEM CUSTOMIZATION SCREEN                              -->
+      <!-- SCREEN 2: ITEM DETAIL SCREEN                              -->
       <!-- ========================================================= -->
-      <div id="view-custom" class="screen-view hidden space-y-3.5">
+      <div id="view-detail" class="screen-view hidden space-y-3.5 flex-1 flex flex-col">
         
-        <!-- Header Nav -->
+        <!-- Header Nav (Back button directly to Menu) -->
         <div class="flex items-center justify-between pt-1">
-          <button onclick="setScreen('menu')" class="w-7 h-7 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
+          <button onclick="setScreen('menu')" class="w-8 h-8 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Item Customizer</span>
-          <button onclick="toggleFavorite()" class="w-7 h-7 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-rose-500 shadow-sm btn-press">
+          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Item Details</span>
+          <button onclick="toggleFavorite()" class="w-8 h-8 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-rose-500 shadow-sm btn-press">
             <i class="fa-solid fa-heart" id="fav-icon"></i>
           </button>
         </div>
 
-        <!-- Hero Image -->
+        <!-- Hero Product Image -->
         <div class="relative h-44 rounded-2xl overflow-hidden shadow-md">
-          <img id="custom-hero-img" src="" alt="Item" class="w-full h-full object-cover">
-          <span id="custom-hero-badge" class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#140b07]/80 text-[#f59e0b] backdrop-blur-sm">
+          <img id="detail-hero-img" src="" alt="Item" class="w-full h-full object-cover">
+          <span id="detail-hero-badge" class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#140b07]/80 text-[#f59e0b] backdrop-blur-sm">
             BESTSELLER
           </span>
         </div>
 
-        <!-- Title & Base Info -->
+        <!-- Title, Price & Description -->
         <div>
           <div class="flex items-center justify-between">
-            <h2 id="custom-item-name" class="text-base font-black text-[#140b07] font-display">Toasted Caramel Macchiato</h2>
-            <span id="custom-base-price" class="text-base font-extrabold text-[#d9532f] font-mono">$4.85</span>
+            <h2 id="detail-item-name" class="text-base font-black text-[#140b07] font-display">Toasted Caramel Macchiato</h2>
+            <span id="detail-base-price" class="text-base font-extrabold text-[#d9532f] font-mono">$4.85</span>
           </div>
-          <p id="custom-item-desc" class="text-[11px] text-[#786457] mt-1 leading-relaxed">
+          <p id="detail-item-desc" class="text-[11px] text-[#786457] mt-1 leading-relaxed">
             Rich espresso roast layered with velvety steamed milk, infused with house-made vanilla bean syrup and toasted caramel drizzle.
           </p>
         </div>
 
-        <!-- Ingredients Wrap -->
+        <!-- Ingredients Chips -->
         <div>
           <span class="text-[10px] font-black uppercase text-[#786457] tracking-wider block mb-1">Key Ingredients</span>
-          <div id="custom-ingredients-row" class="flex flex-wrap gap-1">
-            <!-- Chips -->
-          </div>
+          <div id="detail-ingredients-row" class="flex flex-wrap gap-1"></div>
         </div>
 
-        <!-- Size Selection -->
-        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-2">
+        <!-- Size Selection (Optional / Bonus) -->
+        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
           <div class="flex items-center justify-between">
             <span class="text-[11px] font-bold text-[#140b07]">Cup Size</span>
-            <span class="text-[10px] text-[#786457]">Select 1</span>
+            <span class="text-[9px] text-[#786457] font-mono">Optional Bonus</span>
           </div>
-          <div id="custom-sizes-row" class="grid grid-cols-3 gap-1.5">
-            <!-- Populated via JS -->
-          </div>
+          <div id="detail-sizes-row" class="grid grid-cols-3 gap-1.5"></div>
         </div>
 
-        <!-- Milk Choice -->
-        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-[#140b07]">Milk / Spread Choice</span>
-            <span class="text-[10px] text-[#786457]">Custom blend</span>
-          </div>
-          <div id="custom-milk-row" class="space-y-1.5">
-            <!-- Populated via JS -->
-          </div>
-        </div>
-
-        <!-- Sugar Level Selection -->
-        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-[#140b07]">Sweetness Level</span>
-            <span class="text-[10px] text-[#786457]">Taste profile</span>
-          </div>
-          <div id="custom-sugar-row" class="flex gap-1.5">
-            <!-- Populated via JS -->
-          </div>
-        </div>
-
-        <!-- Sticky Bottom Bar inside screen 2 -->
-        <div class="pt-2 flex items-center gap-2">
+        <!-- Quantity Stepper & Add to Cart Action -->
+        <div class="pt-2 flex items-center gap-2 mt-auto">
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white border border-[#ebd8cb]">
-            <button onclick="adjustCustomQty(-1)" class="text-xs font-black text-[#140b07] btn-press">-</button>
-            <span id="custom-qty-display" class="text-xs font-bold text-[#140b07] font-mono">1</span>
-            <button onclick="adjustCustomQty(1)" class="text-xs font-black text-[#140b07] btn-press">+</button>
+            <button onclick="adjustDetailQty(-1)" class="text-xs font-black text-[#140b07] btn-press">-</button>
+            <span id="detail-qty-display" class="text-xs font-bold text-[#140b07] font-mono">1</span>
+            <button onclick="adjustDetailQty(1)" class="text-xs font-black text-[#140b07] btn-press">+</button>
           </div>
           
-          <button onclick="addToCartCurrentCustom()" class="flex-1 py-3 rounded-xl gradient-terracotta text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-lg btn-press">
+          <button onclick="addToCartFromDetail()" class="flex-1 py-3 rounded-xl gradient-terracotta text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-lg btn-press">
             <span>Add to Cart</span>
             <span>•</span>
-            <span id="custom-calc-total-btn">$5.50</span>
+            <span id="detail-calc-total-btn">$5.50</span>
           </button>
         </div>
 
       </div>
 
       <!-- ========================================================= -->
-      <!-- 3. CART & CHECKOUT SCREEN                                 -->
+      <!-- SCREEN 3: CART & CHECKOUT SCREEN                          -->
       <!-- ========================================================= -->
-      <div id="view-cart" class="screen-view hidden space-y-3.5">
+      <div id="view-cart" class="screen-view hidden space-y-3.5 flex-1 flex flex-col">
         
         <!-- Header -->
         <div class="flex items-center justify-between pt-1">
-          <button onclick="setScreen('menu')" class="w-7 h-7 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
+          <button onclick="setScreen('menu')" class="w-8 h-8 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Your Order Cart</span>
+          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Your Cart</span>
           <button onclick="clearCart()" class="text-[10px] font-bold text-rose-600 hover:underline btn-press">
-            Clear
+            Clear Cart
           </button>
         </div>
 
-        <!-- Items Container -->
-        <div id="cart-items-list" class="space-y-2">
-          <!-- Populated from cart state -->
-        </div>
-
-        <!-- Promo Code Input -->
-        <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] flex items-center justify-between gap-2">
-          <div class="flex items-center gap-2 flex-1">
-            <i class="fa-solid fa-tag text-[#d9532f] text-xs"></i>
-            <input type="text" id="promo-input" placeholder="Promo code (use ROAST10)" class="text-xs text-[#140b07] placeholder-[#786457] outline-none w-full uppercase font-mono">
-          </div>
-          <button onclick="applyPromoCode()" class="px-2.5 py-1 rounded-lg bg-[#140b07] text-white text-[10px] font-bold btn-press">
-            Apply
-          </button>
+        <!-- Cart Items -->
+        <div id="cart-items-list" class="space-y-2 flex-1">
+          <!-- Populated from in-memory cart -->
         </div>
 
         <!-- Bill Breakdown Card -->
@@ -377,10 +340,6 @@
             <span>Est. Tax (8.0%)</span>
             <span id="bill-tax" class="font-mono text-[#140b07] font-semibold">$0.75</span>
           </div>
-          <div id="bill-discount-row" class="hidden flex justify-between text-emerald-600 font-bold">
-            <span>Promo Discount (10%)</span>
-            <span id="bill-discount" class="font-mono">-$0.94</span>
-          </div>
           
           <div class="pt-2 border-t border-dashed border-[#ebd8cb] flex justify-between items-center text-sm font-black text-[#140b07]">
             <span>Total Payable</span>
@@ -388,17 +347,7 @@
           </div>
         </div>
 
-        <!-- Delivery Address Mock -->
-        <div class="p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] flex items-center gap-2 text-xs">
-          <i class="fa-solid fa-location-dot text-[#d9532f]"></i>
-          <div class="flex-1">
-            <span class="text-[10px] text-[#786457] block leading-tight">Deliver to</span>
-            <strong class="text-[11px] text-[#140b07]">45 Market Street, Apt 3B</strong>
-          </div>
-          <span class="text-[10px] font-bold text-[#d9532f]">Change</span>
-        </div>
-
-        <!-- Place Order Button -->
+        <!-- Checkout Action Button -->
         <button onclick="placeOrderFinal()" class="w-full py-3.5 rounded-xl gradient-terracotta text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-xl glow-terracotta btn-press">
           <i class="fa-solid fa-lock text-[10px]"></i>
           <span>Place Order Now</span>
@@ -409,20 +358,20 @@
       </div>
 
       <!-- ========================================================= -->
-      <!-- 4. ORDER STATUS CONFIRMATION SCREEN                       -->
+      <!-- SCREEN 4: ORDER PLACED (CLEARS CART AUTOMATICALLY)        -->
       <!-- ========================================================= -->
-      <div id="view-order" class="screen-view hidden space-y-4 text-center py-2">
+      <div id="view-order" class="screen-view hidden space-y-4 text-center py-4 flex-1 flex flex-col justify-between">
         
-        <!-- Animated Coffee Mug Icon -->
-        <div class="w-20 h-20 mx-auto rounded-full bg-[#f7ebe1] border-2 border-[#d9532f] flex items-center justify-center text-3xl text-[#d9532f] shadow-lg">
-          ☕
-        </div>
-
         <div>
-          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Order Settled Successfully</span>
-          <h2 class="text-lg font-black text-[#140b07] font-display">Brewing in Progress!</h2>
+          <!-- Animated Mug Badge -->
+          <div class="w-20 h-20 mx-auto rounded-full bg-[#f7ebe1] border-2 border-[#d9532f] flex items-center justify-center text-3xl text-[#d9532f] shadow-lg mb-3">
+            ☕
+          </div>
+
+          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Cart Cleared & Settled</span>
+          <h2 class="text-xl font-black text-[#140b07] font-display">Brewing in Progress!</h2>
           <p class="text-xs text-[#786457] max-w-[240px] mx-auto mt-1 leading-relaxed">
-            Our artisan barista has received your ticket and is hand-crafting your items.
+            Your ticket was dispatched to our barista. Your in-memory cart has been reset.
           </p>
         </div>
 
@@ -433,117 +382,128 @@
               <span class="text-[9px] text-[#786457] uppercase font-bold block">Order Ticket</span>
               <strong class="font-mono text-sm text-[#140b07]" id="order-ref-code">#BK-74921</strong>
             </div>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold">PREPARING</span>
+            <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black animate-pulse">
+              PREPARING
+            </span>
           </div>
 
           <div class="flex justify-between text-[#786457]">
-            <span>Estimated Arrival:</span>
+            <span>Estimated Wait:</span>
             <strong class="text-[#d9532f]">20 - 30 minutes</strong>
           </div>
           
           <div class="flex justify-between text-[#786457]">
-            <span>Payment Mode:</span>
-            <span class="font-semibold text-[#140b07]">Credit Card (••8421)</span>
+            <span>Items Ordered:</span>
+            <span class="font-semibold text-[#140b07]" id="order-summary-qty">2 Items</span>
           </div>
 
           <div class="pt-2 border-t border-[#ebd8cb]/60 text-[#786457]">
-            <span class="text-[10px] block mb-1">Delivering to:</span>
-            <strong class="text-[#140b07] block">45 Market Street, Apt 3B (Doorstep drop)</strong>
+            <span class="text-[10px] block mb-0.5">Status:</span>
+            <strong class="text-emerald-700 block">Barista accepted your order!</strong>
           </div>
         </div>
 
-        <!-- Action Back to Store -->
-        <button onclick="setScreen('menu')" class="w-full py-3 rounded-xl bg-[#140b07] text-white font-extrabold text-xs btn-press">
-          Back to Storefront
+        <!-- Return Back to Menu Button -->
+        <button onclick="setScreen('menu')" class="w-full py-3.5 rounded-xl bg-[#140b07] text-white font-extrabold text-xs btn-press shadow-md">
+          Back to Menu
         </button>
 
       </div>
 
     </div>
 
-    <!-- Android Bottom Navigation Bar (4 Connected Tabs) -->
-    <nav id="app-bottom-nav" class="bg-white/95 backdrop-blur-md border-t border-[#ebd8cb] px-4 py-2 flex justify-around items-center z-40 select-none">
-      
-      <button onclick="setScreen('menu')" id="nav-menu" class="flex flex-col items-center gap-0.5 btn-press">
-        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#d9532f] bg-[#d9532f]/15">
-          <i class="fa-solid fa-mug-saucer text-xs"></i>
-        </div>
-        <span class="text-[9px] font-bold text-[#d9532f]">Menu</span>
-      </button>
-
-      <button onclick="openCustomization('item_caramel_macchiato')" id="nav-custom" class="flex flex-col items-center gap-0.5 btn-press">
-        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]">
-          <i class="fa-solid fa-sliders text-xs"></i>
-        </div>
-        <span class="text-[9px] font-semibold text-[#786457]">Customize</span>
-      </button>
-
-      <button onclick="setScreen('cart')" id="nav-cart" class="relative flex flex-col items-center gap-0.5 btn-press">
-        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]">
-          <i class="fa-solid fa-bag-shopping text-xs"></i>
-        </div>
-        <span class="text-[9px] font-semibold text-[#786457]">Cart</span>
-        <span id="nav-cart-dot" class="absolute top-0 right-1 w-2 h-2 rounded-full bg-[#d9532f]"></span>
-      </button>
-
-      <button onclick="setScreen('order')" id="nav-order" class="flex flex-col items-center gap-0.5 btn-press">
-        <div class="w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]">
-          <i class="fa-solid fa-receipt text-xs"></i>
-        </div>
-        <span class="text-[9px] font-semibold text-[#786457]">Status</span>
-      </button>
-
-    </nav>
+    <!-- Android Gesture Navigation Pill at Bottom -->
+    <div class="h-5 bg-[#fdfaf7] flex items-center justify-center pb-1">
+      <div class="android-gesture-pill"></div>
+    </div>
 
   </div>
 
-  <!-- CANDIDATE SPEC & API SECTION -->
-  <section id="assignment-spec" class="w-full max-w-4xl mt-12 bg-[#140b07] border border-[#3e2417] rounded-3xl p-6 sm:p-10 text-white shadow-2xl">
-    <div class="inline-flex items-center gap-2 bg-[#2d1a12] px-3 py-1 rounded-full text-xs font-bold text-[#f59e0b] mb-4">
-      <i class="fa-solid fa-code"></i> Developer Take-Home Brief
+  <!-- ========================================================= -->
+  <!-- FRESHER ASSESSMENT BRIEF & ARCHITECTURE SPECIFICATION     -->
+  <!-- ========================================================= -->
+  <section id="fresher-structure" class="w-full max-w-4xl mt-12 bg-[#140b07] border border-[#3e2417] rounded-3xl p-6 sm:p-10 text-white shadow-2xl">
+    
+    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+      <div class="inline-flex items-center gap-2 bg-[#2d1a12] px-3.5 py-1.5 rounded-full text-xs font-bold text-[#f59e0b]">
+        <i class="fa-solid fa-graduation-cap"></i> Fresher-Friendly Android Assessment
+      </div>
+      <span class="text-xs text-[#a89486] font-mono">Suggested Time: ~3 to 4 Hours</span>
     </div>
     
     <h2 class="text-2xl sm:text-3xl font-black font-display mb-3">
-      API Endpoints & Architecture Specification
+      Skill & AI Evaluation Architecture
     </h2>
-    <p class="text-xs sm:text-sm text-[#ebd8cb]/80 mb-6 leading-relaxed">
-      Recreate the exact 4 screens seen above in Kotlin (Jetpack Compose strongly preferred). Candidates can query either the complete menu or single items dynamically by ID.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono mb-8">
-      <!-- Full Menu -->
-      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
-        <span class="text-[#f59e0b] font-bold block mb-1">1. Full Menu & Store Config</span>
-        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
-          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
-        </div>
-        <button onclick="copyToClipboard('endpoint-menu')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
-          Copy URL
-        </button>
+    
+    <!-- ⚠️ Critical In-Memory Note Callout -->
+    <div class="bg-[#24130b] border-2 border-[#d9532f] rounded-2xl p-4 sm:p-5 my-5 text-xs text-[#ebd8cb] space-y-2">
+      <div class="flex items-center gap-2 text-[#f59e0b] font-bold text-sm">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Important Architecture Guideline: Do NOT Use SQLite / Room!</span>
       </div>
-
-      <!-- Single Item Pattern -->
-      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
-        <span class="text-[#f59e0b] font-bold block mb-1">2. Single Item Detail by ID</span>
-        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-single">
-          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{item_id}.json
-        </div>
-        <button onclick="copyToClipboard('endpoint-single')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
-          Copy Pattern
-        </button>
-      </div>
+      <p class="leading-relaxed">
+        <strong>No local database (SQLite/Room/DataStore) is required.</strong> All cart items and order state can simply live in memory inside a shared <strong><code>ViewModel</code></strong> or singleton <strong><code>Repository</code></strong> (using Kotlin <code>StateFlow</code>). When the app closes, it is completely expected and fine for the cart to reset. Let your AI workflow help you scaffold a clean in-memory state.
+      </p>
     </div>
 
-    <!-- Key Candidate Requirements -->
-    <div class="bg-[#26160e] border border-[#3e2417] rounded-2xl p-6 space-y-3 text-xs text-[#ebd8cb]">
-      <h3 class="font-bold text-sm text-white font-display">Required Deliverables</h3>
-      <ul class="list-disc list-inside space-y-1.5 text-[#ebd8cb]/80">
-        <li><strong>Architecture:</strong> MVVM pattern with ViewModel, Repository, and StateFlow.</li>
-        <li><strong>Subtotal Math:</strong> Dynamic price updates as user toggles sizes (+extra_price) and milk choices.</li>
-        <li><strong>AI Workflow (Mandatory):</strong> Include <code>AI_WORKFLOW.md</code> detailing prompts used and 1 AI hallucination/bug caught and resolved.</li>
-        <li><strong>Submission:</strong> Email GitHub repo + compiled debug APK to <a href="mailto:hr@clickretina.com" class="text-[#f59e0b] underline">hr@clickretina.com</a>.</li>
-      </ul>
+    <!-- Core Requirements vs Bonus Parts -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-6 text-xs">
+      
+      <!-- Core (Passing Criteria) -->
+      <div class="bg-[#1e1008] border border-[#4a2b1c] rounded-2xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-emerald-400 font-display">Core Requirements (Must-Have)</h3>
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">70% SCORE</span>
+        </div>
+        <ul class="space-y-2 text-[#cbd5e1] list-disc list-inside">
+          <li><strong>API Fetch:</strong> Fetch data from GitHub raw endpoint using Retrofit/Ktor with Coroutines.</li>
+          <li><strong>Screen 1 (Menu):</strong> Render categories and items (image via Coil/Glide, title, price, rating).</li>
+          <li><strong>Screen 2 (Detail):</strong> Tap an item to view full photo, description, ingredients, and "Add to Cart".</li>
+          <li><strong>Screen 3 (Cart):</strong> View added items, calculate subtotal + flat delivery + tax.</li>
+          <li><strong>Screen 4 (Order Done):</strong> Clear in-memory cart, display randomized ticket ID (e.g. <code>#BK-83921</code>) and "PREPARING" state.</li>
+          <li><strong>AI Workflow:</strong> Provide <code>AI_WORKFLOW.md</code> showing 2–3 prompts used and 1 AI bug you caught.</li>
+        </ul>
+      </div>
+
+      <!-- Bonus (Outstanding Criteria) -->
+      <div class="bg-[#1e1008] border border-[#4a2b1c] rounded-2xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-[#f59e0b] font-display">Bonus Features (Nice-to-Have)</h3>
+          <span class="px-2 py-0.5 rounded bg-amber-500/20 text-[#f59e0b] font-bold text-[10px]">30% SCORE</span>
+        </div>
+        <ul class="space-y-2 text-[#cbd5e1] list-disc list-inside">
+          <li><strong>Dynamic Customization:</strong> Size picker (Tall/Grande/Venti) recalculating subtotal on Screen 2.</li>
+          <li><strong>Search & Filter:</strong> Live search bar or category chips filtering on Screen 1.</li>
+          <li><strong>Promo Code:</strong> Simple coupon logic (e.g., <code>ROAST10</code> gives 10% off on cart).</li>
+          <li><strong>Unit Tests:</strong> 1 simple unit test verifying subtotal/tax calculation logic.</li>
+          <li><strong>Jetpack Compose:</strong> 100% declarative Compose implementation over legacy XML.</li>
+        </ul>
+      </div>
+
     </div>
+
+    <!-- API Endpoints -->
+    <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 text-xs font-mono mb-6">
+      <span class="text-[#f59e0b] font-bold block mb-1">Public Raw API Endpoint:</span>
+      <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
+        https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
+      </div>
+      <button onclick="copyToClipboard('endpoint-menu')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
+        Copy API Endpoint URL
+      </button>
+    </div>
+
+    <!-- Submission Guidelines -->
+    <div class="border-t border-[#3e2417] pt-5 flex items-center justify-between flex-wrap gap-3 text-xs">
+      <div>
+        <span class="text-[#a89486] block">Questions or Need Help?</span>
+        <strong class="text-white">hr@clickretina.com</strong>
+      </div>
+      <a href="mailto:hr@clickretina.com?subject=Brewkery%20Take-Home%20Submission" class="px-5 py-2.5 rounded-xl bg-[#d9532f] text-white font-extrabold hover:bg-[#b84121] transition">
+        ✉ Submit GitHub Repo & APK
+      </a>
+    </div>
+
   </section>
 
   <!-- Global Toast -->
@@ -554,15 +514,10 @@
     </div>
   </div>
 
-  <!-- CLIENT PROTOTYPE LOGIC -->
+  <!-- JAVASCRIPT PROTOTYPE STATE ENGINE -->
   <script>
-    // In-memory data store replicating data.json
     const storeData = {
-      meta: {
-        delivery_fee: 2.50,
-        tax_rate_percent: 8.0,
-        currency_symbol: "$"
-      },
+      meta: { delivery_fee: 2.50, tax_rate_percent: 8.0, currency_symbol: "$" },
       items: [
         {
           id: "item_caramel_macchiato",
@@ -579,13 +534,7 @@
             { id: "sz_small", label: "Tall (8 oz)", extra: 0.00 },
             { id: "sz_medium", label: "Grande (12 oz)", extra: 0.65 },
             { id: "sz_large", label: "Venti (16 oz)", extra: 1.25 }
-          ],
-          milks: [
-            { id: "m_oat", label: "Oat Milk (Barista Blend)", extra: 0.00 },
-            { id: "m_almond", label: "Roasted Almond Milk", extra: 0.50 },
-            { id: "m_whole", label: "Organic Whole Milk", extra: 0.00 }
-          ],
-          sugars: ["0% Unsweetened", "50% Mild", "100% Sweet"]
+          ]
         },
         {
           id: "item_vanilla_cold_brew",
@@ -601,12 +550,7 @@
           sizes: [
             { id: "sz_medium", label: "Regular (16 oz)", extra: 0.00 },
             { id: "sz_large", label: "Large (24 oz)", extra: 0.95 }
-          ],
-          milks: [
-            { id: "m_sweet_foam", label: "Signature Sweet Cream", extra: 0.00 },
-            { id: "m_coconut_foam", label: "Toasted Coconut Foam", extra: 0.60 }
-          ],
-          sugars: ["Light Sweet", "Regular Sweet", "Extra Sweet"]
+          ]
         },
         {
           id: "item_butter_croissant",
@@ -622,12 +566,7 @@
           sizes: [
             { id: "sz_single", label: "Single Piece", extra: 0.00 },
             { id: "sz_pair", label: "Pair Box (2 Pcs)", extra: 3.20 }
-          ],
-          milks: [
-            { id: "top_butter", label: "Whipped Honey Butter", extra: 0.50 },
-            { id: "top_plain", label: "Classic (No Spread)", extra: 0.00 }
-          ],
-          sugars: ["Warm & Crisp", "Room Temperature"]
+          ]
         },
         {
           id: "item_pistachio_danish",
@@ -642,23 +581,17 @@
           ingredients: ["Bronte Pistachio", "Vanilla Custard", "Puff Pastry"],
           sizes: [
             { id: "sz_single", label: "Single Danish", extra: 0.00 }
-          ],
-          milks: [
-            { id: "top_none", label: "Standard Glaze", extra: 0.00 },
-            { id: "top_nuts", label: "Extra Pistachios", extra: 0.75 }
-          ],
-          sugars: ["Freshly Warmed", "Room Temperature"]
+          ]
         }
       ]
     };
 
-    // User Cart State
+    // In-Memory Cart State
     let cart = [
       {
         id: "item_caramel_macchiato",
         name: "Caramel Macchiato",
         size: "Grande (12 oz)",
-        milk: "Oat Milk (Barista Blend)",
         unitPrice: 5.50,
         qty: 1
       },
@@ -666,56 +599,34 @@
         id: "item_butter_croissant",
         name: "Normandy Croissant",
         size: "Single Piece",
-        milk: "Classic (No Spread)",
         unitPrice: 3.90,
         qty: 1
       }
     ];
 
-    let currentCustomItem = storeData.items[0];
-    let selectedSizeIndex = 1;
-    let selectedMilkIndex = 0;
-    let selectedSugarIndex = 1;
-    let customQty = 1;
-    let discountPercent = 0.0;
+    let currentItem = storeData.items[0];
+    let selectedSizeIdx = 1;
+    let detailQty = 1;
 
-    // Navigation Engine
     function setScreen(screenName) {
       document.querySelectorAll('.screen-view').forEach(v => v.classList.add('hidden'));
       const target = document.getElementById(`view-${screenName}`);
       if (target) target.classList.remove('hidden');
 
-      // Top control bar button sync
+      // Top control buttons
       document.querySelectorAll('.screen-btn').forEach(btn => {
         btn.classList.remove('bg-[#d9532f]', 'text-white', 'glow-terracotta');
         btn.classList.add('bg-[#26160e]', 'text-[#ebd8cb]');
       });
-      const activeTopBtn = document.getElementById(`btn-${screenName}`);
-      if (activeTopBtn) {
-        activeTopBtn.classList.remove('bg-[#26160e]', 'text-[#ebd8cb]');
-        activeTopBtn.classList.add('bg-[#d9532f]', 'text-white', 'glow-terracotta');
+      const topBtn = document.getElementById(`btn-${screenName}`);
+      if (topBtn) {
+        topBtn.classList.remove('bg-[#26160e]', 'text-[#ebd8cb]');
+        topBtn.classList.add('bg-[#d9532f]', 'text-white', 'glow-terracotta');
       }
-
-      // Bottom bar icon sync
-      ['menu', 'custom', 'cart', 'order'].forEach(n => {
-        const navBtn = document.getElementById(`nav-${n}`);
-        if (!navBtn) return;
-        const iconContainer = navBtn.querySelector('div');
-        const label = navBtn.querySelector('span');
-
-        if (n === screenName) {
-          iconContainer.className = 'w-7 h-7 rounded-xl flex items-center justify-center text-[#d9532f] bg-[#d9532f]/15';
-          label.className = 'text-[9px] font-bold text-[#d9532f]';
-        } else {
-          iconContainer.className = 'w-7 h-7 rounded-xl flex items-center justify-center text-[#786457]';
-          label.className = 'text-[9px] font-semibold text-[#786457]';
-        }
-      });
 
       renderCart();
     }
 
-    // Render Menu Catalog
     function renderCatalog(filteredItems = storeData.items) {
       const container = document.getElementById('catalog-items-container');
       container.innerHTML = '';
@@ -723,7 +634,7 @@
       filteredItems.forEach(it => {
         const card = document.createElement('div');
         card.className = "p-2.5 rounded-xl bg-white border border-[#ebd8cb] flex gap-2.5 items-center shadow-sm hover:border-[#d9532f] transition cursor-pointer btn-press";
-        card.onclick = () => openCustomization(it.id);
+        card.onclick = () => openDetail(it.id);
 
         card.innerHTML = `
           <div class="w-14 h-14 rounded-lg bg-cover bg-center flex-shrink-0" style="background-image: url('${it.image_url}');"></div>
@@ -733,7 +644,7 @@
             <span class="text-[10px] text-[#786457]">⭐ ${it.rating} (${it.reviews})</span>
             <div class="flex items-center justify-between mt-1">
               <strong class="text-xs text-[#d9532f] font-mono">$${it.base_price.toFixed(2)}</strong>
-              <button class="px-2 py-0.5 rounded-md bg-[#d9532f] text-white text-[10px] font-bold">+ Customize</button>
+              <button class="px-2 py-0.5 rounded-md bg-[#d9532f] text-white text-[10px] font-bold">+ View Item</button>
             </div>
           </div>
         `;
@@ -764,24 +675,21 @@
       renderCatalog(filtered);
     }
 
-    // Open Customization Detail
-    function openCustomization(itemId) {
+    function openDetail(itemId) {
       const item = storeData.items.find(x => x.id === itemId) || storeData.items[0];
-      currentCustomItem = item;
-      selectedSizeIndex = 0;
-      selectedMilkIndex = 0;
-      selectedSugarIndex = 0;
-      customQty = 1;
+      currentItem = item;
+      selectedSizeIdx = 0;
+      detailQty = 1;
 
-      document.getElementById('custom-hero-img').src = item.image_url;
-      document.getElementById('custom-hero-badge').innerText = item.badge;
-      document.getElementById('custom-item-name').innerText = item.name;
-      document.getElementById('custom-base-price').innerText = `$${item.base_price.toFixed(2)}`;
-      document.getElementById('custom-item-desc').innerText = item.desc;
-      document.getElementById('custom-qty-display').innerText = customQty;
+      document.getElementById('detail-hero-img').src = item.image_url;
+      document.getElementById('detail-hero-badge').innerText = item.badge;
+      document.getElementById('detail-item-name').innerText = item.name;
+      document.getElementById('detail-base-price').innerText = `$${item.base_price.toFixed(2)}`;
+      document.getElementById('detail-item-desc').innerText = item.desc;
+      document.getElementById('detail-qty-display').innerText = detailQty;
 
       // Ingredients
-      const ingRow = document.getElementById('custom-ingredients-row');
+      const ingRow = document.getElementById('detail-ingredients-row');
       ingRow.innerHTML = '';
       item.ingredients.forEach(ing => {
         const chip = document.createElement('span');
@@ -790,92 +698,70 @@
         ingRow.appendChild(chip);
       });
 
-      // Sizes
-      const sizesRow = document.getElementById('custom-sizes-row');
+      // Sizes (Bonus)
+      const sizesRow = document.getElementById('detail-sizes-row');
       sizesRow.innerHTML = '';
       item.sizes.forEach((sz, idx) => {
         const btn = document.createElement('button');
-        btn.className = `p-2 rounded-lg text-[10px] font-bold border transition ${idx === selectedSizeIndex ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f]' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
-        btn.innerHTML = `${sz.label}<br><span class="text-[9px] text-opacity-80">+${sz.extra > 0 ? '$' + sz.extra.toFixed(2) : '$0'}</span>`;
+        btn.className = `p-2 rounded-lg text-[10px] font-bold border transition ${idx === selectedSizeIdx ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f]' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
+        btn.innerHTML = `${sz.label}<br><span class="text-[9px] opacity-80">+${sz.extra > 0 ? '$' + sz.extra.toFixed(2) : '$0'}</span>`;
         btn.onclick = () => {
-          selectedSizeIndex = idx;
-          openCustomization(item.id);
+          selectedSizeIdx = idx;
+          updateDetailTotal();
+          openDetail(item.id);
         };
         sizesRow.appendChild(btn);
       });
 
-      // Milks
-      const milkRow = document.getElementById('custom-milk-row');
-      milkRow.innerHTML = '';
-      item.milks.forEach((m, idx) => {
-        const row = document.createElement('div');
-        row.className = `flex justify-between items-center p-2 rounded-lg border text-xs cursor-pointer ${idx === selectedMilkIndex ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f] font-bold' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
-        row.innerHTML = `<span>${m.label}</span><span class="font-mono text-[10px]">+${m.extra > 0 ? '$' + m.extra.toFixed(2) : '$0'}</span>`;
-        row.onclick = () => {
-          selectedMilkIndex = idx;
-          openCustomization(item.id);
-        };
-        milkRow.appendChild(row);
-      });
-
-      // Sugars
-      const sugarRow = document.getElementById('custom-sugar-row');
-      sugarRow.innerHTML = '';
-      item.sugars.forEach((s, idx) => {
-        const chip = document.createElement('button');
-        chip.className = `flex-1 py-1.5 rounded-lg text-[10px] font-bold border ${idx === selectedSugarIndex ? 'bg-[#140b07] text-white border-[#140b07]' : 'bg-white text-[#786457] border-[#ebd8cb]'}`;
-        chip.innerText = s;
-        chip.onclick = () => {
-          selectedSugarIndex = idx;
-          openCustomization(item.id);
-        };
-        sugarRow.appendChild(chip);
-      });
-
-      updateCustomSubtotal();
-      setScreen('custom');
+      updateDetailTotal();
+      setScreen('detail');
     }
 
-    function updateCustomSubtotal() {
-      const base = currentCustomItem.base_price;
-      const sizeExtra = currentCustomItem.sizes[selectedSizeIndex]?.extra || 0;
-      const milkExtra = currentCustomItem.milks[selectedMilkIndex]?.extra || 0;
-      const total = (base + sizeExtra + milkExtra) * customQty;
-      document.getElementById('custom-calc-total-btn').innerText = `$${total.toFixed(2)}`;
+    function updateDetailTotal() {
+      const base = currentItem.base_price;
+      const extra = currentItem.sizes[selectedSizeIdx]?.extra || 0;
+      const total = (base + extra) * detailQty;
+      document.getElementById('detail-calc-total-btn').innerText = `$${total.toFixed(2)}`;
     }
 
-    function adjustCustomQty(delta) {
-      customQty = Math.max(1, customQty + delta);
-      document.getElementById('custom-qty-display').innerText = customQty;
-      updateCustomSubtotal();
+    function adjustDetailQty(delta) {
+      detailQty = Math.max(1, detailQty + delta);
+      document.getElementById('detail-qty-display').innerText = detailQty;
+      updateDetailTotal();
     }
 
-    function addToCartCurrentCustom() {
-      const base = currentCustomItem.base_price;
-      const sizeObj = currentCustomItem.sizes[selectedSizeIndex] || currentCustomItem.sizes[0];
-      const milkObj = currentCustomItem.milks[selectedMilkIndex] || currentCustomItem.milks[0];
-      const unit = base + (sizeObj.extra || 0) + (milkObj.extra || 0);
+    function addToCartFromDetail() {
+      const base = currentItem.base_price;
+      const sizeObj = currentItem.sizes[selectedSizeIdx] || currentItem.sizes[0];
+      const unit = base + (sizeObj.extra || 0);
 
       cart.push({
-        id: currentCustomItem.id,
-        name: currentCustomItem.name,
+        id: currentItem.id,
+        name: currentItem.name,
         size: sizeObj.label,
-        milk: milkObj.label,
         unitPrice: unit,
-        qty: customQty
+        qty: detailQty
       });
 
-      showToast(`Added ${customQty}x ${currentCustomItem.name} to Cart`);
+      showToast(`Added ${detailQty}x ${currentItem.name} to Cart`);
       setScreen('cart');
     }
 
-    // Cart Management
     function renderCart() {
       const container = document.getElementById('cart-items-list');
       container.innerHTML = '';
 
       let subtotal = 0;
       let totalQty = 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="p-6 text-center text-xs text-[#786457] bg-white rounded-xl border border-[#ebd8cb]">
+            <i class="fa-solid fa-cart-shopping text-2xl text-[#ebd8cb] mb-2 block"></i>
+            Your in-memory cart is empty.
+          </div>
+        `;
+      }
 
       cart.forEach((it, index) => {
         const itemTotal = it.unitPrice * it.qty;
@@ -887,7 +773,7 @@
         row.innerHTML = `
           <div>
             <strong class="text-xs text-[#140b07] block">${it.name}</strong>
-            <span class="text-[10px] text-[#786457]">${it.size} • ${it.milk}</span>
+            <span class="text-[10px] text-[#786457]">${it.size}</span>
             <div class="text-[11px] font-bold text-[#d9532f] font-mono mt-0.5">$${itemTotal.toFixed(2)}</div>
           </div>
           <div class="flex items-center gap-2 bg-[#f7ebe1] px-2 py-1 rounded-lg border border-[#ebd8cb]">
@@ -899,29 +785,25 @@
         container.appendChild(row);
       });
 
-      // Update counters
       document.getElementById('badge-cart-counter').innerText = totalQty;
       document.getElementById('top-cart-count').innerText = totalQty;
       document.getElementById('floating-bar-qty').innerText = totalQty;
 
-      // Update calculations
+      // Show/hide floating bar on Screen 1
+      const stickyBar = document.getElementById('sticky-cart-bar');
+      if (stickyBar) {
+        stickyBar.style.display = totalQty > 0 ? 'flex' : 'none';
+      }
+
       const delivery = subtotal > 0 ? storeData.meta.delivery_fee : 0;
       const tax = subtotal * (storeData.meta.tax_rate_percent / 100);
-      const discount = subtotal * discountPercent;
-      const total = Math.max(0, subtotal + delivery + tax - discount);
+      const total = subtotal > 0 ? subtotal + delivery + tax : 0;
 
       document.getElementById('bill-subtotal').innerText = `$${subtotal.toFixed(2)}`;
       document.getElementById('bill-tax').innerText = `$${tax.toFixed(2)}`;
       document.getElementById('bill-total').innerText = `$${total.toFixed(2)}`;
       document.getElementById('floating-bar-subtotal').innerText = `$${subtotal.toFixed(2)}`;
       document.getElementById('btn-place-order-total').innerText = `$${total.toFixed(2)}`;
-
-      if (discount > 0) {
-        document.getElementById('bill-discount-row').classList.remove('hidden');
-        document.getElementById('bill-discount').innerText = `-$${discount.toFixed(2)}`;
-      } else {
-        document.getElementById('bill-discount-row').classList.add('hidden');
-      }
     }
 
     function changeCartQty(index, delta) {
@@ -935,39 +817,33 @@
     function clearCart() {
       cart = [];
       renderCart();
-      showToast('Cart cleared');
-    }
-
-    function applyPromoCode() {
-      const code = document.getElementById('promo-input').value.trim().toUpperCase();
-      if (code === 'ROAST10') {
-        discountPercent = 0.10;
-        renderCart();
-        showToast('🎉 10% Discount Applied!');
-      } else {
-        showToast('Invalid coupon code');
-      }
+      showToast('In-memory cart cleared');
     }
 
     function placeOrderFinal() {
       if (cart.length === 0) {
-        showToast('Your cart is empty! Add an item first.');
+        showToast('Cart is empty!');
         return;
       }
+      
+      const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
+      document.getElementById('order-summary-qty').innerText = `${totalCount} Item(s)`;
       document.getElementById('order-ref-code').innerText = `#BK-${Math.floor(10000 + Math.random() * 90000)}`;
-      showToast('🎉 Order placed successfully!');
+
+      // Reset in-memory cart automatically upon order placement
       cart = [];
-      discountPercent = 0;
+      renderCart();
+
+      showToast('🎉 Order Placed! In-memory cart cleared.');
       setScreen('order');
     }
 
-    function resetCartState() {
+    function resetPrototype() {
       cart = [
         {
           id: "item_caramel_macchiato",
           name: "Caramel Macchiato",
           size: "Grande (12 oz)",
-          milk: "Oat Milk (Barista Blend)",
           unitPrice: 5.50,
           qty: 1
         },
@@ -975,14 +851,13 @@
           id: "item_butter_croissant",
           name: "Normandy Croissant",
           size: "Single Piece",
-          milk: "Classic (No Spread)",
           unitPrice: 3.90,
           qty: 1
         }
       ];
-      discountPercent = 0;
+      renderCart();
       setScreen('menu');
-      showToast('🔄 Reset to default prototype state');
+      showToast('Reset to default state');
     }
 
     function toggleFavorite() {
@@ -1000,17 +875,17 @@
       setTimeout(() => {
         toast.classList.remove('translate-y-0', 'opacity-100');
         toast.classList.add('-translate-y-24', 'opacity-0');
-      }, 2400);
+      }, 2200);
     }
 
     function copyToClipboard(id) {
       const text = document.getElementById(id).innerText.trim();
       navigator.clipboard.writeText(text).then(() => {
-        showToast('Copied URL to clipboard!');
+        showToast('Copied API URL to clipboard!');
       });
     }
 
-    // Initialize View
+    // Init
     renderCatalog();
     renderCart();
     setScreen('menu');
