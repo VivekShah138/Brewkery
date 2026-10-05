@@ -1,63 +1,51 @@
 {
-  "meta": {
-    "app": "Brewkery",
-    "version": "1.0.0",
-    "tagline": "Artisanal Coffee & Fresh Oven Bakes",
-    "currency": "USD",
-    "currency_symbol": "$",
-    "delivery_fee": 2.5,
-    "tax_rate_percent": 8.0,
-    "estimated_delivery_time": "20 - 30 mins"
-  },
-  "item": {
-    "id": 2,
-    "category_id": "cat_cold_brews",
-    "name": "Velvet Vanilla Cold Foam",
-    "tagline": "18-hour cold steeped coffee topped with sweet cream foam",
-    "description": "Slow-steeped Colombian single-origin beans brewed in cool filtered water for 18 hours. Layered with rich, house-whipped Madagascar vanilla sweet cream foam.",
-    "base_price": 5.4,
-    "rating": 4.8,
-    "review_count": 248,
-    "prep_time": "3-5 mins",
-    "calories": 180,
-    "image_url": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&auto=format&fit=crop&q=80",
-    "badge": "STAFF PICK",
-    "ingredients": [
-      "18hr Steeped Coffee",
-      "Vanilla Sweet Cream",
-      "Crushed Ice",
-      "Raw Cane Sugar"
+  "id": 2,
+  "category_id": "cat_cold_brews",
+  "name": "Velvet Vanilla Cold Foam",
+  "tagline": "18-hour cold steeped coffee topped with sweet cream foam",
+  "description": "Slow-steeped Colombian single-origin beans brewed in cool filtered water for 18 hours. Layered with rich, house-whipped Madagascar vanilla sweet cream foam.",
+  "base_price": 5.4,
+  "rating": 4.8,
+  "review_count": 248,
+  "prep_time": "3-5 mins",
+  "calories": 180,
+  "image_url": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&auto=format&fit=crop&q=80",
+  "badge": "STAFF PICK",
+  "ingredients": [
+    "18hr Steeped Coffee",
+    "Vanilla Sweet Cream",
+    "Crushed Ice",
+    "Raw Cane Sugar"
+  ],
+  "customizations": {
+    "sizes": [
+      {
+        "id": "sz_medium",
+        "label": "Regular (16 oz)",
+        "extra_price": 0.0
+      },
+      {
+        "id": "sz_large",
+        "label": "Large (24 oz)",
+        "extra_price": 0.95
+      }
     ],
-    "customizations": {
-      "sizes": [
-        {
-          "id": "sz_medium",
-          "label": "Regular (16 oz)",
-          "extra_price": 0.0
-        },
-        {
-          "id": "sz_large",
-          "label": "Large (24 oz)",
-          "extra_price": 0.95
-        }
-      ],
-      "sugar_levels": [
-        "Light Sweet",
-        "Regular Sweet",
-        "Extra Sweet"
-      ],
-      "milk_options": [
-        {
-          "id": "m_sweet_foam",
-          "name": "Signature Sweet Cream",
-          "extra_price": 0.0
-        },
-        {
-          "id": "m_coconut_foam",
-          "name": "Toasted Coconut Foam",
-          "extra_price": 0.6
-        }
-      ]
-    }
+    "sugar_levels": [
+      "Light Sweet",
+      "Regular Sweet",
+      "Extra Sweet"
+    ],
+    "milk_options": [
+      {
+        "id": "m_sweet_foam",
+        "name": "Signature Sweet Cream",
+        "extra_price": 0.0
+      },
+      {
+        "id": "m_coconut_foam",
+        "name": "Toasted Coconut Foam",
+        "extra_price": 0.6
+      }
+    ]
   }
 }

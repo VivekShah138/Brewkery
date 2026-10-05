@@ -1,67 +1,55 @@
 {
-  "meta": {
-    "app": "Brewkery",
-    "version": "1.0.0",
-    "tagline": "Artisanal Coffee & Fresh Oven Bakes",
-    "currency": "USD",
-    "currency_symbol": "$",
-    "delivery_fee": 2.5,
-    "tax_rate_percent": 8.0,
-    "estimated_delivery_time": "20 - 30 mins"
-  },
-  "item": {
-    "id": 3,
-    "category_id": "cat_bakery",
-    "name": "Golden Normandy Croissant",
-    "tagline": "36-layer flakey pastry with European churned butter",
-    "description": "Baked fresh at sunrise. Made with slow-fermented French dough and cultured Normandy butter, boasting crisp amber honeycomb crust and an airy, melting center.",
-    "base_price": 3.9,
-    "rating": 4.95,
-    "review_count": 420,
-    "prep_time": "Warm in 2 mins",
-    "calories": 290,
-    "image_url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80",
-    "badge": "FRESHLY BAKED",
-    "ingredients": [
-      "Normandy Butter (84%)",
-      "Organic Flour",
-      "Natural Yeast",
-      "Sea Salt"
+  "id": 3,
+  "category_id": "cat_bakery",
+  "name": "Golden Normandy Croissant",
+  "tagline": "36-layer flakey pastry with European churned butter",
+  "description": "Baked fresh at sunrise. Made with slow-fermented French dough and cultured Normandy butter, boasting crisp amber honeycomb crust and an airy, melting center.",
+  "base_price": 3.9,
+  "rating": 4.95,
+  "review_count": 420,
+  "prep_time": "Warm in 2 mins",
+  "calories": 290,
+  "image_url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80",
+  "badge": "FRESHLY BAKED",
+  "ingredients": [
+    "Normandy Butter (84%)",
+    "Organic Flour",
+    "Natural Yeast",
+    "Sea Salt"
+  ],
+  "customizations": {
+    "sizes": [
+      {
+        "id": "sz_single",
+        "label": "Single Piece",
+        "extra_price": 0.0
+      },
+      {
+        "id": "sz_pair",
+        "label": "Pair Box (2 Pcs)",
+        "extra_price": 3.2
+      }
     ],
-    "customizations": {
-      "sizes": [
-        {
-          "id": "sz_single",
-          "label": "Single Piece",
-          "extra_price": 0.0
-        },
-        {
-          "id": "sz_pair",
-          "label": "Pair Box (2 Pcs)",
-          "extra_price": 3.2
-        }
-      ],
-      "sugar_levels": [
-        "Warm & Crisp (Recommended)",
-        "Room Temperature"
-      ],
-      "milk_options": [
-        {
-          "id": "top_butter",
-          "name": "Whipped Honey Butter",
-          "extra_price": 0.5
-        },
-        {
-          "id": "top_jam",
-          "name": "Artisan Raspberry Jam",
-          "extra_price": 0.5
-        },
-        {
-          "id": "top_plain",
-          "name": "Classic (No Spread)",
-          "extra_price": 0.0
-        }
-      ]
-    }
+    "sugar_levels": [
+      "Warm & Crisp (Recommended)",
+      "Room Temperature"
+    ],
+    "milk_options": [
+      {
+        "id": "top_butter",
+        "name": "Whipped Honey Butter",
+        "extra_price": 0.5
+      },
+      {
+        "id": "top_jam",
+        "name": "Artisan Raspberry Jam",
+        "extra_price": 0.5
+      },
+      {
+        "id": "top_plain",
+        "name": "Classic (No Spread)",
+        "extra_price": 0.0
+      }
+    ]
   }
 }
