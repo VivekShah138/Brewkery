@@ -14,6 +14,8 @@
     * {
       font-family: 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
+    }
+    .phone-frame * {
       user-select: none;
     }
     .font-display { font-family: 'Cabinet Grotesk', sans-serif; }
@@ -106,7 +108,7 @@
       <div class="flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-[#d9532f] animate-ping"></span>
         <span class="text-xs font-black tracking-wider uppercase text-white">Clickretina · Android Developer Take-Home</span>
-        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">~3-4 hrs · Time-Boxed</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">~4-6 hrs · Time-Boxed</span>
       </div>
       
       <div class="flex items-center gap-2">
@@ -509,57 +511,93 @@
 
     <!-- API Endpoints -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
-        <span class="text-[#f59e0b] font-bold block mb-1">1. Full Menu & Store Config:</span>
-        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
-          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
+      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 flex flex-col justify-between">
+        <div>
+          <span class="text-[#f59e0b] font-bold block mb-1">1. Full Menu & Store Config:</span>
+          <div class="text-[#cbd5e1] break-all mb-3 text-[11px] p-2 rounded-lg bg-[#140b07] border border-[#3e2417] select-all" id="endpoint-menu">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json</div>
         </div>
-        <button onclick="copyToClipboard('endpoint-menu')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
-          Copy Menu URL
+        <button onclick="copyRichText('endpoint-menu', this, 'Copied Menu URL!')" class="px-3.5 py-2 rounded-xl bg-[#d9532f] hover:bg-[#b84121] text-white font-bold transition flex items-center justify-center gap-2 btn-press">
+          <i class="fa-regular fa-copy"></i>
+          <span>Copy Menu URL</span>
         </button>
       </div>
 
-      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
-        <span class="text-[#f59e0b] font-bold block mb-1">2. Single Item Detail by Numeric ID:</span>
-        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-item">
-          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{id}.json
+      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 flex flex-col justify-between">
+        <div>
+          <span class="text-[#f59e0b] font-bold block mb-1">2. Single Item Detail by Numeric ID:</span>
+          <div class="text-[#cbd5e1] break-all mb-2 text-[11px] p-2 rounded-lg bg-[#140b07] border border-[#3e2417] select-all" id="endpoint-item">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{id}.json</div>
+          <span class="text-[10px] text-[#a89486] block mb-3 font-sans">Returns the root item object directly (e.g. <code>api/items/1.json</code> to <code>6.json</code>)</span>
         </div>
-        <button onclick="copyToClipboard('endpoint-item')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
-          Copy Pattern
+        <button onclick="copyRichText('endpoint-item', this, 'Copied Item URL Pattern!')" class="px-3.5 py-2 rounded-xl bg-[#d9532f] hover:bg-[#b84121] text-white font-bold transition flex items-center justify-center gap-2 btn-press">
+          <i class="fa-regular fa-copy"></i>
+          <span>Copy Item Pattern</span>
         </button>
-        <span class="text-[10px] text-[#a89486] block mt-2">Example: <code>api/items/1.json</code> to <code>api/items/6.json</code></span>
       </div>
     </div>
 
     <!-- How to submit -->
-    <div class="bg-[#1c100a] border border-[#3e2417] rounded-2xl p-6 space-y-3 text-xs text-[#cbd5e1]">
+    <div class="bg-[#1c100a] border border-[#3e2417] rounded-2xl p-6 space-y-4 text-xs text-[#cbd5e1]">
       <h3 class="text-sm font-bold text-white font-display">How to submit — share your app with us</h3>
       <ol class="list-decimal list-inside space-y-2">
         <li>Push your code to a public GitHub repository and copy the repo link.</li>
         <li>Build a debug APK so we can install and try it. In Android Studio: <code>Build &rarr; Build Bundle(s) / APK(s) &rarr; Build APK(s)</code>. Or run <code>./gradlew assembleDebug</code> — find it in <code>app/build/outputs/apk/debug/</code>.</li>
         <li>Make sure the README (with the AI section) is in the repo.</li>
         <li>Optional but appreciated: a 1–2 minute screen recording of the app running.</li>
-        <li>Email all of it — GitHub link + the APK (attach it, or a Google Drive link) + recording — to <a href="mailto:hr@clickretina.com?subject=Brewkery%20Android%20Assignment%20Submission" class="text-[#f59e0b] font-bold underline">hr@clickretina.com</a>.</li>
+        <li>Email all of it — GitHub link + the APK (attach it, or a Google Drive link) + recording — to <a href="mailto:Hr@clickretina.co.in?subject=Brewkery%20Android%20Assignment%20Submission" class="text-[#f59e0b] font-bold underline">Hr@clickretina.co.in</a>.</li>
       </ol>
-      <div class="pt-3 border-t border-[#3e2417] flex items-center justify-between flex-wrap gap-2 text-[11px]">
-        <span class="text-[#f59e0b] font-bold">⏳ Deadline: within 4 days of receiving this assignment. Need more time? Just ask.</span>
-        <a href="mailto:hr@clickretina.com?subject=Brewkery%20Android%20Assignment%20Submission" class="px-3.5 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
-          ✉ Submit to hr@clickretina.com
-        </a>
+
+      <div class="pt-4 border-t border-[#3e2417] flex items-center justify-between flex-wrap gap-3">
+        <span class="text-[#f59e0b] font-bold text-xs">⏳ Deadline: within 1 day of receiving this assignment. Need more time? Just ask.</span>
+        
+        <div class="flex items-center gap-2">
+          <button onclick="copyDirectValue('Hr@clickretina.co.in', this, 'Copied Email!')" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white font-bold transition flex items-center gap-1.5 btn-press">
+            <i class="fa-regular fa-copy text-xs"></i>
+            <span>Copy Email</span>
+          </button>
+          <a href="mailto:Hr@clickretina.co.in?subject=Brewkery%20Android%20Assignment%20Submission" class="px-4 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition flex items-center gap-1.5">
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+            <span>Hr@clickretina.co.in</span>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- Ground Rules -->
-    <div class="bg-[#140b07] border border-[#3e2417] rounded-2xl p-5 space-y-2 text-xs text-[#a89486]">
-      <h4 class="font-bold text-white text-xs uppercase tracking-wider">Ground rules — A few honest notes</h4>
+    <div class="bg-[#140b07] border border-[#3e2417] rounded-2xl p-6 space-y-3 text-xs text-[#a89486]">
+      <h4 class="font-bold text-white text-xs uppercase tracking-wider font-display">Ground rules — A few honest notes</h4>
       <ul class="list-disc list-inside space-y-1.5">
-        <li>Keep it to roughly 3–4 hours. Don't over-engineer.</li>
+        <li>Keep it to roughly 4–6 hours. Don't over-engineer.</li>
         <li>Match the screens shown above — same app for everyone.</li>
         <li>Use AI as much as you like, but understand your code; we'll go through it in the interview.</li>
         <li>Stuck on something? Email us — how you ask is part of the signal.</li>
-        <li>Questions? <a href="mailto:hr@clickretina.com" class="text-[#ebd8cb] underline">hr@clickretina.com</a> · 9889856987</li>
       </ul>
-      <p class="pt-2 text-white font-semibold">We read every submission — looking forward to seeing what you build.</p>
+
+      <!-- Contact Helpline Box with 1-Click Copy Buttons -->
+      <div class="pt-3 border-t border-[#3e2417] flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-white font-semibold">Questions?</span>
+          
+          <!-- Email Chip with Copy -->
+          <div class="inline-flex items-center gap-1.5 bg-[#20120b] border border-[#3e2417] px-2.5 py-1 rounded-lg text-white">
+            <i class="fa-regular fa-envelope text-[#f59e0b]"></i>
+            <span id="contact-email-text">Hr@clickretina.co.in</span>
+            <button onclick="copyDirectValue('Hr@clickretina.co.in', this, 'Email Copied!')" class="text-[#a89486] hover:text-white ml-1 btn-press" title="Copy Email">
+              <i class="fa-regular fa-copy text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Phone Chip with Copy -->
+          <div class="inline-flex items-center gap-1.5 bg-[#20120b] border border-[#3e2417] px-2.5 py-1 rounded-lg text-white">
+            <i class="fa-solid fa-phone text-emerald-400"></i>
+            <span id="contact-phone-text">+91 84710 78089</span>
+            <button onclick="copyDirectValue('+918471078089', this, 'Phone Copied!')" class="text-[#a89486] hover:text-white ml-1 btn-press" title="Copy Phone">
+              <i class="fa-regular fa-copy text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <span class="text-white font-semibold">We read every submission — looking forward to seeing what you build.</span>
+      </div>
     </div>
 
   </section>
@@ -1050,10 +1088,39 @@
       }, 2200);
     }
 
+    function copyRichText(elementId, btnElement, toastMsg) {
+      const text = document.getElementById(elementId).innerText.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(toastMsg || 'Copied to clipboard!');
+        if (btnElement) {
+          const originalHTML = btnElement.innerHTML;
+          btnElement.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i> <span>Copied!</span>`;
+          btnElement.classList.add('bg-emerald-700');
+          setTimeout(() => {
+            btnElement.innerHTML = originalHTML;
+            btnElement.classList.remove('bg-emerald-700');
+          }, 2000);
+        }
+      });
+    }
+
+    function copyDirectValue(val, btnElement, toastMsg) {
+      navigator.clipboard.writeText(val).then(() => {
+        showToast(toastMsg || 'Copied!');
+        if (btnElement) {
+          const originalHTML = btnElement.innerHTML;
+          btnElement.innerHTML = `<i class="fa-solid fa-check text-emerald-400 text-xs"></i>`;
+          setTimeout(() => {
+            btnElement.innerHTML = originalHTML;
+          }, 2000);
+        }
+      });
+    }
+
     function copyToClipboard(id) {
       const text = document.getElementById(id).innerText.trim();
       navigator.clipboard.writeText(text).then(() => {
-        showToast('Copied API URL to clipboard!');
+        showToast('Copied URL to clipboard!');
       });
     }
 
