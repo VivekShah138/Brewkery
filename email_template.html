@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zoho Mail Rich Text Copy Tool · Clickretina</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 30px;
+      color: #333;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #eee;
+    }
+    .btn-copy {
+      background: #d9532f;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-copy:hover {
+      background: #b84121;
+    }
+    .email-preview {
+      border: 1px solid #e1e4e8;
+      padding: 25px;
+      border-radius: 8px;
+      background: #fff;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #10b981;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-bar">
+      <div>
+        <h2 style="margin: 0 0 4px 0; color: #111;">Zoho Mail 1-Click Formatter</h2>
+        <small style="color: #666;">Click the button & paste (Ctrl+V) directly into Zoho Mail</small>
+      </div>
+      <button class="btn-copy" onclick="copyFormattedEmail()">📋 Copy for Zoho Mail</button>
+    </div>
+
+    <!-- The actual formatted email that will be copied as rich HTML -->
+    <div id="email-content" class="email-preview">
+      <p>Hi {{Candidate_Name}},</p>
+      
+      <p>Thanks for applying for the <strong>Android Developer</strong> role at <strong>Clickretina</strong> — you're through to the next step! Everything you need is detailed below.</p>
+      
+      <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+
+      <h3 style="color: #1a0f0a; margin-bottom: 8px;">The Assignment — Build the "Brewkery" App</h3>
+      <p style="margin: 6px 0;">👉 <strong>Assignment Brief &amp; Live Prototype:</strong> <a href="https://vivekshah138.github.io/Brewkery/" target="_blank" style="color: #d9532f; font-weight: bold;">https://vivekshah138.github.io/Brewkery/</a></p>
+
+      <p style="margin-top: 12px;"><strong>What you're building:</strong><br>
+      A native Android coffee &amp; bakery ordering app in Kotlin powered by a single REST API we provide. The page above contains:</p>
+      <ul style="margin: 6px 0 16px 20px; padding: 0;">
+        <li>The full interactive 4-screen prototype and UI specifications.</li>
+        <li>The raw API endpoints (<code>data.json</code> for full menu &amp; <code>api/items/{id}.json</code> for single items).</li>
+        <li>Step-by-step implementation guide.</li>
+      </ul>
+
+      <p>⏱ <strong>Time commitment:</strong> Plan for about <strong>4–6 hours</strong>. Don't over-engineer — we want to see clean architecture and smart execution.<br>
+      🤖 <strong>AI Tools:</strong> You are strongly encouraged to use AI tools (Claude, Cursor, Copilot, ChatGPT, Gemini) throughout — that is an essential part of how we build at Clickretina.</p>
+
+      <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+
+      <h3 style="color: #1a0f0a; margin-bottom: 8px;">How to Submit</h3>
+      <p>Once you're done, reply to this email or send your submission to <a href="mailto:Hr@clickretina.co.in" style="color: #d9532f; font-weight: bold;">Hr@clickretina.co.in</a> with:</p>
+      <ol style="margin: 6px 0 16px 20px; padding: 0;">
+        <li><strong>Your public GitHub repository link</strong> (must include the <code>README.md</code> with the AI section detailing prompts used and 1 bug caught/fixed).</li>
+        <li><strong>A debug APK file</strong> so our team can install and test your app (attach the <code>.apk</code> directly or share a Google Drive link with view access).</li>
+        <li><strong>Screenshot of your screening-test score</strong> <em>(if applicable)</em>.</li>
+        <li><em>(Optional but appreciated)</em> A short 1–2 minute screen recording of the app running on your device/emulator.</li>
+      </ol>
+
+      <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+
+      <h3 style="color: #1a0f0a; margin-bottom: 8px;">⏳ Deadline</h3>
+      <p><strong>Within 24 hours (1 day)</strong> of receiving this email.<br>
+      <em>Need an extension or stuck on something? Just reply to this email and let us know — how you communicate is part of the signal.</em></p>
+
+      <p style="margin-top: 16px;"><strong>Questions?</strong><br>
+      • Email: <a href="mailto:Hr@clickretina.co.in" style="color: #d9532f;">Hr@clickretina.co.in</a><br>
+      • Phone / WhatsApp: <strong>+91 84710 78089</strong></p>
+
+      <p style="margin-top: 24px;">We review every single submission carefully and look forward to seeing what you build!</p>
+
+      <p style="margin-top: 20px; color: #555;">
+        Best regards,<br>
+        <strong>Hiring Team · Clickretina</strong><br>
+        🌐 <a href="https://www.clickretina.com" target="_blank" style="color: #d9532f;">www.clickretina.com</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">✔ Copied formatted text with links! Paste directly into Zoho Mail.</div>
+
+  <script>
+    function copyFormattedEmail() {
+      const emailDiv = document.getElementById('email-content');
+      
+      // Use Clipboard API with rich HTML text
+      const blobHtml = new Blob([emailDiv.innerHTML], { type: 'text/html' });
+      const blobText = new Blob([emailDiv.innerText], { type: 'text/plain' });
+      const item = new ClipboardItem({
+        'text/html': blobHtml,
+        'text/plain': blobText
+      });
+
+      navigator.clipboard.write([item]).then(() => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+      }).catch(err => {
+        // Fallback for older browsers
+        const range = document.createRange();
+        range.selectNode(emailDiv);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        alert('Copied! Now press Ctrl+V in Zoho Mail.');
+      });
+    }
+  </script>
+</body>
+</html>
