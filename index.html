@@ -130,7 +130,7 @@
       <button onclick="setScreen('menu')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#d9532f] text-white shadow glow-terracotta transition btn-press" id="btn-menu">
         1. Menu Catalog
       </button>
-      <button onclick="openDetail('item_caramel_macchiato')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-detail">
+      <button onclick="openDetail(1)" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-detail">
         2. Item Detail
       </button>
       <button onclick="setScreen('cart')" class="screen-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-[#26160e] hover:bg-[#382015] text-[#ebd8cb] transition btn-press" id="btn-cart">
@@ -508,14 +508,27 @@
     </div>
 
     <!-- API Endpoints -->
-    <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 text-xs font-mono">
-      <span class="text-[#f59e0b] font-bold block mb-1">Public Raw API Endpoint:</span>
-      <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
-        https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
+        <span class="text-[#f59e0b] font-bold block mb-1">1. Full Menu & Store Config:</span>
+        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-menu">
+          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json
+        </div>
+        <button onclick="copyToClipboard('endpoint-menu')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
+          Copy Menu URL
+        </button>
       </div>
-      <button onclick="copyToClipboard('endpoint-menu')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
-        Copy API Endpoint URL
-      </button>
+
+      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4">
+        <span class="text-[#f59e0b] font-bold block mb-1">2. Single Item Detail by Numeric ID:</span>
+        <div class="text-[#cbd5e1] break-all mb-3 text-[11px]" id="endpoint-item">
+          https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{id}.json
+        </div>
+        <button onclick="copyToClipboard('endpoint-item')" class="px-3 py-1.5 rounded-lg bg-[#d9532f] text-white font-bold hover:bg-[#b84121] transition">
+          Copy Pattern
+        </button>
+        <span class="text-[10px] text-[#a89486] block mt-2">Example: <code>api/items/1.json</code> to <code>api/items/6.json</code></span>
+      </div>
     </div>
 
     <!-- How to submit -->
@@ -565,7 +578,7 @@
       meta: { delivery_fee: 2.50, tax_rate_percent: 8.0, currency_symbol: "$" },
       items: [
         {
-          id: "item_caramel_macchiato",
+          id: 1,
           category_id: "cat_hot_coffee",
           name: "Toasted Caramel Macchiato",
           base_price: 4.85,
@@ -590,7 +603,7 @@
           }
         },
         {
-          id: "item_vanilla_cold_brew",
+          id: 2,
           category_id: "cat_cold_brews",
           name: "Velvet Vanilla Cold Foam",
           base_price: 5.40,
@@ -613,7 +626,7 @@
           }
         },
         {
-          id: "item_butter_croissant",
+          id: 3,
           category_id: "cat_bakery",
           name: "Golden Normandy Croissant",
           base_price: 3.90,
@@ -637,7 +650,7 @@
           }
         },
         {
-          id: "item_pistachio_danish",
+          id: 4,
           category_id: "cat_bakery",
           name: "Crushed Pistachio Danish",
           base_price: 4.60,
@@ -664,7 +677,7 @@
     // State
     let cart = [
       {
-        id: "item_caramel_macchiato",
+        id: 1,
         name: "Caramel Macchiato",
         size: "Grande (12 oz)",
         milk: "Oat Milk (Barista Blend)",
@@ -673,7 +686,7 @@
         qty: 1
       },
       {
-        id: "item_butter_croissant",
+        id: 3,
         name: "Normandy Croissant",
         size: "Single Piece",
         milk: "Classic (No Spread)",
@@ -996,7 +1009,7 @@
       activeOrder = null;
       cart = [
         {
-          id: "item_caramel_macchiato",
+          id: 1,
           name: "Caramel Macchiato",
           size: "Grande (12 oz)",
           milk: "Oat Milk (Barista Blend)",
@@ -1005,7 +1018,7 @@
           qty: 1
         },
         {
-          id: "item_butter_croissant",
+          id: 3,
           name: "Normandy Croissant",
           size: "Single Piece",
           milk: "Classic (No Spread)",

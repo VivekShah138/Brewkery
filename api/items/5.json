@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "app": "Brewkery",
+    "version": "1.0.0",
+    "tagline": "Artisanal Coffee & Fresh Oven Bakes",
+    "currency": "USD",
+    "currency_symbol": "$",
+    "delivery_fee": 2.5,
+    "tax_rate_percent": 8.0,
+    "estimated_delivery_time": "20 - 30 mins"
+  },
+  "item": {
+    "id": 5,
+    "category_id": "cat_hot_coffee",
+    "name": "Havana Spanish Latte",
+    "tagline": "Espresso with condensed sweet milk and cinnamon dust",
+    "description": "A velvety blend of intense dark roast espresso and sweetened condensed milk, balanced with textured whole milk and finished with fresh cinnamon bark zest.",
+    "base_price": 5.1,
+    "rating": 4.88,
+    "review_count": 195,
+    "prep_time": "4-6 mins",
+    "calories": 260,
+    "image_url": "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800&auto=format&fit=crop&q=80",
+    "badge": "POPULAR",
+    "ingredients": [
+      "Dark Roast Espresso",
+      "Condensed Milk",
+      "Steamed Whole Milk",
+      "Ground Ceylon Cinnamon"
+    ],
+    "customizations": {
+      "sizes": [
+        {
+          "id": "sz_small",
+          "label": "Tall (8 oz)",
+          "extra_price": 0.0
+        },
+        {
+          "id": "sz_medium",
+          "label": "Grande (12 oz)",
+          "extra_price": 0.7
+        }
+      ],
+      "sugar_levels": [
+        "Less Sweet (Half Condensed)",
+        "Original Havana Sweet"
+      ],
+      "milk_options": [
+        {
+          "id": "m_whole",
+          "name": "Whole Milk",
+          "extra_price": 0.0
+        },
+        {
+          "id": "m_oat",
+          "name": "Oat Milk",
+          "extra_price": 0.5
+        }
+      ]
+    }
+  }
+}

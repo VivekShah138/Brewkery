@@ -29,9 +29,9 @@
       "item_count": 2
     }
   ],
-  "featured_items": [
+  "items": [
     {
-      "id": "item_caramel_macchiato",
+      "id": 1,
       "category_id": "cat_hot_coffee",
       "name": "Toasted Caramel Macchiato",
       "tagline": "Double shot espresso with velvety oat milk & salted caramel",
@@ -43,14 +43,23 @@
       "calories": 240,
       "image_url": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&auto=format&fit=crop&q=80",
       "badge": "BESTSELLER",
-      "ingredients": ["Signature Espresso", "Steamed Oat Milk", "Salted Caramel", "Bourbon Vanilla"],
+      "ingredients": [
+        "Signature Espresso",
+        "Steamed Oat Milk",
+        "Salted Caramel",
+        "Bourbon Vanilla"
+      ],
       "customizations": {
         "sizes": [
           { "id": "sz_small", "label": "Tall (8 oz)", "extra_price": 0.00 },
           { "id": "sz_medium", "label": "Grande (12 oz)", "extra_price": 0.65 },
           { "id": "sz_large", "label": "Venti (16 oz)", "extra_price": 1.25 }
         ],
-        "sugar_levels": ["0% Unsweetened", "50% Mild", "100% Standard Sweet"],
+        "sugar_levels": [
+          "0% Unsweetened",
+          "50% Mild",
+          "100% Standard Sweet"
+        ],
         "milk_options": [
           { "id": "m_oat", "name": "Oat Milk (Barista Blend)", "extra_price": 0.00 },
           { "id": "m_almond", "name": "Roasted Almond Milk", "extra_price": 0.50 },
@@ -59,7 +68,7 @@
       }
     },
     {
-      "id": "item_vanilla_cold_brew",
+      "id": 2,
       "category_id": "cat_cold_brews",
       "name": "Velvet Vanilla Cold Foam",
       "tagline": "18-hour cold steeped coffee topped with sweet cream foam",
@@ -71,13 +80,22 @@
       "calories": 180,
       "image_url": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&auto=format&fit=crop&q=80",
       "badge": "STAFF PICK",
-      "ingredients": ["18hr Steeped Coffee", "Vanilla Sweet Cream", "Crushed Ice", "Raw Cane Sugar"],
+      "ingredients": [
+        "18hr Steeped Coffee",
+        "Vanilla Sweet Cream",
+        "Crushed Ice",
+        "Raw Cane Sugar"
+      ],
       "customizations": {
         "sizes": [
           { "id": "sz_medium", "label": "Regular (16 oz)", "extra_price": 0.00 },
           { "id": "sz_large", "label": "Large (24 oz)", "extra_price": 0.95 }
         ],
-        "sugar_levels": ["Light Sweet", "Regular Sweet", "Extra Sweet"],
+        "sugar_levels": [
+          "Light Sweet",
+          "Regular Sweet",
+          "Extra Sweet"
+        ],
         "milk_options": [
           { "id": "m_sweet_foam", "name": "Signature Sweet Cream", "extra_price": 0.00 },
           { "id": "m_coconut_foam", "name": "Toasted Coconut Foam", "extra_price": 0.60 }
@@ -85,7 +103,7 @@
       }
     },
     {
-      "id": "item_butter_croissant",
+      "id": 3,
       "category_id": "cat_bakery",
       "name": "Golden Normandy Croissant",
       "tagline": "36-layer flakey pastry with European churned butter",
@@ -97,13 +115,21 @@
       "calories": 290,
       "image_url": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&auto=format&fit=crop&q=80",
       "badge": "FRESHLY BAKED",
-      "ingredients": ["Normandy Butter (84%)", "Organic Flour", "Natural Yeast", "Sea Salt"],
+      "ingredients": [
+        "Normandy Butter (84%)",
+        "Organic Flour",
+        "Natural Yeast",
+        "Sea Salt"
+      ],
       "customizations": {
         "sizes": [
           { "id": "sz_single", "label": "Single Piece", "extra_price": 0.00 },
           { "id": "sz_pair", "label": "Pair Box (2 Pcs)", "extra_price": 3.20 }
         ],
-        "sugar_levels": ["Warm & Crisp (Recommended)", "Room Temperature"],
+        "sugar_levels": [
+          "Warm & Crisp (Recommended)",
+          "Room Temperature"
+        ],
         "milk_options": [
           { "id": "top_butter", "name": "Whipped Honey Butter", "extra_price": 0.50 },
           { "id": "top_jam", "name": "Artisan Raspberry Jam", "extra_price": 0.50 },
@@ -112,7 +138,7 @@
       }
     },
     {
-      "id": "item_pistachio_danish",
+      "id": 4,
       "category_id": "cat_bakery",
       "name": "Crushed Pistachio Danish",
       "tagline": "Flaky puff pastry with rich Sicilian pistachio custard",
@@ -124,12 +150,20 @@
       "calories": 330,
       "image_url": "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800&auto=format&fit=crop&q=80",
       "badge": "SEASONAL",
-      "ingredients": ["Bronte Pistachio Paste", "Vanilla Custard", "Puff Pastry", "Icing Sugar"],
+      "ingredients": [
+        "Bronte Pistachio Paste",
+        "Vanilla Custard",
+        "Puff Pastry",
+        "Icing Sugar"
+      ],
       "customizations": {
         "sizes": [
           { "id": "sz_single", "label": "Single Danish", "extra_price": 0.00 }
         ],
-        "sugar_levels": ["Freshly Warmed", "Room Temperature"],
+        "sugar_levels": [
+          "Freshly Warmed",
+          "Room Temperature"
+        ],
         "milk_options": [
           { "id": "top_none", "name": "Standard Glaze", "extra_price": 0.00 },
           { "id": "top_extra_nuts", "name": "Extra Toasted Pistachios", "extra_price": 0.75 }
@@ -137,7 +171,7 @@
       }
     },
     {
-      "id": "item_spanish_latte",
+      "id": 5,
       "category_id": "cat_hot_coffee",
       "name": "Havana Spanish Latte",
       "tagline": "Espresso with condensed sweet milk and cinnamon dust",
@@ -149,13 +183,21 @@
       "calories": 260,
       "image_url": "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800&auto=format&fit=crop&q=80",
       "badge": "POPULAR",
-      "ingredients": ["Dark Roast Espresso", "Condensed Milk", "Steamed Whole Milk", "Ground Ceylon Cinnamon"],
+      "ingredients": [
+        "Dark Roast Espresso",
+        "Condensed Milk",
+        "Steamed Whole Milk",
+        "Ground Ceylon Cinnamon"
+      ],
       "customizations": {
         "sizes": [
           { "id": "sz_small", "label": "Tall (8 oz)", "extra_price": 0.00 },
           { "id": "sz_medium", "label": "Grande (12 oz)", "extra_price": 0.70 }
         ],
-        "sugar_levels": ["Less Sweet (Half Condensed)", "Original Havana Sweet"],
+        "sugar_levels": [
+          "Less Sweet (Half Condensed)",
+          "Original Havana Sweet"
+        ],
         "milk_options": [
           { "id": "m_whole", "name": "Whole Milk", "extra_price": 0.00 },
           { "id": "m_oat", "name": "Oat Milk", "extra_price": 0.50 }
@@ -163,7 +205,7 @@
       }
     },
     {
-      "id": "item_nitro_cascara",
+      "id": 6,
       "category_id": "cat_cold_brews",
       "name": "Nitro Cherry Cascara",
       "tagline": "Nitrogen-infused sparkling coffee cherry brew with citrus notes",
@@ -175,12 +217,19 @@
       "calories": 45,
       "image_url": "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=800&auto=format&fit=crop&q=80",
       "badge": "NITRO ON TAP",
-      "ingredients": ["Cascara Coffee Cherries", "Liquid Nitrogen Infusion", "Organic Meyer Lemon Peel"],
+      "ingredients": [
+        "Cascara Coffee Cherries",
+        "Liquid Nitrogen Infusion",
+        "Organic Meyer Lemon Peel"
+      ],
       "customizations": {
         "sizes": [
           { "id": "sz_pint", "label": "Nitro Glass (16 oz)", "extra_price": 0.00 }
         ],
-        "sugar_levels": ["Zero Added Sugar", "Light Wildflower Honey (+0.40)"],
+        "sugar_levels": [
+          "Zero Added Sugar",
+          "Light Wildflower Honey (+0.40)"
+        ],
         "milk_options": [
           { "id": "m_black", "name": "Pure Nitro (No Milk)", "extra_price": 0.00 }
         ]
