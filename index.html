@@ -105,13 +105,13 @@
     <div class="flex flex-wrap items-center justify-between gap-3 bg-[#1c100a]/90 border border-[#3e2417] px-4 py-2.5 rounded-2xl mb-3 shadow-xl backdrop-blur-md">
       <div class="flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-[#d9532f] animate-ping"></span>
-        <span class="text-xs font-black tracking-wider uppercase text-white">Fresher Take-Home Assessment</span>
-        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">1-Day / ~3-4 Hrs</span>
+        <span class="text-xs font-black tracking-wider uppercase text-white">Android Developer Take-Home</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">1-Day / Fresher Friendly</span>
       </div>
       
       <div class="flex items-center gap-2">
         <a href="#fresher-structure" class="px-3 py-1.5 rounded-full bg-[#d9532f]/20 hover:bg-[#d9532f]/30 border border-[#d9532f]/40 text-xs font-bold text-[#f59e0b] flex items-center gap-1.5 transition btn-press">
-          <i class="fa-solid fa-list-check text-[#f59e0b]"></i> Core vs Bonus Breakdown
+          <i class="fa-solid fa-list-check text-[#f59e0b]"></i> Assignment Requirements
         </a>
         <button onclick="resetPrototype()" class="px-3 py-1.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-xs font-bold text-white flex items-center gap-1.5 transition btn-press">
           <i class="fa-solid fa-rotate-left"></i> Reset
@@ -123,7 +123,7 @@
       <span>Brewkery</span>
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d9532f] to-[#f59e0b]">App Flow Prototype</span>
     </h1>
-    <p class="text-xs text-[#a89486] mt-1">Natural flow: <b>Menu</b> &rarr; <i>(Tap item)</i> &rarr; <b>Detail</b> &rarr; <i>(Add to Cart)</i> &rarr; <b>Cart</b> &rarr; <i>(Place Order)</i> &rarr; <b>Order Status</b></p>
+    <p class="text-xs text-[#a89486] mt-1">Flow: <b>Menu</b> &rarr; <i>(Tap item)</i> &rarr; <b>Detail (Full Customizations)</b> &rarr; <i>(Add to Cart)</i> &rarr; <b>Cart</b> &rarr; <i>(Place Order)</i> &rarr; <b>Order Status</b></p>
 
     <!-- Top Flow Step Switcher -->
     <div class="flex flex-wrap justify-center gap-2 mt-3.5">
@@ -159,7 +159,7 @@
       </div>
     </div>
 
-    <!-- MAIN SCROLLABLE SCREEN VIEWPORT (Fills full height without bottom nav) -->
+    <!-- MAIN SCROLLABLE SCREEN VIEWPORT (Full height without bottom nav) -->
     <div id="screen-viewport" class="flex-1 overflow-y-auto custom-scrollbar relative px-4 pb-4 pt-2 space-y-4 app-viewport flex flex-col">
 
       <!-- ========================================================= -->
@@ -186,13 +186,15 @@
           </button>
         </div>
 
-        <!-- Delivery Banner -->
-        <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs">
+        <!-- DYNAMIC STORE / ACTIVE ORDER BANNER -->
+        <!-- Default State (Before ordering): 🛵 Delivery in 20 - 30 mins • $2.50 fee -->
+        <!-- Active Order State (After ordering): 🟢 Active Order #BK-XXXXX: Preparing (Arriving in 25 mins) -->
+        <div id="home-status-banner" class="flex items-center justify-between p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs transition-all">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-[11px] font-semibold text-[#140b07]">Delivery ETA: <b>20 - 30 mins</b></span>
+            <span class="text-sm" id="home-banner-icon">🛵</span>
+            <span class="text-[11px] font-semibold text-[#140b07]" id="home-banner-text">Delivery in 20 - 30 mins • $2.50 fee</span>
           </div>
-          <span class="text-[10px] font-bold text-[#d9532f]">$2.50 Flat</span>
+          <span class="text-[10px] font-bold text-[#d9532f]" id="home-banner-sub">Standard</span>
         </div>
 
         <!-- Search Bar -->
@@ -239,23 +241,23 @@
       </div>
 
       <!-- ========================================================= -->
-      <!-- SCREEN 2: ITEM DETAIL SCREEN                              -->
+      <!-- SCREEN 2: ITEM DETAIL SCREEN (WITH ALL API CUSTOMIZATIONS) -->
       <!-- ========================================================= -->
-      <div id="view-detail" class="screen-view hidden space-y-3.5 flex-1 flex flex-col">
+      <div id="view-detail" class="screen-view hidden space-y-3 flex-1 flex flex-col">
         
         <!-- Header Nav (Back button directly to Menu) -->
         <div class="flex items-center justify-between pt-1">
           <button onclick="setScreen('menu')" class="w-8 h-8 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-[#140b07] shadow-sm btn-press">
             <i class="fa-solid fa-arrow-left"></i>
           </button>
-          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Item Details</span>
+          <span class="text-xs font-extrabold text-[#140b07] uppercase tracking-wider">Item Customizer</span>
           <button onclick="toggleFavorite()" class="w-8 h-8 rounded-full bg-white border border-[#ebd8cb] flex items-center justify-center text-xs text-rose-500 shadow-sm btn-press">
             <i class="fa-solid fa-heart" id="fav-icon"></i>
           </button>
         </div>
 
         <!-- Hero Product Image -->
-        <div class="relative h-44 rounded-2xl overflow-hidden shadow-md">
+        <div class="relative h-40 rounded-2xl overflow-hidden shadow-md">
           <img id="detail-hero-img" src="" alt="Item" class="w-full h-full object-cover">
           <span id="detail-hero-badge" class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#140b07]/80 text-[#f59e0b] backdrop-blur-sm">
             BESTSELLER
@@ -268,7 +270,7 @@
             <h2 id="detail-item-name" class="text-base font-black text-[#140b07] font-display">Toasted Caramel Macchiato</h2>
             <span id="detail-base-price" class="text-base font-extrabold text-[#d9532f] font-mono">$4.85</span>
           </div>
-          <p id="detail-item-desc" class="text-[11px] text-[#786457] mt-1 leading-relaxed">
+          <p id="detail-item-desc" class="text-[11px] text-[#786457] mt-0.5 leading-relaxed">
             Rich espresso roast layered with velvety steamed milk, infused with house-made vanilla bean syrup and toasted caramel drizzle.
           </p>
         </div>
@@ -279,17 +281,35 @@
           <div id="detail-ingredients-row" class="flex flex-wrap gap-1"></div>
         </div>
 
-        <!-- Size Selection (Optional / Bonus) -->
-        <div class="p-3 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
+        <!-- 1. API Customization: SIZES -->
+        <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-[#140b07]">Cup Size</span>
-            <span class="text-[9px] text-[#786457] font-mono">Optional Bonus</span>
+            <span class="text-[11px] font-bold text-[#140b07]">Size Selection</span>
+            <span class="text-[9px] text-[#786457] font-mono">from customizations.sizes</span>
           </div>
           <div id="detail-sizes-row" class="grid grid-cols-3 gap-1.5"></div>
         </div>
 
+        <!-- 2. API Customization: MILK OPTIONS / SPREADS -->
+        <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#140b07]">Milk Options / Spreads</span>
+            <span class="text-[9px] text-[#786457] font-mono">from customizations.milk_options</span>
+          </div>
+          <div id="detail-milk-row" class="space-y-1"></div>
+        </div>
+
+        <!-- 3. API Customization: SUGAR LEVELS / PREPARATION -->
+        <div class="p-2.5 rounded-xl bg-white border border-[#ebd8cb] space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#140b07]">Sugar Levels / Serving</span>
+            <span class="text-[9px] text-[#786457] font-mono">from customizations.sugar_levels</span>
+          </div>
+          <div id="detail-sugar-row" class="flex gap-1.5 flex-wrap"></div>
+        </div>
+
         <!-- Quantity Stepper & Add to Cart Action -->
-        <div class="pt-2 flex items-center gap-2 mt-auto">
+        <div class="pt-1 flex items-center gap-2 mt-auto">
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white border border-[#ebd8cb]">
             <button onclick="adjustDetailQty(-1)" class="text-xs font-black text-[#140b07] btn-press">-</button>
             <span id="detail-qty-display" class="text-xs font-bold text-[#140b07] font-mono">1</span>
@@ -368,7 +388,7 @@
             ☕
           </div>
 
-          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Cart Cleared & Settled</span>
+          <span class="text-[10px] font-black uppercase tracking-wider text-[#d9532f] block">Cart Cleared & Dispatched</span>
           <h2 class="text-xl font-black text-[#140b07] font-display">Brewing in Progress!</h2>
           <p class="text-xs text-[#786457] max-w-[240px] mx-auto mt-1 leading-relaxed">
             Your ticket was dispatched to our barista. Your in-memory cart has been reset.
@@ -432,54 +452,34 @@
     </div>
     
     <h2 class="text-2xl sm:text-3xl font-black font-display mb-3">
-      Skill & AI Evaluation Architecture
+      Architecture & Candidate Evaluation
     </h2>
     
-    <!-- ⚠️ Critical In-Memory Note Callout -->
+    <!-- ⚠️ Critical Architecture Note Callout -->
     <div class="bg-[#24130b] border-2 border-[#d9532f] rounded-2xl p-4 sm:p-5 my-5 text-xs text-[#ebd8cb] space-y-2">
       <div class="flex items-center gap-2 text-[#f59e0b] font-bold text-sm">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <span>Important Architecture Guideline: Do NOT Use SQLite / Room!</span>
+        <i class="fa-solid fa-database"></i>
+        <span>Important Architecture Note: Database Usage</span>
       </div>
       <p class="leading-relaxed">
-        <strong>No local database (SQLite/Room/DataStore) is required.</strong> All cart items and order state can simply live in memory inside a shared <strong><code>ViewModel</code></strong> or singleton <strong><code>Repository</code></strong> (using Kotlin <code>StateFlow</code>). When the app closes, it is completely expected and fine for the cart to reset. Let your AI workflow help you scaffold a clean in-memory state.
+        <strong>No SQLite or Room database is required.</strong> When the app closes, it is completely fine if the cart resets. You and your AI workflow are free to decide how state is maintained (e.g., in memory or however you choose). If you do choose to integrate local persistence like Room/SQLite, that is a pure bonus.
       </p>
     </div>
 
-    <!-- Core Requirements vs Bonus Parts -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-6 text-xs">
-      
-      <!-- Core (Passing Criteria) -->
-      <div class="bg-[#1e1008] border border-[#4a2b1c] rounded-2xl p-5 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-sm text-emerald-400 font-display">Core Requirements (Must-Have)</h3>
-          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">70% SCORE</span>
-        </div>
-        <ul class="space-y-2 text-[#cbd5e1] list-disc list-inside">
-          <li><strong>API Fetch:</strong> Fetch data from GitHub raw endpoint using Retrofit/Ktor with Coroutines.</li>
-          <li><strong>Screen 1 (Menu):</strong> Render categories and items (image via Coil/Glide, title, price, rating).</li>
-          <li><strong>Screen 2 (Detail):</strong> Tap an item to view full photo, description, ingredients, and "Add to Cart".</li>
-          <li><strong>Screen 3 (Cart):</strong> View added items, calculate subtotal + flat delivery + tax.</li>
-          <li><strong>Screen 4 (Order Done):</strong> Clear in-memory cart, display randomized ticket ID (e.g. <code>#BK-83921</code>) and "PREPARING" state.</li>
-          <li><strong>AI Workflow:</strong> Provide <code>AI_WORKFLOW.md</code> showing 2–3 prompts used and 1 AI bug you caught.</li>
-        </ul>
+    <!-- Core Requirements (Must-Have) -->
+    <div class="bg-[#1e1008] border border-[#4a2b1c] rounded-2xl p-5 space-y-3 text-xs my-6">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-sm text-white font-display">Core Requirements (Must-Have)</h3>
+        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-[#f59e0b] font-bold text-[10px]">ALL CORE REQUIREMENTS</span>
       </div>
-
-      <!-- Bonus (Outstanding Criteria) -->
-      <div class="bg-[#1e1008] border border-[#4a2b1c] rounded-2xl p-5 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-sm text-[#f59e0b] font-display">Bonus Features (Nice-to-Have)</h3>
-          <span class="px-2 py-0.5 rounded bg-amber-500/20 text-[#f59e0b] font-bold text-[10px]">30% SCORE</span>
-        </div>
-        <ul class="space-y-2 text-[#cbd5e1] list-disc list-inside">
-          <li><strong>Dynamic Customization:</strong> Size picker (Tall/Grande/Venti) recalculating subtotal on Screen 2.</li>
-          <li><strong>Search & Filter:</strong> Live search bar or category chips filtering on Screen 1.</li>
-          <li><strong>Promo Code:</strong> Simple coupon logic (e.g., <code>ROAST10</code> gives 10% off on cart).</li>
-          <li><strong>Unit Tests:</strong> 1 simple unit test verifying subtotal/tax calculation logic.</li>
-          <li><strong>Jetpack Compose:</strong> 100% declarative Compose implementation over legacy XML.</li>
-        </ul>
-      </div>
-
+      <ul class="space-y-2.5 text-[#cbd5e1] list-disc list-inside">
+        <li><strong>API Fetch:</strong> Fetch data from GitHub raw endpoint using Retrofit or Ktor with Coroutines.</li>
+        <li><strong>Screen 1 (Menu):</strong> Render category row and item cards (remote image via Coil/Glide, title, price, rating). Includes store announcement banner (e.g., <em>Delivery in 20 - 30 mins • $2.50 fee</em>) and dynamic active order tracking when an order is placed.</li>
+        <li><strong>Screen 2 (Item Detail & Customizations):</strong> Match exact API schema: render <code>sizes</code>, <code>sugar_levels</code>, and <code>milk_options</code> dynamically with price recalculation and "Add to Cart".</li>
+        <li><strong>Screen 3 (Cart & Checkout):</strong> View added items, calculate subtotal + flat delivery + tax.</li>
+        <li><strong>Screen 4 (Order Placed):</strong> Clear the cart automatically, display randomized ticket ID (e.g. <code>#BK-83921</code>), and <code>PREPARING</code> status.</li>
+        <li><strong>AI Workflow (Mandatory):</strong> Submit <code>AI_WORKFLOW.md</code> showing 2–3 prompts used and 1 AI bug or hallucination you caught and resolved.</li>
+      </ul>
     </div>
 
     <!-- API Endpoints -->
@@ -528,13 +528,21 @@
           reviews: 312,
           badge: "BESTSELLER",
           image_url: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&auto=format&fit=crop&q=80",
-          desc: "Rich espresso roast layered with velvety steamed milk, vanilla syrup and salted toasted caramel.",
+          desc: "Rich espresso roast layered with velvety steamed milk, infused with house-made vanilla bean syrup and marked with a buttery toasted caramel drizzle.",
           ingredients: ["Signature Espresso", "Steamed Oat Milk", "Salted Caramel", "Bourbon Vanilla"],
-          sizes: [
-            { id: "sz_small", label: "Tall (8 oz)", extra: 0.00 },
-            { id: "sz_medium", label: "Grande (12 oz)", extra: 0.65 },
-            { id: "sz_large", label: "Venti (16 oz)", extra: 1.25 }
-          ]
+          customizations: {
+            sizes: [
+              { id: "sz_small", label: "Tall (8 oz)", extra_price: 0.00 },
+              { id: "sz_medium", label: "Grande (12 oz)", extra_price: 0.65 },
+              { id: "sz_large", label: "Venti (16 oz)", extra_price: 1.25 }
+            ],
+            sugar_levels: ["0% Unsweetened", "50% Mild", "100% Standard Sweet"],
+            milk_options: [
+              { id: "m_oat", name: "Oat Milk (Barista Blend)", extra_price: 0.00 },
+              { id: "m_almond", name: "Roasted Almond Milk", extra_price: 0.50 },
+              { id: "m_whole", name: "Organic Whole Milk", extra_price: 0.00 }
+            ]
+          }
         },
         {
           id: "item_vanilla_cold_brew",
@@ -546,11 +554,18 @@
           badge: "STAFF PICK",
           image_url: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&auto=format&fit=crop&q=80",
           desc: "18-hour cold steeped Colombian beans topped with Madagascar vanilla sweet cream foam.",
-          ingredients: ["18hr Steeped Coffee", "Vanilla Sweet Cream", "Ice", "Raw Cane Sugar"],
-          sizes: [
-            { id: "sz_medium", label: "Regular (16 oz)", extra: 0.00 },
-            { id: "sz_large", label: "Large (24 oz)", extra: 0.95 }
-          ]
+          ingredients: ["18hr Steeped Coffee", "Vanilla Sweet Cream", "Crushed Ice", "Raw Cane Sugar"],
+          customizations: {
+            sizes: [
+              { id: "sz_medium", label: "Regular (16 oz)", extra_price: 0.00 },
+              { id: "sz_large", label: "Large (24 oz)", extra_price: 0.95 }
+            ],
+            sugar_levels: ["Light Sweet", "Regular Sweet", "Extra Sweet"],
+            milk_options: [
+              { id: "m_sweet_foam", name: "Signature Sweet Cream", extra_price: 0.00 },
+              { id: "m_coconut_foam", name: "Toasted Coconut Foam", extra_price: 0.60 }
+            ]
+          }
         },
         {
           id: "item_butter_croissant",
@@ -563,10 +578,18 @@
           image_url: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&auto=format&fit=crop&q=80",
           desc: "36-layer flakey European butter pastry baked fresh at sunrise with crisp amber crust.",
           ingredients: ["Normandy Butter (84%)", "Organic Flour", "Natural Yeast", "Sea Salt"],
-          sizes: [
-            { id: "sz_single", label: "Single Piece", extra: 0.00 },
-            { id: "sz_pair", label: "Pair Box (2 Pcs)", extra: 3.20 }
-          ]
+          customizations: {
+            sizes: [
+              { id: "sz_single", label: "Single Piece", extra_price: 0.00 },
+              { id: "sz_pair", label: "Pair Box (2 Pcs)", extra_price: 3.20 }
+            ],
+            sugar_levels: ["Warm & Crisp (Recommended)", "Room Temperature"],
+            milk_options: [
+              { id: "top_butter", name: "Whipped Honey Butter", extra_price: 0.50 },
+              { id: "top_jam", name: "Artisan Raspberry Jam", extra_price: 0.50 },
+              { id: "top_plain", name: "Classic (No Spread)", extra_price: 0.00 }
+            ]
+          }
         },
         {
           id: "item_pistachio_danish",
@@ -579,19 +602,28 @@
           image_url: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600&auto=format&fit=crop&q=80",
           desc: "Laminated puff pastry filled with rich Sicilian pistachio custard and roasted emerald nuts.",
           ingredients: ["Bronte Pistachio", "Vanilla Custard", "Puff Pastry"],
-          sizes: [
-            { id: "sz_single", label: "Single Danish", extra: 0.00 }
-          ]
+          customizations: {
+            sizes: [
+              { id: "sz_single", label: "Single Danish", extra_price: 0.00 }
+            ],
+            sugar_levels: ["Freshly Warmed", "Room Temperature"],
+            milk_options: [
+              { id: "top_none", name: "Standard Glaze", extra_price: 0.00 },
+              { id: "top_nuts", name: "Extra Toasted Pistachios", extra_price: 0.75 }
+            ]
+          }
         }
       ]
     };
 
-    // In-Memory Cart State
+    // State
     let cart = [
       {
         id: "item_caramel_macchiato",
         name: "Caramel Macchiato",
         size: "Grande (12 oz)",
+        milk: "Oat Milk (Barista Blend)",
+        sugar: "50% Mild",
         unitPrice: 5.50,
         qty: 1
       },
@@ -599,13 +631,19 @@
         id: "item_butter_croissant",
         name: "Normandy Croissant",
         size: "Single Piece",
+        milk: "Classic (No Spread)",
+        sugar: "Warm & Crisp",
         unitPrice: 3.90,
         qty: 1
       }
     ];
 
+    let activeOrder = null; // null or { orderId: "#BK-12345", wait: "25 mins" }
+
     let currentItem = storeData.items[0];
     let selectedSizeIdx = 1;
+    let selectedMilkIdx = 0;
+    let selectedSugarIdx = 1;
     let detailQty = 1;
 
     function setScreen(screenName) {
@@ -624,7 +662,29 @@
         topBtn.classList.add('bg-[#d9532f]', 'text-white', 'glow-terracotta');
       }
 
+      updateHomeBanner();
       renderCart();
+    }
+
+    function updateHomeBanner() {
+      const banner = document.getElementById('home-status-banner');
+      const icon = document.getElementById('home-banner-icon');
+      const text = document.getElementById('home-banner-text');
+      const sub = document.getElementById('home-banner-sub');
+
+      if (activeOrder) {
+        banner.className = "flex items-center justify-between p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-xs transition-all";
+        icon.innerText = "🟢";
+        text.innerHTML = `Active Order <b>${activeOrder.orderId}</b>: Preparing (Arriving in ${activeOrder.wait})`;
+        sub.innerText = "Tracking";
+        sub.className = "text-[10px] font-bold text-emerald-700";
+      } else {
+        banner.className = "flex items-center justify-between p-2.5 rounded-xl bg-[#f7ebe1] border border-[#ebd8cb] text-xs transition-all";
+        icon.innerText = "🛵";
+        text.innerText = "Delivery in 20 - 30 mins • $2.50 fee";
+        sub.innerText = "Standard";
+        sub.className = "text-[10px] font-bold text-[#d9532f]";
+      }
     }
 
     function renderCatalog(filteredItems = storeData.items) {
@@ -644,7 +704,7 @@
             <span class="text-[10px] text-[#786457]">⭐ ${it.rating} (${it.reviews})</span>
             <div class="flex items-center justify-between mt-1">
               <strong class="text-xs text-[#d9532f] font-mono">$${it.base_price.toFixed(2)}</strong>
-              <button class="px-2 py-0.5 rounded-md bg-[#d9532f] text-white text-[10px] font-bold">+ View Item</button>
+              <button class="px-2 py-0.5 rounded-md bg-[#d9532f] text-white text-[10px] font-bold">+ Customize</button>
             </div>
           </div>
         `;
@@ -675,10 +735,13 @@
       renderCatalog(filtered);
     }
 
+    // Open Screen 2 Item Detail with exact API Customizations
     function openDetail(itemId) {
       const item = storeData.items.find(x => x.id === itemId) || storeData.items[0];
       currentItem = item;
       selectedSizeIdx = 0;
+      selectedMilkIdx = 0;
+      selectedSugarIdx = 0;
       detailQty = 1;
 
       document.getElementById('detail-hero-img').src = item.image_url;
@@ -698,13 +761,13 @@
         ingRow.appendChild(chip);
       });
 
-      // Sizes (Bonus)
+      // 1. Sizes from customizations.sizes
       const sizesRow = document.getElementById('detail-sizes-row');
       sizesRow.innerHTML = '';
-      item.sizes.forEach((sz, idx) => {
+      item.customizations.sizes.forEach((sz, idx) => {
         const btn = document.createElement('button');
         btn.className = `p-2 rounded-lg text-[10px] font-bold border transition ${idx === selectedSizeIdx ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f]' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
-        btn.innerHTML = `${sz.label}<br><span class="text-[9px] opacity-80">+${sz.extra > 0 ? '$' + sz.extra.toFixed(2) : '$0'}</span>`;
+        btn.innerHTML = `${sz.label}<br><span class="text-[9px] opacity-80">+${sz.extra_price > 0 ? '$' + sz.extra_price.toFixed(2) : '$0.00'}</span>`;
         btn.onclick = () => {
           selectedSizeIdx = idx;
           updateDetailTotal();
@@ -713,14 +776,45 @@
         sizesRow.appendChild(btn);
       });
 
+      // 2. Milk Options from customizations.milk_options
+      const milkRow = document.getElementById('detail-milk-row');
+      milkRow.innerHTML = '';
+      item.customizations.milk_options.forEach((m, idx) => {
+        const row = document.createElement('div');
+        row.className = `flex justify-between items-center p-2 rounded-lg border text-xs cursor-pointer ${idx === selectedMilkIdx ? 'bg-[#f7ebe1] border-[#d9532f] text-[#d9532f] font-bold' : 'bg-white border-[#ebd8cb] text-[#786457]'}`;
+        row.innerHTML = `<span>${m.name}</span><span class="font-mono text-[10px]">+${m.extra_price > 0 ? '$' + m.extra_price.toFixed(2) : '$0.00'}</span>`;
+        row.onclick = () => {
+          selectedMilkIdx = idx;
+          updateDetailTotal();
+          openDetail(item.id);
+        };
+        milkRow.appendChild(row);
+      });
+
+      // 3. Sugar Levels from customizations.sugar_levels
+      const sugarRow = document.getElementById('detail-sugar-row');
+      sugarRow.innerHTML = '';
+      item.customizations.sugar_levels.forEach((s, idx) => {
+        const chip = document.createElement('button');
+        chip.className = `px-2.5 py-1.5 rounded-lg text-[10px] font-bold border ${idx === selectedSugarIdx ? 'bg-[#140b07] text-white border-[#140b07]' : 'bg-white text-[#786457] border-[#ebd8cb]'}`;
+        chip.innerText = s;
+        chip.onclick = () => {
+          selectedSugarIdx = idx;
+          updateDetailTotal();
+          openDetail(item.id);
+        };
+        sugarRow.appendChild(chip);
+      });
+
       updateDetailTotal();
       setScreen('detail');
     }
 
     function updateDetailTotal() {
       const base = currentItem.base_price;
-      const extra = currentItem.sizes[selectedSizeIdx]?.extra || 0;
-      const total = (base + extra) * detailQty;
+      const sizeExtra = currentItem.customizations.sizes[selectedSizeIdx]?.extra_price || 0;
+      const milkExtra = currentItem.customizations.milk_options[selectedMilkIdx]?.extra_price || 0;
+      const total = (base + sizeExtra + milkExtra) * detailQty;
       document.getElementById('detail-calc-total-btn').innerText = `$${total.toFixed(2)}`;
     }
 
@@ -732,13 +826,17 @@
 
     function addToCartFromDetail() {
       const base = currentItem.base_price;
-      const sizeObj = currentItem.sizes[selectedSizeIdx] || currentItem.sizes[0];
-      const unit = base + (sizeObj.extra || 0);
+      const sizeObj = currentItem.customizations.sizes[selectedSizeIdx] || currentItem.customizations.sizes[0];
+      const milkObj = currentItem.customizations.milk_options[selectedMilkIdx] || currentItem.customizations.milk_options[0];
+      const sugarVal = currentItem.customizations.sugar_levels[selectedSugarIdx] || currentItem.customizations.sugar_levels[0];
+      const unit = base + (sizeObj.extra_price || 0) + (milkObj.extra_price || 0);
 
       cart.push({
         id: currentItem.id,
         name: currentItem.name,
         size: sizeObj.label,
+        milk: milkObj.name,
+        sugar: sugarVal,
         unitPrice: unit,
         qty: detailQty
       });
@@ -773,7 +871,7 @@
         row.innerHTML = `
           <div>
             <strong class="text-xs text-[#140b07] block">${it.name}</strong>
-            <span class="text-[10px] text-[#786457]">${it.size}</span>
+            <span class="text-[10px] text-[#786457]">${it.size} • ${it.milk || ''}</span>
             <div class="text-[11px] font-bold text-[#d9532f] font-mono mt-0.5">$${itemTotal.toFixed(2)}</div>
           </div>
           <div class="flex items-center gap-2 bg-[#f7ebe1] px-2 py-1 rounded-lg border border-[#ebd8cb]">
@@ -789,7 +887,6 @@
       document.getElementById('top-cart-count').innerText = totalQty;
       document.getElementById('floating-bar-qty').innerText = totalQty;
 
-      // Show/hide floating bar on Screen 1
       const stickyBar = document.getElementById('sticky-cart-bar');
       if (stickyBar) {
         stickyBar.style.display = totalQty > 0 ? 'flex' : 'none';
@@ -817,7 +914,7 @@
     function clearCart() {
       cart = [];
       renderCart();
-      showToast('In-memory cart cleared');
+      showToast('Cart cleared');
     }
 
     function placeOrderFinal() {
@@ -827,23 +924,33 @@
       }
       
       const totalCount = cart.reduce((acc, it) => acc + it.qty, 0);
+      const code = `#BK-${Math.floor(10000 + Math.random() * 90000)}`;
       document.getElementById('order-summary-qty').innerText = `${totalCount} Item(s)`;
-      document.getElementById('order-ref-code').innerText = `#BK-${Math.floor(10000 + Math.random() * 90000)}`;
+      document.getElementById('order-ref-code').innerText = code;
 
-      // Reset in-memory cart automatically upon order placement
+      // Set Active Order tracking state for Home banner
+      activeOrder = {
+        orderId: code,
+        wait: "25 mins"
+      };
+
+      // Reset cart automatically
       cart = [];
       renderCart();
 
-      showToast('🎉 Order Placed! In-memory cart cleared.');
+      showToast('🎉 Order Placed! Cart cleared.');
       setScreen('order');
     }
 
     function resetPrototype() {
+      activeOrder = null;
       cart = [
         {
           id: "item_caramel_macchiato",
           name: "Caramel Macchiato",
           size: "Grande (12 oz)",
+          milk: "Oat Milk (Barista Blend)",
+          sugar: "50% Mild",
           unitPrice: 5.50,
           qty: 1
         },
@@ -851,13 +958,15 @@
           id: "item_butter_croissant",
           name: "Normandy Croissant",
           size: "Single Piece",
+          milk: "Classic (No Spread)",
+          sugar: "Warm & Crisp",
           unitPrice: 3.90,
           qty: 1
         }
       ];
       renderCart();
       setScreen('menu');
-      showToast('Reset to default state');
+      showToast('Reset to default prototype state');
     }
 
     function toggleFavorite() {
