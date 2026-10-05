@@ -509,29 +509,68 @@
       </p>
     </div>
 
-    <!-- API Endpoints -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 flex flex-col justify-between">
-        <div>
-          <span class="text-[#f59e0b] font-bold block mb-1">1. Full Menu & Store Config:</span>
-          <div class="text-[#cbd5e1] break-all mb-3 text-[11px] p-2 rounded-lg bg-[#140b07] border border-[#3e2417] select-all" id="endpoint-menu">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json</div>
+    <!-- API Endpoints Showcase (Developer Console Style) -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-server text-[#d9532f]"></i>
+          <h3 class="text-xs font-black uppercase tracking-wider text-white font-mono">REST API Endpoints</h3>
         </div>
-        <button onclick="copyRichText('endpoint-menu', this, 'Copied Menu URL!')" class="px-3.5 py-2 rounded-xl bg-[#d9532f] hover:bg-[#b84121] text-white font-bold transition flex items-center justify-center gap-2 btn-press">
-          <i class="fa-regular fa-copy"></i>
-          <span>Copy Menu URL</span>
-        </button>
+        <span class="text-[10px] text-[#a89486] font-mono">CORS Enabled • Static Raw JSON</span>
       </div>
 
-      <div class="bg-[#20120b] border border-[#4a2b1c] rounded-2xl p-4 flex flex-col justify-between">
-        <div>
-          <span class="text-[#f59e0b] font-bold block mb-1">2. Single Item Detail by Numeric ID:</span>
-          <div class="text-[#cbd5e1] break-all mb-2 text-[11px] p-2 rounded-lg bg-[#140b07] border border-[#3e2417] select-all" id="endpoint-item">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{id}.json</div>
-          <span class="text-[10px] text-[#a89486] block mb-3 font-sans">Returns the root item object directly (e.g. <code>api/items/1.json</code> to <code>6.json</code>)</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+        
+        <!-- Endpoint 1: Full Menu -->
+        <div class="bg-[#180e09] border border-[#3e2417] hover:border-[#d9532f]/60 rounded-2xl p-4 flex flex-col justify-between transition-all duration-200 shadow-md">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[#f59e0b] font-bold text-xs flex items-center gap-1.5 font-sans">
+                <span>1. Full Menu & Store Config</span>
+              </span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[9px] border border-emerald-500/30">GET 200</span>
+            </div>
+            
+            <p class="text-[11px] text-[#a89486] font-sans mb-3 leading-relaxed">
+              Returns shop metadata (fees, delivery estimates) and all 6 categorized menu items.
+            </p>
+
+            <div class="p-2.5 rounded-xl bg-[#0d0704] border border-[#2d180f] flex items-center justify-between gap-2 mb-3">
+              <span class="text-[11px] text-[#cbd5e1] break-all select-all font-mono leading-tight" id="endpoint-menu">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/data.json</span>
+            </div>
+          </div>
+
+          <button onclick="copyRichText('endpoint-menu', this, 'Copied Menu URL!')" class="w-full py-2.5 rounded-xl bg-[#26160e] hover:bg-[#d9532f] text-white font-bold transition-all duration-200 flex items-center justify-center gap-2 btn-press border border-[#4a2b1c] hover:border-[#d9532f]">
+            <i class="fa-regular fa-copy text-xs"></i>
+            <span class="font-sans text-xs">Copy Menu URL</span>
+          </button>
         </div>
-        <button onclick="copyRichText('endpoint-item', this, 'Copied Item URL Pattern!')" class="px-3.5 py-2 rounded-xl bg-[#d9532f] hover:bg-[#b84121] text-white font-bold transition flex items-center justify-center gap-2 btn-press">
-          <i class="fa-regular fa-copy"></i>
-          <span>Copy Item Pattern</span>
-        </button>
+
+        <!-- Endpoint 2: Single Item -->
+        <div class="bg-[#180e09] border border-[#3e2417] hover:border-[#d9532f]/60 rounded-2xl p-4 flex flex-col justify-between transition-all duration-200 shadow-md">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[#f59e0b] font-bold text-xs flex items-center gap-1.5 font-sans">
+                <span>2. Single Item Detail by ID</span>
+              </span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[9px] border border-emerald-500/30">GET 200</span>
+            </div>
+            
+            <p class="text-[11px] text-[#a89486] font-sans mb-3 leading-relaxed">
+              Returns root item resource (e.g. <code>api/items/1.json</code> to <code>api/items/6.json</code>).
+            </p>
+
+            <div class="p-2.5 rounded-xl bg-[#0d0704] border border-[#2d180f] flex items-center justify-between gap-2 mb-3">
+              <span class="text-[11px] text-[#cbd5e1] break-all select-all font-mono leading-tight" id="endpoint-item">https://raw.githubusercontent.com/VivekShah138/Brewkery/main/api/items/{id}.json</span>
+            </div>
+          </div>
+
+          <button onclick="copyRichText('endpoint-item', this, 'Copied Item URL Pattern!')" class="w-full py-2.5 rounded-xl bg-[#26160e] hover:bg-[#d9532f] text-white font-bold transition-all duration-200 flex items-center justify-center gap-2 btn-press border border-[#4a2b1c] hover:border-[#d9532f]">
+            <i class="fa-regular fa-copy text-xs"></i>
+            <span class="font-sans text-xs">Copy Item Pattern</span>
+          </button>
+        </div>
+
       </div>
     </div>
 
